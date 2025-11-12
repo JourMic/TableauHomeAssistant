@@ -1,0 +1,1278 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: heading
+    heading: NAS Asustor
+    heading_style: title
+    icon: hue:room-computer
+
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        entity: sensor.system_monitor_utilisation_de_l_espace_d_echange
+        name: Espace d'échange
+        needle: true
+        min: 0
+        max: 100
+        segments:
+          - from: 0
+            color: '#669D34'
+          - from: 2
+            color: '#6C9F32'
+          - from: 4
+            color: '#72A130'
+          - from: 6
+            color: '#78A32E'
+          - from: 8
+            color: '#7EA62D'
+          - from: 10
+            color: '#84A82B'
+          - from: 12
+            color: '#8AAA29'
+          - from: 14
+            color: '#90AD27'
+          - from: 16
+            color: '#96AF26'
+          - from: 18
+            color: '#9CB124'
+          - from: 20
+            color: '#A2B422'
+          - from: 22
+            color: '#A8B621'
+          - from: 24
+            color: '#AEB81F'
+          - from: 26
+            color: '#B5BB1D'
+          - from: 28
+            color: '#BBBD1B'
+          - from: 30
+            color: '#C1BF1A'
+          - from: 32
+            color: '#C7C218'
+          - from: 34
+            color: '#CDC416'
+          - from: 36
+            color: '#D3C615'
+          - from: 38
+            color: '#D9C913'
+          - from: 40
+            color: '#DFCB11'
+          - from: 42
+            color: '#E5CD0F'
+          - from: 44
+            color: '#EBD00E'
+          - from: 46
+            color: '#F1D20C'
+          - from: 48
+            color: '#F7D40A'
+          - from: 50
+            color: '#FED709'
+          - from: 52
+            color: '#FED009'
+          - from: 54
+            color: '#FECA09'
+          - from: 56
+            color: '#FEC40A'
+          - from: 58
+            color: '#FEBE0A'
+          - from: 60
+            color: '#FEB80B'
+          - from: 62
+            color: '#FEB20B'
+          - from: 64
+            color: '#FEAC0C'
+          - from: 66
+            color: '#FEA60C'
+          - from: 68
+            color: '#FEA00D'
+          - from: 70
+            color: '#FE9A0D'
+          - from: 72
+            color: '#FE940E'
+          - from: 74
+            color: '#FE8E0E'
+          - from: 76
+            color: '#FE880F'
+          - from: 78
+            color: '#FE820F'
+          - from: 80
+            color: '#FE7C10'
+          - from: 82
+            color: '#FE7610'
+          - from: 84
+            color: '#FE7011'
+          - from: 86
+            color: '#FE6A11'
+          - from: 88
+            color: '#FE6412'
+          - from: 90
+            color: '#FE5E12'
+          - from: 92
+            color: '#FE5813'
+          - from: 94
+            color: '#FE5213'
+          - from: 96
+            color: '#FE4C14'
+          - from: 98
+            color: '#FE4614'
+          - from: 100
+            color: '#FF4015'
+
+      - type: gauge
+        entity: sensor.system_monitor_utilisation_de_la_memoire
+        name: Utilisation de la mémoire
+        needle: true
+        min: 0
+        max: 100
+        segments:
+          - from: 0
+            color: "#76BB40"
+          - from: 2
+            color: "#7BBC3D"
+          - from: 4
+            color: "#80BD3B"
+          - from: 6
+            color: "#86BE39"
+          - from: 8
+            color: "#8BBF37"
+          - from: 10
+            color: "#91C035"
+          - from: 12
+            color: "#96C132"
+          - from: 14
+            color: "#9CC230"
+          - from: 16
+            color: "#A1C32E"
+          - from: 18
+            color: "#A6C52C"
+          - from: 20
+            color: "#ACC62A"
+          - from: 22
+            color: "#B1C727"
+          - from: 24
+            color: "#B7C825"
+          - from: 26
+            color: "#BCC923"
+          - from: 28
+            color: "#C2CA21"
+          - from: 30
+            color: "#C7CB1F"
+          - from: 32
+            color: "#CDCC1C"
+          - from: 34
+            color: "#D2CE1A"
+          - from: 36
+            color: "#D7CF18"
+          - from: 38
+            color: "#DDD016"
+          - from: 40
+            color: "#E2D114"
+          - from: 42
+            color: "#E8D211"
+          - from: 44
+            color: "#EDD30F"
+          - from: 46
+            color: "#F3D40D"
+          - from: 48
+            color: "#F8D50B"
+          - from: 50
+            color: "#FED709"
+          - from: 52
+            color: "#FED009"
+          - from: 54
+            color: "#FECA09"
+          - from: 56
+            color: "#FEC40A"
+          - from: 58
+            color: "#FEBE0A"
+          - from: 60
+            color: "#FEB80B"
+          - from: 62
+            color: "#FEB20B"
+          - from: 64
+            color: "#FEAC0C"
+          - from: 66
+            color: "#FEA60C"
+          - from: 68
+            color: "#FEA00D"
+          - from: 70
+            color: "#FE9A0D"
+          - from: 72
+            color: "#FE940E"
+          - from: 74
+            color: "#FE8E0E"
+          - from: 76
+            color: "#FE880F"
+          - from: 78
+            color: "#FE820F"
+          - from: 80
+            color: "#FE7C10"
+          - from: 82
+            color: "#FE7610"
+          - from: 84
+            color: "#FE7011"
+          - from: 86
+            color: "#FE6A11"
+          - from: 88
+            color: "#FE6412"
+          - from: 90
+            color: "#FE5E12"
+          - from: 92
+            color: "#FE5813"
+          - from: 94
+            color: "#FE5213"
+          - from: 96
+            color: "#FE4C14"
+          - from: 98
+            color: "#FE4614"
+          - from: 100
+            color: "#FF4015"
+
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        name: Utilisation du processeur
+        needle: true
+        min: 0
+        max: 100
+        segments:
+          - from: 0
+            color: "#76BB40"
+          - from: 2
+            color: "#7BBC3D"
+          - from: 4
+            color: "#80BD3B"
+          - from: 6
+            color: "#86BE39"
+          - from: 8
+            color: "#8BBF37"
+          - from: 10
+            color: "#91C035"
+          - from: 12
+            color: "#96C132"
+          - from: 14
+            color: "#9CC230"
+          - from: 16
+            color: "#A1C32E"
+          - from: 18
+            color: "#A6C52C"
+          - from: 20
+            color: "#ACC62A"
+          - from: 22
+            color: "#B1C727"
+          - from: 24
+            color: "#B7C825"
+          - from: 26
+            color: "#BCC923"
+          - from: 28
+            color: "#C2CA21"
+          - from: 30
+            color: "#C7CB1F"
+          - from: 32
+            color: "#CDCC1C"
+          - from: 34
+            color: "#D2CE1A"
+          - from: 36
+            color: "#D7CF18"
+          - from: 38
+            color: "#DDD016"
+          - from: 40
+            color: "#E2D114"
+          - from: 42
+            color: "#E8D211"
+          - from: 44
+            color: "#EDD30F"
+          - from: 46
+            color: "#F3D40D"
+          - from: 48
+            color: "#F8D50B"
+          - from: 50
+            color: "#FED709"
+          - from: 52
+            color: "#FED009"
+          - from: 54
+            color: "#FECA09"
+          - from: 56
+            color: "#FEC40A"
+          - from: 58
+            color: "#FEBE0A"
+          - from: 60
+            color: "#FEB80B"
+          - from: 62
+            color: "#FEB20B"
+          - from: 64
+            color: "#FEAC0C"
+          - from: 66
+            color: "#FEA60C"
+          - from: 68
+            color: "#FEA00D"
+          - from: 70
+            color: "#FE9A0D"
+          - from: 72
+            color: "#FE940E"
+          - from: 74
+            color: "#FE8E0E"
+          - from: 76
+            color: "#FE880F"
+          - from: 78
+            color: "#FE820F"
+          - from: 80
+            color: "#FE7C10"
+          - from: 82
+            color: "#FE7610"
+          - from: 84
+            color: "#FE7011"
+          - from: 86
+            color: "#FE6A11"
+          - from: 88
+            color: "#FE6412"
+          - from: 90
+            color: "#FE5E12"
+          - from: 92
+            color: "#FE5813"
+          - from: 94
+            color: "#FE5213"
+          - from: 96
+            color: "#FE4C14"
+          - from: 98
+            color: "#FE4614"
+          - from: 100
+            color: "#FF4015"
+
+        entity: sensor.system_monitor_utilisation_du_processeur
+      - type: gauge
+        name: Utilisation du disque
+        needle: true
+        min: 0
+        max: 100
+        segments:
+          - from: 0
+            color: "#76BB40"
+          - from: 2
+            color: "#7BBC3D"
+          - from: 4
+            color: "#80BD3B"
+          - from: 6
+            color: "#86BE39"
+          - from: 8
+            color: "#8BBF37"
+          - from: 10
+            color: "#91C035"
+          - from: 12
+            color: "#96C132"
+          - from: 14
+            color: "#9CC230"
+          - from: 16
+            color: "#A1C32E"
+          - from: 18
+            color: "#A6C52C"
+          - from: 20
+            color: "#ACC62A"
+          - from: 22
+            color: "#B1C727"
+          - from: 24
+            color: "#B7C825"
+          - from: 26
+            color: "#BCC923"
+          - from: 28
+            color: "#C2CA21"
+          - from: 30
+            color: "#C7CB1F"
+          - from: 32
+            color: "#CDCC1C"
+          - from: 34
+            color: "#D2CE1A"
+          - from: 36
+            color: "#D7CF18"
+          - from: 38
+            color: "#DDD016"
+          - from: 40
+            color: "#E2D114"
+          - from: 42
+            color: "#E8D211"
+          - from: 44
+            color: "#EDD30F"
+          - from: 46
+            color: "#F3D40D"
+          - from: 48
+            color: "#F8D50B"
+          - from: 50
+            color: "#FED709"
+          - from: 52
+            color: "#FED009"
+          - from: 54
+            color: "#FECA09"
+          - from: 56
+            color: "#FEC40A"
+          - from: 58
+            color: "#FEBE0A"
+          - from: 60
+            color: "#FEB80B"
+          - from: 62
+            color: "#FEB20B"
+          - from: 64
+            color: "#FEAC0C"
+          - from: 66
+            color: "#FEA60C"
+          - from: 68
+            color: "#FEA00D"
+          - from: 70
+            color: "#FE9A0D"
+          - from: 72
+            color: "#FE940E"
+          - from: 74
+            color: "#FE8E0E"
+          - from: 76
+            color: "#FE880F"
+          - from: 78
+            color: "#FE820F"
+          - from: 80
+            color: "#FE7C10"
+          - from: 82
+            color: "#FE7610"
+          - from: 84
+            color: "#FE7011"
+          - from: 86
+            color: "#FE6A11"
+          - from: 88
+            color: "#FE6412"
+          - from: 90
+            color: "#FE5E12"
+          - from: 92
+            color: "#FE5813"
+          - from: 94
+            color: "#FE5213"
+          - from: 96
+            color: "#FE4C14"
+          - from: 98
+            color: "#FE4614"
+          - from: 100
+            color: "#FF4015"
+
+        entity: sensor.system_monitor_utilisation_du_disque
+  - type: horizontal-stack
+    cards:
+      - type: gauge
+        name: Débit réseau sortant
+        needle: true
+        min: 0
+        max: 0.199
+        segments:
+          - from: 0
+            color: "#76BB40"
+          - from: 0.001
+            color: "#77BB3F"
+          - from: 0.002
+            color: "#78BB3E"
+          - from: 0.003
+            color: "#7ABB3E"
+          - from: 0.004
+            color: "#7BBC3D"
+          - from: 0.005
+            color: "#7CBC3D"
+          - from: 0.006
+            color: "#7EBC3C"
+          - from: 0.007
+            color: "#7FBC3C"
+          - from: 0.008
+            color: "#80BD3B"
+          - from: 0.009
+            color: "#82BD3B"
+          - from: 0.01
+            color: "#83BD3A"
+          - from: 0.011
+            color: "#85BE39"
+          - from: 0.012
+            color: "#86BE39"
+          - from: 0.013
+            color: "#87BE38"
+          - from: 0.014
+            color: "#89BE38"
+          - from: 0.015
+            color: "#8ABF37"
+          - from: 0.016
+            color: "#8BBF37"
+          - from: 0.017
+            color: "#8DBF36"
+          - from: 0.018
+            color: "#8EC036"
+          - from: 0.019
+            color: "#90C035"
+          - from: 0.02
+            color: "#91C034"
+          - from: 0.021
+            color: "#92C034"
+          - from: 0.022
+            color: "#94C133"
+          - from: 0.023
+            color: "#95C133"
+          - from: 0.024
+            color: "#96C132"
+          - from: 0.025
+            color: "#98C232"
+          - from: 0.026
+            color: "#99C231"
+          - from: 0.027
+            color: "#9BC231"
+          - from: 0.028
+            color: "#9CC230"
+          - from: 0.029
+            color: "#9DC32F"
+          - from: 0.03
+            color: "#9FC32F"
+          - from: 0.031
+            color: "#A0C32E"
+          - from: 0.032
+            color: "#A1C42E"
+          - from: 0.033
+            color: "#A3C42D"
+          - from: 0.034
+            color: "#A4C42D"
+          - from: 0.035
+            color: "#A6C42C"
+          - from: 0.036
+            color: "#A7C52C"
+          - from: 0.037
+            color: "#A8C52B"
+          - from: 0.038
+            color: "#AAC52A"
+          - from: 0.039
+            color: "#ABC62A"
+          - from: 0.04
+            color: "#ACC629"
+          - from: 0.041
+            color: "#AEC629"
+          - from: 0.042
+            color: "#AFC628"
+          - from: 0.043
+            color: "#B1C728"
+          - from: 0.044
+            color: "#B2C727"
+          - from: 0.045
+            color: "#B3C727"
+          - from: 0.046
+            color: "#B5C826"
+          - from: 0.047
+            color: "#B6C825"
+          - from: 0.048
+            color: "#B7C825"
+          - from: 0.049
+            color: "#B9C824"
+          - from: 0.051
+            color: "#BAC924"
+          - from: 0.052
+            color: "#BCC923"
+          - from: 0.053
+            color: "#BDC923"
+          - from: 0.054
+            color: "#BEC922"
+          - from: 0.055
+            color: "#C0CA22"
+          - from: 0.056
+            color: "#C1CA21"
+          - from: 0.057
+            color: "#C2CA20"
+          - from: 0.058
+            color: "#C4CB20"
+          - from: 0.059
+            color: "#C5CB1F"
+          - from: 0.06
+            color: "#C7CB1F"
+          - from: 0.061
+            color: "#C8CB1E"
+          - from: 0.062
+            color: "#C9CC1E"
+          - from: 0.063
+            color: "#CBCC1D"
+          - from: 0.064
+            color: "#CCCC1D"
+          - from: 0.065
+            color: "#CDCD1C"
+          - from: 0.066
+            color: "#CFCD1B"
+          - from: 0.067
+            color: "#D0CD1B"
+          - from: 0.068
+            color: "#D2CD1A"
+          - from: 0.069
+            color: "#D3CE1A"
+          - from: 0.07
+            color: "#D4CE19"
+          - from: 0.071
+            color: "#D6CE19"
+          - from: 0.072
+            color: "#D7CF18"
+          - from: 0.073
+            color: "#D8CF18"
+          - from: 0.074
+            color: "#DACF17"
+          - from: 0.075
+            color: "#DBCF16"
+          - from: 0.076
+            color: "#DDD016"
+          - from: 0.077
+            color: "#DED015"
+          - from: 0.078
+            color: "#DFD015"
+          - from: 0.079
+            color: "#E1D114"
+          - from: 0.08
+            color: "#E2D114"
+          - from: 0.081
+            color: "#E3D113"
+          - from: 0.082
+            color: "#E5D113"
+          - from: 0.083
+            color: "#E6D212"
+          - from: 0.084
+            color: "#E8D211"
+          - from: 0.085
+            color: "#E9D211"
+          - from: 0.086
+            color: "#EAD310"
+          - from: 0.087
+            color: "#ECD310"
+          - from: 0.088
+            color: "#EDD30F"
+          - from: 0.089
+            color: "#EED30F"
+          - from: 0.09
+            color: "#F0D40E"
+          - from: 0.091
+            color: "#F1D40E"
+          - from: 0.092
+            color: "#F3D40D"
+          - from: 0.093
+            color: "#F4D50C"
+          - from: 0.094
+            color: "#F5D50C"
+          - from: 0.095
+            color: "#F7D50B"
+          - from: 0.96
+            color: "#F8D50B"
+          - from: 0.097
+            color: "#F9D60A"
+          - from: 0.098
+            color: "#FBD60A"
+          - from: 0.099
+            color: "#FCD609"
+          - from: 0.1
+            color: "#FED709"
+          - from: 0.101
+            color: "#FED509"
+          - from: 0.102
+            color: "#FED309"
+          - from: 0.102
+            color: "#FED209"
+          - from: 0.104
+            color: "#FED009"
+          - from: 0.105
+            color: "#FECF09"
+          - from: 0.106
+            color: "#FECD09"
+          - from: 0.107
+            color: "#FECC09"
+          - from: 0.108
+            color: "#FECA09"
+          - from: 0.109
+            color: "#FEC90A"
+          - from: 0.11
+            color: "#FEC70A"
+          - from: 0.111
+            color: "#FEC60A"
+          - from: 0.112
+            color: "#FEC40A"
+          - from: 0.113
+            color: "#FEC30A"
+          - from: 0.114
+            color: "#FEC10A"
+          - from: 0.115
+            color: "#FEC00A"
+          - from: 0.116
+            color: "#FEBE0A"
+          - from: 0.117
+            color: "#FEBD0B"
+          - from: 0.118
+            color: "#FEBB0B"
+          - from: 0.119
+            color: "#FEBA0B"
+          - from: 0.12
+            color: "#FEB80B"
+          - from: 0.121
+            color: "#FEB60B"
+          - from: 0.122
+            color: "#FEB50B"
+          - from: 0.123
+            color: "#FEB30B"
+          - from: 0.124
+            color: "#FEB20B"
+          - from: 0.125
+            color: "#FEB00C"
+          - from: 0.126
+            color: "#FEAF0C"
+          - from: 0.127
+            color: "#FEAD0C"
+          - from: 0.128
+            color: "#FEAC0C"
+          - from: 0.129
+            color: "#FEAA0C"
+          - from: 0.13
+            color: "#FEA90C"
+          - from: 0.131
+            color: "#FEA70C"
+          - from: 0.132
+            color: "#FEA60C"
+          - from: 0.133
+            color: "#FEA40D"
+          - from: 0.134
+            color: "#FEA30D"
+          - from: 0.135
+            color: "#FEA10D"
+          - from: 0.136
+            color: "#FEA00D"
+          - from: 0.137
+            color: "#FE9E0D"
+          - from: 0.138
+            color: "#FE9D0D"
+          - from: 0.139
+            color: "#FE9B0D"
+          - from: 0.14
+            color: "#FE990D"
+          - from: 0.141
+            color: "#FE980D"
+          - from: 0.142
+            color: "#FE960E"
+          - from: 0.143
+            color: "#FE950E"
+          - from: 0.144
+            color: "#FE930E"
+          - from: 0.145
+            color: "#FE920E"
+          - from: 0.146
+            color: "#FE900E"
+          - from: 0.147
+            color: "#FE8F0E"
+          - from: 0.148
+            color: "#FE8D0E"
+          - from: 0.149
+            color: "#FE8C0E"
+          - from: 0.15
+            color: "#FE8A0F"
+          - from: 0.151
+            color: "#FE890F"
+          - from: 0.152
+            color: "#FE870F"
+          - from: 0.153
+            color: "#FE860F"
+          - from: 0.154
+            color: "#FE840F"
+          - from: 0.155
+            color: "#FE830F"
+          - from: 0.156
+            color: "#FE810F"
+          - from: 0.157
+            color: "#FE800F"
+          - from: 0.158
+            color: "#FE7E10"
+          - from: 0.159
+            color: "#FE7D10"
+          - from: 0.16
+            color: "#FE7B10"
+          - from: 0.161
+            color: "#FE7910"
+          - from: 0.162
+            color: "#FE7810"
+          - from: 0.163
+            color: "#FE7610"
+          - from: 0.164
+            color: "#FE7510"
+          - from: 0.165
+            color: "#FE7310"
+          - from: 0.166
+            color: "#FE7211"
+          - from: 0.167
+            color: "#FE7011"
+          - from: 0.168
+            color: "#FE6F11"
+          - from: 0.169
+            color: "#FE6D11"
+          - from: 0.17
+            color: "#FE6C11"
+          - from: 0.171
+            color: "#FE6A11"
+          - from: 0.172
+            color: "#FE6911"
+          - from: 0.173
+            color: "#FE6711"
+          - from: 0.174
+            color: "#FE6611"
+          - from: 0.175
+            color: "#FE6412"
+          - from: 0.176
+            color: "#FE6312"
+          - from: 0.177
+            color: "#FE6112"
+          - from: 0.178
+            color: "#FE6012"
+          - from: 0.179
+            color: "#FE5E12"
+          - from: 0.18
+            color: "#FE5C12"
+          - from: 0.181
+            color: "#FE5B12"
+          - from: 0.182
+            color: "#FE5912"
+          - from: 0.183
+            color: "#FE5813"
+          - from: 0.184
+            color: "#FE5613"
+          - from: 0.185
+            color: "#FE5513"
+          - from: 0.186
+            color: "#FE5313"
+          - from: 0.187
+            color: "#FE5213"
+          - from: 0.188
+            color: "#FE5013"
+          - from: 0.189
+            color: "#FE4F13"
+          - from: 0.19
+            color: "#FE4D13"
+          - from: 0.191
+            color: "#FE4C14"
+          - from: 0.192
+            color: "#FE4A14"
+          - from: 0.193
+            color: "#FE4914"
+          - from: 0.194
+            color: "#FE4714"
+          - from: 0.195
+            color: "#FE4614"
+          - from: 0.196
+            color: "#FE4414"
+          - from: 0.197
+            color: "#FE4314"
+          - from: 0.198
+            color: "#FE4114"
+          - from: 0.199
+            color: "#FF4015"
+
+        entity: sensor.system_monitor_debit_du_reseau_sortant_via_end0
+        severity:
+          green: 0
+          yellow: 0
+          red: 0
+      - type: gauge
+        name: Débit réseau entrant
+        needle: true
+        min: 0
+        max: 0.199
+        segments:
+          - from: 0
+            color: "#76BB40"
+          - from: 0.001
+            color: "#77BB3F"
+          - from: 0.002
+            color: "#78BB3E"
+          - from: 0.003
+            color: "#7ABB3E"
+          - from: 0.004
+            color: "#7BBC3D"
+          - from: 0.005
+            color: "#7CBC3D"
+          - from: 0.006
+            color: "#7EBC3C"
+          - from: 0.007
+            color: "#7FBC3C"
+          - from: 0.008
+            color: "#80BD3B"
+          - from: 0.009
+            color: "#82BD3B"
+          - from: 0.01
+            color: "#83BD3A"
+          - from: 0.011
+            color: "#85BE39"
+          - from: 0.012
+            color: "#86BE39"
+          - from: 0.013
+            color: "#87BE38"
+          - from: 0.014
+            color: "#89BE38"
+          - from: 0.015
+            color: "#8ABF37"
+          - from: 0.016
+            color: "#8BBF37"
+          - from: 0.017
+            color: "#8DBF36"
+          - from: 0.018
+            color: "#8EC036"
+          - from: 0.019
+            color: "#90C035"
+          - from: 0.02
+            color: "#91C034"
+          - from: 0.021
+            color: "#92C034"
+          - from: 0.022
+            color: "#94C133"
+          - from: 0.023
+            color: "#95C133"
+          - from: 0.024
+            color: "#96C132"
+          - from: 0.025
+            color: "#98C232"
+          - from: 0.026
+            color: "#99C231"
+          - from: 0.027
+            color: "#9BC231"
+          - from: 0.028
+            color: "#9CC230"
+          - from: 0.029
+            color: "#9DC32F"
+          - from: 0.03
+            color: "#9FC32F"
+          - from: 0.031
+            color: "#A0C32E"
+          - from: 0.032
+            color: "#A1C42E"
+          - from: 0.033
+            color: "#A3C42D"
+          - from: 0.034
+            color: "#A4C42D"
+          - from: 0.035
+            color: "#A6C42C"
+          - from: 0.036
+            color: "#A7C52C"
+          - from: 0.037
+            color: "#A8C52B"
+          - from: 0.038
+            color: "#AAC52A"
+          - from: 0.039
+            color: "#ABC62A"
+          - from: 0.04
+            color: "#ACC629"
+          - from: 0.041
+            color: "#AEC629"
+          - from: 0.042
+            color: "#AFC628"
+          - from: 0.043
+            color: "#B1C728"
+          - from: 0.044
+            color: "#B2C727"
+          - from: 0.045
+            color: "#B3C727"
+          - from: 0.046
+            color: "#B5C826"
+          - from: 0.047
+            color: "#B6C825"
+          - from: 0.048
+            color: "#B7C825"
+          - from: 0.049
+            color: "#B9C824"
+          - from: 0.051
+            color: "#BAC924"
+          - from: 0.052
+            color: "#BCC923"
+          - from: 0.053
+            color: "#BDC923"
+          - from: 0.054
+            color: "#BEC922"
+          - from: 0.055
+            color: "#C0CA22"
+          - from: 0.056
+            color: "#C1CA21"
+          - from: 0.057
+            color: "#C2CA20"
+          - from: 0.058
+            color: "#C4CB20"
+          - from: 0.059
+            color: "#C5CB1F"
+          - from: 0.06
+            color: "#C7CB1F"
+          - from: 0.061
+            color: "#C8CB1E"
+          - from: 0.062
+            color: "#C9CC1E"
+          - from: 0.063
+            color: "#CBCC1D"
+          - from: 0.064
+            color: "#CCCC1D"
+          - from: 0.065
+            color: "#CDCD1C"
+          - from: 0.066
+            color: "#CFCD1B"
+          - from: 0.067
+            color: "#D0CD1B"
+          - from: 0.068
+            color: "#D2CD1A"
+          - from: 0.069
+            color: "#D3CE1A"
+          - from: 0.07
+            color: "#D4CE19"
+          - from: 0.071
+            color: "#D6CE19"
+          - from: 0.072
+            color: "#D7CF18"
+          - from: 0.073
+            color: "#D8CF18"
+          - from: 0.074
+            color: "#DACF17"
+          - from: 0.075
+            color: "#DBCF16"
+          - from: 0.076
+            color: "#DDD016"
+          - from: 0.077
+            color: "#DED015"
+          - from: 0.078
+            color: "#DFD015"
+          - from: 0.079
+            color: "#E1D114"
+          - from: 0.08
+            color: "#E2D114"
+          - from: 0.081
+            color: "#E3D113"
+          - from: 0.082
+            color: "#E5D113"
+          - from: 0.083
+            color: "#E6D212"
+          - from: 0.084
+            color: "#E8D211"
+          - from: 0.085
+            color: "#E9D211"
+          - from: 0.086
+            color: "#EAD310"
+          - from: 0.087
+            color: "#ECD310"
+          - from: 0.088
+            color: "#EDD30F"
+          - from: 0.089
+            color: "#EED30F"
+          - from: 0.09
+            color: "#F0D40E"
+          - from: 0.091
+            color: "#F1D40E"
+          - from: 0.092
+            color: "#F3D40D"
+          - from: 0.093
+            color: "#F4D50C"
+          - from: 0.094
+            color: "#F5D50C"
+          - from: 0.095
+            color: "#F7D50B"
+          - from: 0.96
+            color: "#F8D50B"
+          - from: 0.097
+            color: "#F9D60A"
+          - from: 0.098
+            color: "#FBD60A"
+          - from: 0.099
+            color: "#FCD609"
+          - from: 0.1
+            color: "#FED709"
+          - from: 0.101
+            color: "#FED509"
+          - from: 0.102
+            color: "#FED309"
+          - from: 0.102
+            color: "#FED209"
+          - from: 0.104
+            color: "#FED009"
+          - from: 0.105
+            color: "#FECF09"
+          - from: 0.106
+            color: "#FECD09"
+          - from: 0.107
+            color: "#FECC09"
+          - from: 0.108
+            color: "#FECA09"
+          - from: 0.109
+            color: "#FEC90A"
+          - from: 0.11
+            color: "#FEC70A"
+          - from: 0.111
+            color: "#FEC60A"
+          - from: 0.112
+            color: "#FEC40A"
+          - from: 0.113
+            color: "#FEC30A"
+          - from: 0.114
+            color: "#FEC10A"
+          - from: 0.115
+            color: "#FEC00A"
+          - from: 0.116
+            color: "#FEBE0A"
+          - from: 0.117
+            color: "#FEBD0B"
+          - from: 0.118
+            color: "#FEBB0B"
+          - from: 0.119
+            color: "#FEBA0B"
+          - from: 0.12
+            color: "#FEB80B"
+          - from: 0.121
+            color: "#FEB60B"
+          - from: 0.122
+            color: "#FEB50B"
+          - from: 0.123
+            color: "#FEB30B"
+          - from: 0.124
+            color: "#FEB20B"
+          - from: 0.125
+            color: "#FEB00C"
+          - from: 0.126
+            color: "#FEAF0C"
+          - from: 0.127
+            color: "#FEAD0C"
+          - from: 0.128
+            color: "#FEAC0C"
+          - from: 0.129
+            color: "#FEAA0C"
+          - from: 0.13
+            color: "#FEA90C"
+          - from: 0.131
+            color: "#FEA70C"
+          - from: 0.132
+            color: "#FEA60C"
+          - from: 0.133
+            color: "#FEA40D"
+          - from: 0.134
+            color: "#FEA30D"
+          - from: 0.135
+            color: "#FEA10D"
+          - from: 0.136
+            color: "#FEA00D"
+          - from: 0.137
+            color: "#FE9E0D"
+          - from: 0.138
+            color: "#FE9D0D"
+          - from: 0.139
+            color: "#FE9B0D"
+          - from: 0.14
+            color: "#FE990D"
+          - from: 0.141
+            color: "#FE980D"
+          - from: 0.142
+            color: "#FE960E"
+          - from: 0.143
+            color: "#FE950E"
+          - from: 0.144
+            color: "#FE930E"
+          - from: 0.145
+            color: "#FE920E"
+          - from: 0.146
+            color: "#FE900E"
+          - from: 0.147
+            color: "#FE8F0E"
+          - from: 0.148
+            color: "#FE8D0E"
+          - from: 0.149
+            color: "#FE8C0E"
+          - from: 0.15
+            color: "#FE8A0F"
+          - from: 0.151
+            color: "#FE890F"
+          - from: 0.152
+            color: "#FE870F"
+          - from: 0.153
+            color: "#FE860F"
+          - from: 0.154
+            color: "#FE840F"
+          - from: 0.155
+            color: "#FE830F"
+          - from: 0.156
+            color: "#FE810F"
+          - from: 0.157
+            color: "#FE800F"
+          - from: 0.158
+            color: "#FE7E10"
+          - from: 0.159
+            color: "#FE7D10"
+          - from: 0.16
+            color: "#FE7B10"
+          - from: 0.161
+            color: "#FE7910"
+          - from: 0.162
+            color: "#FE7810"
+          - from: 0.163
+            color: "#FE7610"
+          - from: 0.164
+            color: "#FE7510"
+          - from: 0.165
+            color: "#FE7310"
+          - from: 0.166
+            color: "#FE7211"
+          - from: 0.167
+            color: "#FE7011"
+          - from: 0.168
+            color: "#FE6F11"
+          - from: 0.169
+            color: "#FE6D11"
+          - from: 0.17
+            color: "#FE6C11"
+          - from: 0.171
+            color: "#FE6A11"
+          - from: 0.172
+            color: "#FE6911"
+          - from: 0.173
+            color: "#FE6711"
+          - from: 0.174
+            color: "#FE6611"
+          - from: 0.175
+            color: "#FE6412"
+          - from: 0.176
+            color: "#FE6312"
+          - from: 0.177
+            color: "#FE6112"
+          - from: 0.178
+            color: "#FE6012"
+          - from: 0.179
+            color: "#FE5E12"
+          - from: 0.18
+            color: "#FE5C12"
+          - from: 0.181
+            color: "#FE5B12"
+          - from: 0.182
+            color: "#FE5912"
+          - from: 0.183
+            color: "#FE5813"
+          - from: 0.184
+            color: "#FE5613"
+          - from: 0.185
+            color: "#FE5513"
+          - from: 0.186
+            color: "#FE5313"
+          - from: 0.187
+            color: "#FE5213"
+          - from: 0.188
+            color: "#FE5013"
+          - from: 0.189
+            color: "#FE4F13"
+          - from: 0.19
+            color: "#FE4D13"
+          - from: 0.191
+            color: "#FE4C14"
+          - from: 0.192
+            color: "#FE4A14"
+          - from: 0.193
+            color: "#FE4914"
+          - from: 0.194
+            color: "#FE4714"
+          - from: 0.195
+            color: "#FE4614"
+          - from: 0.196
+            color: "#FE4414"
+          - from: 0.197
+            color: "#FE4314"
+          - from: 0.198
+            color: "#FE4114"
+          - from: 0.199
+            color: "#FF4015"
+
+        entity: sensor.system_monitor_debit_du_reseau_entrant_via_end0
+        severity:
+          green: 0
+          yellow: 0
+          red: 0

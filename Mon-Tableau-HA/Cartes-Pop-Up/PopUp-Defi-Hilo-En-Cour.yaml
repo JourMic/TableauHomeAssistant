@@ -1,0 +1,87 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: markdown
+    content: |-
+      {% 
+      set data = state_attr('sensor.defi_hilo','next_events')[0] 
+      %}
+
+      {% 
+      set montant = states('sensor.defi_hilo_currentdefi_cash')
+      %}
+
+      {% if data is defined %}
+
+         <h2><center></center></h2>  
+         <ha-alert alert-type="info"><h3>
+          Défis en cour
+        </h3></ha-alert>      
+        <br>
+
+       <table width=100%>
+          <tr>
+            <th>Période</th>
+            <th>Permis</th>
+            <th>Utilisé</th>
+            <th>Prévus</th>
+            <th>Actuel</th>
+          </tr>  
+            <tr>
+              <td align=center>{{ data.phases.preheat_start.timestamp() | timestamp_custom('%HH%M') }}-{{ data.phases.recovery_end.timestamp() | timestamp_custom('%HH%M') }}</td>
+              <td align=center>{{ "%.1f"|format(data.allowed_kWh) }} kWh</td> 
+              <td align=center>{{ "%.1f"|format(data.used_kWh) }} kWh</td>   
+              <td align=center>{{ "%.2f"|format(max(0,data.allowed_kWh - data.used_kWh) * 0.55) }} $</td>
+              <td align=center>{{ montant }} $</td>      
+            </tr>
+       </table>
+       
+      {% else %}
+      Aucune donnée disponible
+      {% endif %}
+
+  - type: custom:apexcharts-card
+    experimental:
+      color_threshold: true
+    graph_span: 24h
+    show:
+      last_updated: true
+    header:
+      standard_format: false
+      show: true
+      show_states: true
+      colorize_states: true
+      title: kWh permnis et utilisé
+    span:
+      start: day
+    series:
+      - entity: sensor.defi_hilo_allowed_kwh
+        type: line
+        group_by:
+          func: last
+          duration: 15m
+        stroke_width: 5
+      - entity: sensor.defi_hilo_used_kwh
+        type: area
+        group_by:
+          func: last
+          duration: 15m
+        stroke_width: 5
+        show:
+          header_color_threshold: true
+        color_threshold:
+          - value: 0
+            color: steelblue
+          - value: 0.5
+            color: midnightblue
+          - value: 1
+            color: orange
+          - value: 1.5
+            color: orangered
+          - value: 2
+            color: red
+
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }

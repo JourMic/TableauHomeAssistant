@@ -1,0 +1,28 @@
+template:
+  - sensor:
+      - name: "ordures_menageres_date"
+        unique_id: ordures_menageres_date
+        state: "{{((as_timestamp(states.calendar.dechets.attributes.start_time)- as_timestamp(now())) /86400+1) | int}}"
+
+      - name: "ordures_recuperation_date"
+        unique_id: ordures_recuperation_date
+        state: "{{((as_timestamp(states.calendar.recuperation.attributes.start_time)- as_timestamp(now())) /86400+1) | int}}"
+
+      - name: "ordures_compostage_date"
+        unique_id: ordures_compostage_date
+        state: "{{((as_timestamp(states.calendar.organique.attributes.start_time)- as_timestamp(now())) /86400+1) | int}}"
+
+      - name: "Collecte des dechets"
+        unique_id: "collecte_des_dechets_deux"
+        state: "{{ states('sensor.ordures_menageres_date') }}"
+        picture: /local/images/waste.png
+
+      - name: "Collecte de la recuperation"
+        unique_id: "collecte_de_la_recuperation_deux"
+        state: "{{ states('sensor.ordures_recuperation_date') }}"
+        picture: /local/images/recycling.png
+
+      - name: "Collecte du compostage"
+        unique_id: "collecte_du_compostage_deux"
+        state: "{{ states('sensor.ordures_compostage_date') }}"
+        picture: /local/images/organic.png

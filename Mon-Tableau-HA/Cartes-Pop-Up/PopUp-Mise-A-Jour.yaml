@@ -1,0 +1,43 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: custom:auto-entities
+    filter:
+      include:
+        - entity_id: update.*
+          state: "on"
+      exclude:
+        - entity_id: update.*
+          state: "off"
+    card:
+      type: custom:flex-table-card
+      sort_by: friendly_name+
+      clickable: true
+      columns:
+        - data: entity_picture
+          align: center
+          name: icone
+          modify: '''<img src="'' + x + ''"style="height: 30px;width:30px">'''
+        - data: friendly_name
+          align: left
+          name: " Nom"
+          modify: |-
+            x = x.replace('update', '');
+            x;
+        - data: installed_version
+          name: Installé
+          align: center
+        - data: latest_version
+          name: Dernière
+          align: center
+      css:
+        tbody tr td:nth-child(3): "color: green; font-weight: bold;"
+        tbody tr td:nth-child(4): "color: red; font-weight: bold;"
+    visibility:
+      - condition: state
+        entity: sensor.nombre_de_mise_a_jour_hacs
+        state_not: "0"

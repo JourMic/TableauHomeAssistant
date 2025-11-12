@@ -1,0 +1,92 @@
+title: Hilo données
+path: Sous-Vue-Hilo
+icon: mdi:gauge-full
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: true
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:database-arrow-up
+        grid_options:
+          columns: full
+          rows: full
+        heading: Défis
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: entities
+              entities:
+                - entity: sensor.defi_hilo
+                - entity: sensor.defi_hilo_nb_defi_planifies
+                - entity: sensor.defi_hilo_in_progress
+                - entity: sensor.defi_hilo_date_heure_next
+                - entity: sensor.defi_hilo_date_heure_last
+                - entity: sensor.defi_hilo_nb_defi_completes
+                - entity: sensor.recompenses_hilo
+                - entity: sensor.defi_hilo_allowed_cash
+                - entity: sensor.defi_hilo_avg_cash
+                - entity: sensor.defi_hilo_remaining_cash
+                - entity: sensor.defi_hilo_predicted_cash
+                - entity: sensor.defi_hilo_used_cash
+                - entity: sensor.defi_hilo_currentdefi_cash
+                - entity: sensor.defi_hilo_used_kwh
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Données
+        heading_style: title
+        icon: mdi:database
+        grid_options:
+          columns: full
+          rows: full
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: entities
+              entities:
+                - entity: sensor.hilo_energy_total
+ #               - entity: sensor.hydroqc_maison_current_billing_period_kwh_cost_mean
+ #               - entity: sensor.hilo_energy_total_medium_cost
+                - entity: sensor.hilo_gateway
+                - entity: sensor.hilo_rate_access
+                - entity: sensor.hilo_rate_current
+                - entity: sensor.hilo_rate_low
+                - entity: sensor.hilo_rate_low_threshold
+                - entity: sensor.hilo_rate_medium
+                - entity: sensor.hilo_rate_reward_rate
+                - entity: sensor.notifications_hilo
+                - entity: sensor.hilo_energy_total_low
+                - entity: sensor.hilo_energy_total_medium
+                - entity: sensor.defi_hilo_allowed_kwh
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full

@@ -1,0 +1,252 @@
+type: custom:button-card
+template: frame
+padding-bottom: 1px
+custom_fields:
+  buttons:
+    card:
+      type: custom:apexcharts-card
+      header:
+        show: false
+        title: Probabilité de pointe critique
+        show_states: false
+        colorize_states: true
+      graph_span: 7d
+      stacked: false
+      span:
+        start: day
+        offset: +1d
+      apex_config:
+        chart:
+          height: 240px
+      series:
+        - entity: sensor.probabilite_pointe_critique_1_jour_am
+          type: column
+          color: orange
+          name: Demain AM
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+        - entity: sensor.probabilite_pointe_critique_1_jour_pm
+          type: column
+          name: Demain PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+        - entity: sensor.probabilite_pointe_critique_2_jours_am
+          type: column
+          name: 2 jours AM
+          color: orange
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+        - entity: sensor.probabilite_pointe_critique_2_jours_pm
+          type: column
+          name: 2 jours PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+        - entity: sensor.probabilite_pointe_critique_3_jours_am
+          type: column
+          name: 3 jours AM
+          color: orange
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+             points.push([timestamp, value]);
+            }
+
+            return points;
+        - entity: sensor.probabilite_pointe_critique_3_jours_pm
+          type: column
+          name: 3 jours PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_4_jours_am
+          type: column
+          name: 4 jours AM
+          color: orange
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_4_jours_pm
+          type: column
+          name: 4 jours PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_5_jours_am
+          type: column
+          name: 5 jours AM
+          color: orange
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_5_jours_pm
+          type: column
+          name: 5 jours PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_6_jours_am
+          type: column
+          name: 6 jours AM
+          color: orange
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+
+        - entity: sensor.probabilite_pointe_critique_6_jours_pm
+          type: column
+          name: 6 jours PM
+          color: teal
+          data_generator: >
+            const value = parseFloat(entity.state); const points = [];
+
+            const startTime = new Date(entity.attributes.start).getTime(); const
+            endTime = new Date(entity.attributes.end).getTime(); const timeRange =
+            endTime - startTime; const numPoints = 40; const interval = timeRange /
+            (numPoints - 1);
+
+            for (let i = 0; i < numPoints; i++) {
+              const timestamp = startTime + (interval * i);
+              points.push([timestamp, value]);
+            }
+
+            return points;
+card_mod:
+  class: soft-ui
+  style: |
+    ha-card {
+      --primary-text-color: rgb(var(--my-grey));   
+    }
+grid_options:
+  columns: full
+  rows: full

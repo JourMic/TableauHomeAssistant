@@ -1,0 +1,178 @@
+title: Piles
+path: Vue-Piles
+icon: mdi:battery
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    column_span: 2
+    cards:
+      - type: heading
+        heading: Niveaux des piles
+        heading_style: title
+        icon: mdi:battery
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:auto-entities
+        card:
+          type: custom:bar-card
+          icon: mdi:water
+          title_position: inside
+          height: 35
+          columns: "3"
+          positions:
+            icon: inside
+            indicator: inside
+            name: inside
+            value: inside
+          show_icon: true
+          align: split
+          max: 100
+          unit_of_measurement: "%"
+          severity:
+            - color: "#FF453A"
+              from: 0
+              to: 9
+              icon: mdi:battery-outline
+            - color: "#FE6230"
+              from: 10
+              to: 19
+              icon: mdi:battery-10
+            - color: "#FE7F26"
+              from: 20
+              to: 29
+              icon: mdi:battery-20
+            - color: "#FE9C1C"
+              from: 30
+              to: 39
+              icon: mdi:battery-30
+            - color: "#FEB912"
+              from: 40
+              to: 49
+              icon: mdi:battery-40
+            - color: "#FED709"
+              from: 50
+              to: 59
+              icon: mdi:battery-50
+            - color: "#D8CC15"
+              from: 60
+              to: 69
+              icon: mdi:battery-60
+            - color: "#B3C121"
+              from: 70
+              to: 79
+              icon: mdi:battery-70
+            - color: "#8EB62E"
+              from: 80
+              to: 89
+              icon: mdi:battery-80
+            - color: "#69AB3A"
+              from: 90
+              to: 99
+              icon: mdi:battery-90
+            - color: "#44A047"
+              from: 100
+              to: 100
+              icon: mdi:battery
+          card_mod:
+            style: >
+              bar-card-currentbar, bar-card-current, bar-card-backgroundbar
+              {
+                  height: 8px !important;
+                  margin-top: 30px;
+              }
+
+              ha-icon{
+                  color: lightblue !important;
+              }
+
+              bar-card-iconbar {
+                  margin-bottom: 10px;
+              }
+        filter:
+          include:
+            - attributes:
+                device_class: battery
+              domain: sensor
+        sort:
+          method: state
+          numeric: true
+        show_empty: false
+        grid_options:
+          columns: full
+          rows: full
+ 
+  - type: grid
+    column_span: 2
+    cards:
+      - type: heading
+        heading: Piles autres
+        heading_style: title
+        icon: mdi:cctv
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:auto-entities
+              show_empty: false
+              filter:
+                include:
+                  - attributes:
+                      device_class: battery
+                    domain: binary_sensor
+                    options:
+                      type: custom:mushroom-template-card
+                      primary: |
+                        {{state_attr(entity,'friendly_name')}}
+                      secondary: |
+                        {{ state_translated(entity) }}
+                      tap_action:
+                        action: more-info
+                      double_tap_action:
+                        action: none
+              sort:
+                method: friendly_name
+              card:
+                square: false
+                type: grid
+                columns: 6
+              card_param: cards
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+badges:
+  - type: entity
+    entity: sensor.life360_pile_tel_valerie
+    display_type: complete
+    name: Téléphone Valérie
+    icon: mdi:battery
+  - type: entity
+    entity: sensor.life360_pile_tel_brigitte
+    display_type: complete
+    name: Téléphone Brigitte
+  - type: entity
+    entity: sensor.life360_pile_tel_claude
+    display_type: complete
+    name: Téléphone Claude
+  - type: entity
+    entity: sensor.life360_pile_tel_michel
+    display_type: complete
+    name: Téléphone Michel

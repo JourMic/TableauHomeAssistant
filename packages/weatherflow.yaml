@@ -1,0 +1,110 @@
+template:
+  - sensor:
+
+      - name: "Weatherflow nombre eclaires mois"
+        unique_id: "weatherflow_nombre_eclaires_mois_deux"
+        icon: mdi:weather-lightning
+        state: "{{ state_attr('sensor.tempest_st_00032986_lightning_count_today', 'max_month') | round(0) }}"
+
+      - name: "Minmax temperature max jour"
+        unique_id: "minmax_temperature_max_jour_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_day') }}"
+
+      - name: "Minmax temperature min jour"
+        unique_id: "minmax_temperature_min_jour_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_day') }}"
+
+      - name: "Minmax temperature min jour time"
+        unique_id: "minmax_temperature_min_jour_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_day_time') }}"
+
+      - name: "Minmax temperature max jour time"
+        unique_id: "minmax_temperature_max_jour_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_day_time') }}"
+
+      - name: "Minmax temperature max mois"
+        unique_id: "minmax_temperature_max_mois_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_month') }}"
+
+      - name: "Minmax temperature min mois"
+        unique_id: "minmax_temperature_min_mois_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_month') }}"
+
+      - name: "Minmax temperature max mois time"
+        unique_id: "minmax_temperature_max_mois_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_month_time') }}"
+
+      - name: "Minmax temperature min mois time"
+        unique_id: "minmax_temperature_min_mois_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_month_time') }}"
+
+      - name: "Minmax temperature maximum"
+        unique_id: "minmax_temperature_maximum_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_all') }}"
+
+      - name: "Minmax temperature minimum"
+        unique_id: "minmax_temperature_minimum_deux"
+        unit_of_measurement: "°C"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_all') }}"
+
+      - name: "Minmax temperature max all time"
+        unique_id: "minmax_temperature_max_all_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'max_all_time') }}"
+
+      - name: "Minmax temperature min all time"
+        unique_id: "minmax_temperature_min_all_time_deux"
+        icon: mdi:text-box-outline
+        state: "{{ state_attr('sensor.tempest_st_00032986_temperature', 'min_all_time') }}"
+        
+      - name: "Rain Today (Tempest, cumulative)"
+        unique_id: tempest_rain_today_cumulative
+        unit_of_measurement: "mm"
+        device_class: precipitation
+        state_class: total_increasing
+        state: "{{ states('sensor.tempest_st_00032986_rain_today')|float(0) }}"
+        availability: >
+          {{ states('sensor.tempest_st_00032986_rain_today') not in ['unknown','unavailable','none'] }}
+          
+      - name: "Rain per hours (Tempest, cumulative)"
+        unique_id: tempest_rain_per_hours_cumulative
+        unit_of_measurement: "mm"
+        device_class: precipitation
+        state_class: total_increasing
+        state: "{{ states('sensor.pluie_par_heure')|float(0) }}"
+        availability: >
+          {{ states('sensor.pluie_par_heure') not in ['unknown','unavailable','none'] }}
+          
+      - name: "Weatherflow mode descption"
+        unique_id: "weatherflow_mode_descption_deux"
+        icon: mdi:tailwind
+        state: |
+          {% if states.sensor.tempest_st_00032986_battery_mode.state | int == 0 %}
+              Tous les capteurs sont activés et fonctionnant à pleine puissance.
+              Intervalle d'échantillonnage du vent toutes les 3 secondes
+          {% elif states.sensor.tempest_st_00032986_battery_mode.state | int == 1 %}
+              Intervalle d'échantillonnage du vent réglé sur 6 secondes.
+          {% elif states.sensor.tempest_st_00032986_battery_mode.state | int == 2 %}
+              Intervalle d'échantillonnage du vent réglé sur une minute.
+          {% elif states.sensor.tempest_st_00032986_battery_mode.state | int == 3 %}
+              Intervalle d'échantillonnage du vent réglé sur 5 minutes.
+              Intervalle d'échantillonnage de tous les autres capteurs réglé sur 5 minutes.
+              Le capteur de pluie haptique est désactivé de l'écoute active.
+          {% else %}
+              Indéterminé
+          {% endif %}

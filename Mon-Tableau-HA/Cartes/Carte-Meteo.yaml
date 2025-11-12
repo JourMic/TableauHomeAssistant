@@ -1,0 +1,70 @@
+type: custom:button-card
+template: frame
+padding-bottom: 1px
+custom_fields:
+  buttons:
+    card:
+      type: custom:weather-chart-card
+      entity: weather.pirateweather
+      title: Shawinigan-sud
+      show_main: true
+      show_temperature: true
+      show_current_condition: true
+      show_attributes: true
+      show_time: true
+      show_time_seconds: false
+      show_day: true
+      show_date: true
+      show_humidity: true
+      show_pressure: true
+      show_wind_direction: true
+      show_wind_speed: true
+      show_sun: true
+      show_feels_like: true
+      show_dew_point: true
+      show_wind_gust_speed: true
+      show_visibility: false
+      show_last_changed: false
+      use_12hour_format: false
+      icons_size: "50"
+      time_size: "30"
+      day_date_size: "15"
+      current_temp_size: "30"
+      animated_icons: true
+      icon_style: style2
+      autoscroll: true
+      show_description: true
+      forecast:
+        precipitation_type: rainfall
+        show_probability: false
+        labels_font_size: "11"
+        precip_bar_size: "100"
+        style: style1
+        show_wind_forecast: true
+        condition_icons: true
+        round_temp: true
+        type: daily
+        number_of_forecasts: "0"
+        disable_animation: false
+      units:
+        speed: ""
+      temp: sensor.tempest_st_00032986_temperature
+      feels_like: sensor.tempest_st_00032986_feels_like_temperature
+      windspeed: sensor.tempest_st_00032986_wind_speed
+      wind_gust_speed: sensor.tempest_st_00032986_wind_gust
+      description: sensor.previsions_meteo_en_text
+      press: sensor.tempest_st_00032986_station_pressure
+      humid: sensor.tempest_st_00032986_humidity
+      uv: sensor.tempest_st_00032986_uv_index
+      dew_point: sensor.tempest_st_00032986_dew_point
+      winddir: sensor.tempest_st_00032986_wind_bearing
+      visibility: sensor.tempest_st_00032986_visibility
+card_mod:
+  class: soft-ui
+  style: |
+    ha-card {
+      --primary-text-color: rgb(var(--my-grey));   
+    }
+grid_options:
+  columns: 12
+  rows: full

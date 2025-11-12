@@ -1,0 +1,155 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+
+  - type: custom:button-card
+    icon: mdi:sun-wireless
+    entity: sensor.tempest_st_00032986_uv_index
+    name: Indice actuel
+    show_name: true
+    show_icon: true
+    show_label: false
+    show_state: false
+    custom_fields:
+      level: |
+        [[[
+          var uv = parseFloat(entity.state) || 0;
+          var lev = Math.round((uv / 12) * 100);
+          lev = Math.min(Math.max(lev, 0), 100);
+          
+          return `<div><div style="background: white; height: 1.7rem; width: 1.7rem; border-radius: 100px; position: relative; left: ${lev}%; box-shadow: 2px 1px 10px var(--contrast10);"></div></div>`;
+        ]]]
+      uv: |
+        [[[
+          return `<div></div>`
+        ]]]
+      label: |
+        [[[
+          let uv = parseFloat(entity.state) || 0;
+          if (uv <= 2) return '<span style="font-size: 1.2rem">🙂 BAS</span>';
+          else if (uv <= 5) return '<span style="font-size: 1.2rem">🙁 MODÉRÉ</span>';
+          else if (uv <= 7) return '<span style="font-size: 1.2rem">😧 ÉLEVÉ</span>';
+          else if (uv <= 10) return '<span style="font-size: 1.2rem">😬 DANGER</span>';
+          else return '<span style="font-size: 1.2rem">😵 EXTREME</span>';
+        ]]]
+      index: |
+        [[[
+          return entity.state;
+        ]]]
+    styles:
+      grid:
+        - grid-template-areas: |
+            "n . index" 
+            "n . label"  
+            ". uv uv"  
+            ". level level"
+        - grid-template-rows: min-content 1fr min-content 0px
+        - grid-template-columns: min-content 1fr 1fr
+      card:
+        - height: 115px
+        - padding: 10px
+        - border-radius: 20px
+      name:
+        - font-size: 1.5rem
+        - font-weight: 500
+        - justify-self: start
+        - align-self: start
+        - padding-bottom: 10px
+        - color: white
+        - padding-left: 5px
+      img_cell:
+        - position: absolute
+        - top: 15%
+        - right: 40%
+        - overflow: visible
+      icon:
+        - position: absolute
+        - width: 5rem
+        - color: yellow
+      custom_fields:
+        uv:
+          - background: >
+              linear-gradient(90deg, rgba(137,204,141,1) 0%, rgba(255,217,119,1)
+              27%, rgba(255,175,108,1) 52%, rgba(247,126,117,1) 77%,
+              rgba(167,136,210,1) 100%);
+          - border-radius: 10px
+          - height: 1rem
+          - width: 100%
+          - margin-bottom: 10px
+          - z-index: 1
+        level:
+          - background: transparent
+          - justify-self: start
+          - border-radius: 10px
+          - position: relative
+          - right: 5px
+          - bottom: 17px
+          - width: 100%
+          - z-index: 2
+          - overflow: visible
+        label:
+          - align-self: start
+          - justify-self: end
+          - margin-bottom: 10px
+          - color: white
+          - font-weight: 500
+        index:
+          - font-size: 2.2rem
+          - font-weight: 600
+          - justify-self: end
+          - color: white
+          - padding-bottom: 0px
+          - margin-left: 5px
+
+  - type: custom:mini-graph-card
+    icon: mdi:air-purifier
+    name: IQA
+    hours_to_show: 128
+    hour24: true
+    show:
+      extrema: true
+      graph: bar
+      name: false
+      icon: false
+      state: true
+    entities:
+      - entity: sensor.tempest_st_00032986_uv_index
+    color_thresholds:
+      - value: 0
+        color: '#76BB40'
+      - value: 1
+        color: '#98CB40'
+      - value: 2
+        color: '#BADB40'
+      - value: 3
+        color: '#DCEB40'
+      - value: 4
+        color: '#FEFB41'
+      - value: 5
+        color: '#FEE731'
+      - value: 6
+        color: '#FED321'
+      - value: 7
+        color: '#FEBF11'
+      - value: 8
+        color: '#FFAB01'
+      - value: 9
+        color: '#FF9006'
+      - value: 10
+        color: '#FF750B'
+      - value: 11
+        color: '#FF5A10'
+      - value: 12
+        color: '#FF4015'
+      - value: 13
+        color: '#E53923'
+      - value: 14
+        color: '#CC3232'
+      - value: 15
+        color: '#B22B40'
+      - value: 16
+        color: '#99244F'

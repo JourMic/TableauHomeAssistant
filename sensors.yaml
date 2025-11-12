@@ -1,0 +1,88 @@
+
+- platform: websocket_api
+
+- platform: time_date
+  display_options:
+    - "time"
+    - "date"
+    - "date_time"
+    - "date_time_utc"
+    - "date_time_iso"
+    - "time_date"
+    - "time_utc"
+
+- platform: template
+  sensors:
+    etats_temporaire:
+      friendly_name: "États temporaire"
+      value_template: "Inconnue"
+
+    date_du_jour:
+      friendly_name: "Date du jour"
+      unique_id: "date_du_jour"
+      value_template: >
+        {% set months = ["jan", "fév", "mar", "avr", "mai", "jun", "jui", "aoû", "sep", "oct", "nov", "déc"] %}
+        {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"] %}
+        {% set month = months[now().strftime('%m') | int -1] %}  
+        {% set day = days[now().strftime('%w') | int -1] %}  
+        {{ day + ' ' + now().strftime('%d') + ' ' + month }}
+
+    serrure_porte_avant_traduire_etat:
+      friendly_name: "serrure_porte_avant_traduire_etat"
+      unique_id: "serrure_porte_avant_traduire_etat"
+      value_template: >
+        {{ state_translated('lock.porte_d_entree' ) }}
+        
+    brosse_a_dents_traduire_secteur:
+      friendly_name: "Brosse à dents traduire secteur"
+      icon_template: mdi:toothbrush-paste
+      unique_id: "brosse_a_dents_traduire_secteur"
+      value_template: >
+        {% if is_state('sensor.smart_series_9000_10000_b259_secteur', 'sector 1') %}
+            Secteur 1
+        {% elif is_state('sensor.smart_series_9000_10000_b259_secteur', 'sector 2') %}
+            Secteur 2
+        {% elif is_state('sensor.smart_series_9000_10000_b259_secteur', 'sector 3') %}
+            Secteur 3
+        {% elif is_state('sensor.smart_series_9000_10000_b259_secteur', 'sector 4') %}
+            Secteur 4
+        {% elif is_state('sensor.smart_series_9000_10000_b259_secteur', 'no sector') %}
+            Aucun secteur
+        {% else %}
+            {{ states('sensor.smart_series_9000_10000_b259_secteur') }}
+        {% endif %}
+        
+    brosse_a_dents_traduire_etat:
+      friendly_name: "Brosse à dents traduire état"
+      icon_template: mdi:toothbrush-paste
+      unique_id: "brosse_a_dents_traduire_etat"
+      value_template: >
+        {% if is_state('sensor.smart_series_9000_10000_b259', 'running') %}
+            En fonction
+        {% elif is_state('sensor.smart_series_9000_10000_b259', 'idle') %}
+            Arrêtée
+        {% else %}
+            {{ states('sensor.smart_series_9000_10000_b259') }}
+        {% endif %}
+
+    brosse_a_dents_traduire_mode_de_brossage:
+      friendly_name: "Brosse à dents traduire mode de brossage"
+      icon_template: mdi:toothbrush-paste
+      unique_id: "brosse_a_dents_traduire_mode_de_brossage"
+      value_template: >
+       {% if is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "daily clean") -%}
+         Nettoyage quotidien
+       {% elif is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "Turbo") -%}
+         Turbo
+       {% elif is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "sensible") -%}
+         Sensible
+       {% elif is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "whitening") -%}
+         Blanchiment
+       {% elif is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "massage") -%}
+         Massage
+       {% elif is_state("sensor.smart_series_9000_10000_b259_mode_de_brossage", "tongue cleaning") -%}
+         Nettoyage de la langue
+       {% else -%}
+         {{ states('sensor.smart_series_9000_10000_b259_mode_de_brossage') }}
+       {% endif %} 
+ 

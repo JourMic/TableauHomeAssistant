@@ -1,0 +1,138 @@
+type: horizontal-stack
+cards:
+  - type: custom:button-card
+    entity: sensor.tempest_st_00032986_wind_speed
+    name: Vent
+    show_name: true
+    show_state: false
+    show_icon: false
+    custom_fields:
+      graph:
+        card:
+          type: custom:mini-graph-card
+          line_width: 1
+          entities:
+            - entity: "[[[ return entity.entity_id ]]]"
+              show_fill: true
+              show_line: true
+          show:
+            name: false
+            icon: false
+            state: false
+          line_color: "#315CA6"
+      name1: Vitesse
+      name2: Rafales
+      name3: Direction
+      speed: |
+        [[[
+          return states[entity.entity_id].state
+        ]]]
+      gust: |
+        [[[
+          return states['sensor.tempest_st_00032986_wind_gust'].state
+        ]]]
+      dir: >
+        [[[
+
+        const deg =
+        states['sensor.tempest_st_00032986_wind_bearing']?.state;
+
+        return `${deg}°`;
+
+        ]]]
+    styles:
+      grid:
+        - grid-template-areas: |
+            "n n"  
+            "name1 speed"  
+            "name2 gust" 
+            "name3 dir"
+        - grid-template-rows: 1fr 1fr
+        - grid-template-columns: 70% 30%
+      name:
+        - text-transform: capitalize
+        - font-size: 1.5rem
+        - font-weight: 500
+        - justify-self: start
+        - align-self: start
+        - color: white
+        - opacity: 1
+        - padding-left: 5px
+      icon:
+        - color: white
+        - width: 3rem
+        - height: 3rem
+      img_cell:
+        - justify-self: start
+        - width: 3rem
+        - padding-left: 5px
+      custom_fields:
+        speed:
+          - font-size: 1.3rem
+          - font-weight: 500
+          - justify-self: end
+          - align-self: end
+          - color: white
+          - padding-bottom: 0
+          - margin-left: 5px
+          - z-index: 2
+        gust:
+          - font-size: 1.3rem
+          - font-weight: 500
+          - justify-self: end
+          - align-self: end
+          - color: white
+          - padding-bottom: 0
+          - margin-left: 5px
+          - z-index: 2
+        dir:
+          - font-size: 1.3rem
+          - font-weight: 500
+          - justify-self: end
+          - align-self: end
+          - color: white
+          - padding-bottom: 0px
+          - margin-left: 5px
+          - z-index: 2
+        name1:
+          - font-size: 1.4rem
+          - font-weight: 500
+          - justify-self: start
+          - align-self: end
+          - color: white
+          - padding-bottom: 0
+          - margin-left: 5px
+          - z-index: 2
+        name2:
+          - font-size: 1.4rem
+          - font-weight: 500
+          - justify-self: start
+          - align-self: end
+          - color: white
+          - padding-bottom: 0
+          - margin-left: 5px
+          - z-index: 2
+        name3:
+          - font-size: 1.4rem
+          - font-weight: 500
+          - justify-self: start
+          - align-self: end
+          - color: white
+          - padding-bottom: 0
+          - margin-left: 5px
+          - z-index: 2
+        graph:
+          - display: block
+          - position: absolute
+          - left: 0
+          - bottom: 0
+          - width: 100%
+          - z-index: 1
+ 
+  - type: custom:ring-tile
+    entity: sensor.tempest_st_00032986_wind_speed
+    marker: sensor.tempest_st_00032986_wind_bearing
+    ring_type: compass_nesw
+    ring_size: 3
+    top_element: marker_dir
+    middle_element: value_with_unit

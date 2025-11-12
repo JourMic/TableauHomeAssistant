@@ -1,0 +1,38 @@
+template:
+  # Nombre de mise à jour HACS
+
+  - sensor:
+      - name: "Nombre de mise à jour HACS"
+        unique_id: "nombre_de_mise_a_jour_hacs"
+        state: >
+          {{
+             integration_entities('hacs')
+           | select('search', '^update.')
+           | select('is_state', 'on')
+           | list
+           | count
+          }}
+
+      # Nombre de lumières allumées
+
+      - name: "Nombre de lumières allumées"
+        unique_id: "nombre_de_lumieres_allumees"
+        state: >
+          {{ states.light
+              |rejectattr('attributes.is_hue_group', 'true')
+              |rejectattr('attributes.entity_id', 'defined')
+              |selectattr('state', 'eq', 'on')
+              |list
+              |count
+          }}
+
+      # Nombre de mise à jour total
+
+      - name: "Nombre de mise à jour total"
+        unique_id: "nombre_de_mise_a_jour_total"
+        state: >
+          {{ states.update
+              |selectattr('state', 'eq', 'on')
+              |list
+              |count
+          }}

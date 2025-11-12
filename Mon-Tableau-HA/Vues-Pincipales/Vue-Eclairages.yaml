@@ -1,0 +1,381 @@
+title: Éclairages
+path: Vue-Eclairages
+icon: mdi:lamps-outline
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Éclairage
+        template: titre
+      - type: heading
+        icon: mdi:sofa
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: 0.4
+        heading: Salon
+      - type: custom:button-card
+        template: light
+        entity: light.salon
+        icon: mdi:lamps
+        name: lampes
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.lecture
+        icon: mdi:desk-lamp
+        name: Lecture
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.brilliant_1g_8d1c0112b0_huche_du_salon
+        icon: hue:bulb-group-recessed-ceiling
+        name: huche
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.govee_tele
+        icon: mdi:television-ambient-light
+        name: govee
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        icon: mdi:table-chair
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle à manger
+      - type: heading
+        icon: mdi:tree
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Extérieure
+      - type: custom:button-card
+        template: light
+        entity: light.brilliant_table
+        icon: hue:ensis
+        name: Table
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.brilliant_vestibule_avant
+        icon: hue:ceiling-fugato-three-alt
+        name: Entrée
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.exterieure_avant
+        icon: hue:floor-lantern-group
+        name: Avant
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_lumiere_exterieurs_arriere
+        icon: hue:ceiling-fugato-two-alt
+        name: Arrière
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        icon: mdi:bathtub
+        heading_style: title
+        grid_options:
+          columns: 3
+          rows: 0.4
+        heading: Bain
+      - type: heading
+        icon: mdi:toilet
+        heading_style: title
+        grid_options:
+          columns: 3
+          rows: 0.4
+        heading: Toilette
+      - type: heading
+        icon: mdi:chair-rolling
+        heading_style: title
+        grid_options:
+          columns: 3
+          rows: 0.4
+        heading: Boudoire
+      - type: heading
+        icon: mdi:tools
+        heading_style: title
+        grid_options:
+          columns: 3
+          rows: 0.4
+        heading: Atlier
+      - type: custom:button-card
+        template: light
+        entity: light.salle_de_bain
+        icon: hue:ceiling-adore
+        name: Lavabo
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_lumiere_salle_deau
+        icon: hue:ceiling-adore
+        name: Huche
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: switch.salle_de_repos
+        icon: hue:ceiling-fugato-four-alt
+        name: Repos
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_lumiere_atelier
+        icon: hue:ceiling-adore
+        name: Plafond
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        name: Prises
+        template: titre
+      - type: heading
+        icon: mdi:sofa
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salon
+      - type: heading
+        icon: ""
+        heading_style: title
+        grid_options:
+          columns: 5
+          rows: 0.4
+        heading: Cuisine
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.ipad_de_michel_battery_level
+      - type: custom:button-card
+        template: light
+        entity: switch.neviweb130_switch_prise_lampes_salon
+        icon: mdi:power-socket-us
+        name: Huche
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: switch.neviweb130_switch_prise_huche_salon
+        icon: mdi:power-socket-us
+        name: Lampes
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: switch.neviweb130_switch_prise_ipad_ha
+        icon: mdi:power-socket-us
+        name: iPad HA
+        grid_options:
+          columns: 3
+          rows: 2
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: null
+        template: titre
+      - type: heading
+        icon: mdi:stove
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: 0.4
+        heading: Cuisine
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_comptoir_cuisine
+        icon: hue:ceiling-fugato-two
+        name: Évier
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_lumiere_huche_cuisine
+        icon: hue:single-spot
+        name: Huche
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_lumiere_vestibule_arriere
+        name: Entrée
+        icon: hue:ceiling-buratto-four
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_garde_robes_cuisine
+        icon: mdi:ceiling-light-outline
+        name: Placard
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        icon: mdi:desk
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Chambre des maîtres
+      - type: heading
+        icon: mdi:bed-king
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Bureau
+      - type: custom:button-card
+        template: light
+        entity: light.brilliant_1g_e8f9c29b43_chambre_maitres_light
+        icon: hue:pendant-cher
+        name: Plafond
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.chevets
+        icon: hue:beyond-solid-group
+        name: Chevets
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_bureau
+        icon: hue:ceiling-fugato-four-alt
+        name: Bureau
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_garde_robes_bureau
+        icon: hue:ceiling-fair-semiflush
+        name: Placard
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        icon: mdi:bed-double
+        heading_style: title
+        grid_options:
+          columns: 9
+          rows: 0.4
+        heading: "Familiale "
+      - type: heading
+        icon: mdi:bed-double
+        heading_style: title
+        grid_options:
+          columns: 3
+          rows: 0.4
+        heading: Invités
+      - type: custom:button-card
+        template: light
+        entity: light.salle_familiale
+        icon: hue:ceiling-square
+        name: Plafond
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.escalier_sous_sol_groupe_de_lumieres
+        icon: mdi:stairs
+        name: Escalier
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.echangeur_air
+        icon: hue:bulb-sultan
+        name: Air
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: light
+        entity: light.neviweb130_light_lumiere_chambre_invites
+        icon: hue:ceiling-fugato-three-alt
+        name: Plafond
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        name: null
+        template: titre
+
+      - type: heading
+        icon: ""
+        heading_style: title
+        grid_options:
+          columns: 5
+          rows: 0.4
+        heading: Sous-Sol
+        
+      - type: heading
+        icon: ""
+        heading_style: title
+        grid_options:
+          columns: 4
+          rows: 0.4
+        heading: ""
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.chauffe_eau_temperature
+        
+      - type: custom:button-card
+        template: light
+        entity: switch.neviweb130_switch_prise_echangeur_dair
+        icon: mdi:power-socket-us
+        name: Air
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: custom:button-card
+        template: light
+        entity: switch.chauffe_eau
+        icon: mdi:water-boiler
+        name: Ch eau
+        grid_options:
+          columns: 3
+          rows: 2

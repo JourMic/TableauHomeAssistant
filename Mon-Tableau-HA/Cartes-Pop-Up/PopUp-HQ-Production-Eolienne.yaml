@@ -1,0 +1,58 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: custom:apexcharts-card
+    experimental:
+      color_threshold: true
+    show:
+      last_updated: false
+    header:
+      standard_format: false
+      show: true
+      show_states: true
+      colorize_states: true
+      title: Éolienne
+    graph_span: 10d
+    apex_config:
+      chart:
+        height: 200px
+    series:
+      - entity: sensor.hydro_quebec_production_eolien
+        name: Énergie quotidienne
+        type: area
+        group_by:
+          func: last
+          duration: 1d
+        stroke_width: 5
+        show:
+          extremas: true
+          header_color_threshold: true
+          name_in_header: true
+          legend_value: false
+        color_threshold:
+          - value: 1
+            color: "#06AFFD"
+          - value: 100
+            color: "#07FCF8"
+          - value: 200
+            color: "#0AFAAA"
+          - value: 300
+            color: "#50F40A"
+          - value: 400
+            color: "#D3F20C"
+          - value: 500
+            color: "#EFC20F"
+          - value: 600
+            color: "#EE7B10"
+          - value: 700
+            color: "#CA430E"
+          - value: 800
+            color: "#94260A"
+          - value: 900
+            color: "#811C09"
+          - value: 1000
+            color: "#800000"

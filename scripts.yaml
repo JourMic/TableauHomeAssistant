@@ -1,0 +1,20 @@
+cameras:
+  sequence:
+  - action: alarm_control_panel.alarm_arm_away
+    metadata: {}
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_ca_exterieures
+  alias: Caméras +
+  description: ''
+  icon: mdi:cctv
+cameras_2:
+  sequence:
+  - action: alarm_control_panel.alarm_disarm
+    metadata: {}
+    data: {}
+    target:
+      entity_id: alarm_control_panel.blink_ca_exterieures
+  alias: Caméras -
+  description: ''
+  icon: mdi:cctv-off

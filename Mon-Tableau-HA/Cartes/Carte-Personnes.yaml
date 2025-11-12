@@ -1,0 +1,80 @@
+type: grid
+grid_options:
+columns: 4
+rows: 2
+cards:
+  - type: custom:button-card
+    template: personne
+    show_entity_picture: true
+    entity: person.brigitte
+    name: Brigitte
+    grid_options:
+      columns: 3
+      rows: 2
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Brigitte
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Personne-Brigitte.yaml
+
+  - type: custom:button-card
+    template: personne
+    show_entity_picture: true
+    entity: person.valerie
+    name: Valérie
+    grid_options:
+      columns: 3
+      rows: 2
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Valérie
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Personne-Valerie.yaml
+
+  - type: custom:button-card
+    template: personne
+    show_entity_picture: true
+    entity: person.claude
+    name: Claude
+    grid_options:
+      columns: 3
+      rows: 2
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Claude
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Personne-Claude.yaml
+
+  - type: custom:button-card
+    template: personne
+    show_entity_picture: true
+    entity: person.nasdemichel
+    name: Michel
+    grid_options:
+      columns: 3
+      rows: 2
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Michel
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Personne-Michel.yaml

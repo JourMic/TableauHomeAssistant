@@ -1,0 +1,90 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: custom:apexcharts-card
+    card_mod:
+      class: middle-contained
+    experimental:
+      color_threshold: true
+    show:
+      last_updated: false
+    header:
+      standard_format: false
+      show: true
+      show_states: true
+      colorize_states: true
+      title: Production Demande
+    graph_span: 10d
+    apex_config:
+      chart:
+        height: 200px
+    series:
+      - entity: sensor.hydro_quebec_production_total
+        name: Production
+        type: area
+        group_by:
+          func: last
+          duration: 1d
+        stroke_width: 5
+        show:
+          extremas: true
+          header_color_threshold: true
+          name_in_header: true
+          legend_value: false
+        color_threshold:
+          - value: 14000
+            color: "#06AFFD"
+          - value: 15000
+            color: "#07D7FC"
+          - value: 16000
+            color: "#07FCF8"
+          - value: 17000
+            color: "#08FBD2"
+          - value: 18000
+            color: "#0AFAAA"
+          - value: 19000
+            color: "#0BF86E"
+          - value: 20000
+            color: "#50F40A"
+          - value: 21000
+            color: "#9EF30B"
+          - value: 22000
+            color: "#D3F20C"
+          - value: 23000
+            color: "#F0E90E"
+          - value: 24000
+            color: "#EFC20F"
+          - value: 25000
+            color: "#EF9D0F\t"
+          - value: 26000
+            color: "#EE7B10"
+          - value: 27000
+            color: "#ED5711"
+          - value: 28000
+            color: "#CA430E"
+          - value: 29000
+            color: "#BA3B0D"
+          - value: 30000
+            color: "#94260A"
+          - value: 31000
+            color: "#8A210A"
+          - value: 32000
+            color: "#811C09"
+          - value: 33000
+            color: "#800000"
+      - entity: sensor.hydro_quebec_demande_de_puissance_reseau
+        name: Demande
+        type: line
+        group_by:
+          func: last
+          duration: 1d
+        stroke_width: 5
+        show:
+          extremas: true
+          header_color_threshold: false
+          name_in_header: true
+          legend_value: false

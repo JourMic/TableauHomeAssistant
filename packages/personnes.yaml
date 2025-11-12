@@ -1,0 +1,175 @@
+# Personnes Life360
+
+template:
+  - sensor:
+      # Michel
+
+      - name: "Life360 pile tel Michel"
+        unique_id: "life360_pile_tel_michel_deux"
+        icon: mdi:battery
+        unit_of_measurement: "%"
+        state: "{{ state_attr('device_tracker.life360_michel', 'battery_level') }}"
+
+      - name: "Life360 pile tel en charge Michel"
+        unique_id: "life360_pile_tel_en_charge_michel_deux"
+        icon: mdi:battery
+        state: >
+          {% if state_attr('device_tracker.life360_michel', 'battery_charging') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 wifi Michel"
+        unique_id: "life360_wifi_michel_deux"
+        icon: mdi:wifi
+        state: >
+          {% if state_attr('device_tracker.life360_michel', 'wifi_on') == true %}
+            Activé
+          {% else %}
+            Désactivé
+          {% endif %}
+
+      - name: "Life360 en deplacement Michel"
+        unique_id: "life360_en_deplacement_michel_deux"
+        icon: mdi:car-side
+        state: >
+          {% if state_attr('device_tracker.life360_michel', 'driving') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 vitesse Michel"
+        unique_id: "life360_vitesse_michel_deux"
+        icon: mdi:speedometer
+        state: "{{ state_attr('device_tracker.life360_michel', 'speed') | round(0) }}"
+
+      # Claude
+
+      - name: "Life360 pile tel Claude"
+        unique_id: "life360_pile_tel_claude_deux"
+        icon: mdi:battery
+        unit_of_measurement: "%"
+        state: "{{ state_attr('device_tracker.life360_claude', 'battery_level') }}"
+
+      - name: "Life360 pile tel en charge Claude"
+        unique_id: "life360_pile_tel_en_charge_claude_deux"
+        icon: mdi:battery
+        state: >
+          {% if state_attr('device_tracker.life360_claude', 'battery_charging') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 wifi Claude"
+        unique_id: "life360_wifi_claude_deux"
+        icon: mdi:wifi
+        state: >
+          {% if state_attr('device_tracker.life360_claude', 'wifi_on') == true %}
+            Activé
+          {% else %}
+            Désactivé
+          {% endif %}
+
+      - name: "Life360 en deplacement Claude"
+        unique_id: "life360_en_deplacement_claude_deux"
+        icon: mdi:car-side
+        state: >
+          {% if state_attr('device_tracker.life360_claude', 'driving') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 vitesse Claude"
+        unique_id: "life360_vitesse_claude_deux"
+        icon: mdi:speedometer
+        state: "{{ state_attr('device_tracker.life360_claude', 'speed') | round(0) }}"
+
+      # Brigitte
+
+      - name: "Life360 pile tel Brigitte"
+        unique_id: "life360_pile_tel_brigitte_deux"
+        icon: mdi:battery
+        unit_of_measurement: "%"
+        state: "{{ state_attr('device_tracker.life360_brigitte', 'battery_level') }}"
+
+      - name: "Life360 pile tel en charge Brigitte"
+        unique_id: "life360_pile_tel_en_charge_brigitte_deux"
+        icon: mdi:battery
+        state: >
+          {% if state_attr('device_tracker.life360_brigitte', 'battery_charging') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 wifi Brigitte"
+        unique_id: "life360_wifi_brigitte_deux"
+        icon: mdi:wifi
+        state: >
+          {% if state_attr('device_tracker.life360_brigitte', 'wifi_on') == true %}
+            Activé
+          {% else %}
+            Désactivé
+          {% endif %}
+
+      - name: "Life360 en deplacement Brigitte"
+        unique_id: "life360_en_deplacement_brigitte_deux"
+        icon: mdi:car-side
+        state: >
+          {% if state_attr('device_tracker.life360_brigitte', 'driving') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 vitesse Brigitte"
+        unique_id: "life360_vitesse_brigitte_deux"
+        icon: mdi:speedometer
+        state: "{{ state_attr('device_tracker.life360_brigitte', 'speed') | round(0) }}"
+
+      # Valérie
+
+      - name: "Life360 pile tel Valérie"
+        unique_id: "life360_pile_tel_valerie_deux"
+        icon: mdi:battery
+        unit_of_measurement: "%"
+        state: "{{ state_attr('device_tracker.life360_valerie_jourdain', 'battery_level') }}"
+
+      - name: "Life360 pile tel en charge Valérie"
+        unique_id: "life360_pile_tel_en_charge_valerie_deux"
+        icon: mdi:battery
+        state: >
+          {% if state_attr('device_tracker.life360_valerie_jourdain', 'battery_charging') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 wifi Valérie"
+        unique_id: "life360_wifi_valerie_deux"
+        icon: mdi:wifi
+        state: >
+          {% if state_attr('device_tracker.life360_valerie_jourdain', 'wifi_on') == true %}
+            Activé
+          {% else %}
+            Désactivé
+          {% endif %}
+
+      - name: "Life360 en deplacement Valérie"
+        unique_id: "life360_en_deplacement_valerie_deux"
+        icon: mdi:car-side
+        state: >
+          {% if state_attr('device_tracker.life360_valerie_jourdain', 'driving') == true %}
+            Oui
+          {% else %}
+            Non
+          {% endif %}
+
+      - name: "Life360 vitesse Valérie"
+        unique_id: "life360_vitesse_valerie_deux"
+        icon: mdi:speedometer
+        state: "{{ state_attr('device_tracker.life360_valerie_jourdain', 'speed') | round(0) }}"

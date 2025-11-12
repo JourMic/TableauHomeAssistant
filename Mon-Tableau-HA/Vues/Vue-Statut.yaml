@@ -1,0 +1,382 @@
+title: Statut
+path: Vue-Statuts
+icon: mdi:list-status
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:speedometer
+        heading: Internet
+        grid_options:
+          columns: full
+          rows: 0.4
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.speedtest_download
+            icon: mdi:arrow-down
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.speedtest_upload
+            icon: mdi:arrow-up
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:apexcharts-card
+              experimental:
+                color_threshold: true
+              graph_span: 24h
+              show:
+                last_updated: false
+              apex_config:
+                chart:
+                  height: 325px
+              header:
+                standard_format: false
+                show: false
+                show_states: false
+                colorize_states: true
+                title: Vitesse internet
+              now:
+                show: true
+                color: red
+                label: Maintenant
+              span:
+                start: day
+              series:
+                - entity: sensor.speedtest_download
+                  type: line
+                  name: Téléchargements
+                  group_by:
+                    func: last
+                    duration: 15m
+                  stroke_width: 5
+                  show:
+                    extremas: true
+                    header_color_threshold: true
+                  color_threshold:
+                    - value: 0
+                      color: red
+                    - value: 50
+                      color: orange
+                    - value: 80
+                      color: yellow
+                    - value: 100
+                      color: green
+                - entity: sensor.speedtest_upload
+                  name: Téléversements
+                  show:
+                    extremas: true
+                    header_color_threshold: true
+                  color_threshold:
+                    - value: 0
+                      color: red
+                    - value: 5
+                      color: orange
+                    - value: 8
+                      color: yellow
+                    - value: 10
+                      color: green
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 6
+
+      - type: heading
+        heading: Imprimante Canon Pro-100
+        heading_style: title
+        icon: mdi:printer
+        badges:
+          - type: entity
+            entity: sensor.canon_pro_100_series
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:auto-entities
+              card:
+                type: custom:bar-card
+                icon: mdi:water
+                title_position: inside
+                height: 35
+                columns: "2"
+                positions:
+                  icon: inside
+                  indicator: inside
+                  name: inside
+                  value: inside
+                show_icon: true
+                align: split
+                max: 100
+                unit_of_measurement: "%"
+                severity:
+                  - color: "#d11e1e"
+                    from: 0
+                    to: 5
+                  - color: "#cf2d11"
+                    from: 6
+                    to: 10
+                  - color: "#cc3900"
+                    from: 11
+                    to: 15
+                  - color: "#c84400"
+                    from: 16
+                    to: 20
+                  - color: "#c44d00"
+                    from: 21
+                    to: 25
+                  - color: "#bf5600"
+                    from: 26
+                    to: 30
+                  - color: "#b95f00"
+                    from: 31
+                    to: 35
+                  - color: "#b36600"
+                    from: 36
+                    to: 40
+                  - color: "#ac6e00"
+                    from: 41
+                    to: 45
+                  - color: "#a57500"
+                    from: 46
+                    to: 50
+                  - color: "#9d7b00"
+                    from: 51
+                    to: 55
+                  - color: "#948100"
+                    from: 56
+                    to: 60
+                  - color: "#8b8700"
+                    from: 61
+                    to: 65
+                  - color: "#818d00"
+                    from: 66
+                    to: 70
+                  - color: "#769200"
+                    from: 71
+                    to: 75
+                  - color: "#6a9700"
+                    from: 76
+                    to: 80
+                  - color: "#5d9c00"
+                    from: 81
+                    to: 85
+                  - color: "#4da100"
+                    from: 86
+                    to: 90
+                  - color: "#39a500"
+                    from: 91
+                    to: 95
+                  - color: "#15a911"
+                    from: 96
+                    to: 100
+                card_mod:
+                  style: >
+                    bar-card-currentbar, bar-card-current, bar-card-backgroundbar
+                    {
+                        height: 8px !important;
+                        margin-top: 30px;
+                        margin-left: -100px;
+                    }
+
+                    ha-icon{
+                        color: lightblue !important;
+                    }
+
+                    bar-card-iconbar {
+                        margin-bottom: 10px;
+                    }
+              filter:
+                include:
+                  - attributes:
+                      marker_type: inkCartridge
+                    domain: sensor
+              sort:
+                method: state
+                numeric: true
+              show_empty: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 6
+
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:toothbrush
+        heading_style: title
+        heading: Brosse à dents
+        badges:
+          - type: entity
+            entity: sensor.smart_series_9000_10000_b259_duree
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: glance
+              entities:
+                - entity: sensor.brosse_a_dents_traduire_etat
+                  name: État
+                  icon: mdi:state-machine
+                - entity: sensor.smart_series_9000_10000_b259_batterie
+                  name: Pile
+                - entity: sensor.smart_series_9000_10000_b259_duree
+                  name: Duré
+                - entity: sensor.smart_series_9000_10000_b259_nombre_de_secteurs
+                  name: Secteurs
+                  icon: mdi:selection-marker
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 2.5
+
+      - type: heading
+        icon: mdi:flower
+        heading: Plante
+        heading_style: title
+        badges:
+          - type: entity
+            entity: sensor.plant_sensor_8e01_temperature
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: plant-status
+              entity: plant.lis_de_la_paix
+              name: Lis de la paix
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 3.5
+
+      - type: heading
+        icon: mdi:robot-vacuum
+        heading: Aspirateur
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:vacuum-card
+              entity: vacuum.roomba_deux
+              compact_view: true
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 2.5
+
+badges:
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.system_monitor_utilisation_du_processeur
+    name: NAS
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Utilisation NAS
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-NAS.yaml
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+    name: Essence
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Prix de l'essence par ville
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-CAA-Prix-Essence.yaml
+              
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: ""
+    entity: sensor.tempest_st_00032986_voltage
+    name: Pile Tempest
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Statut de la station météo Tempest
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Tempest.yaml

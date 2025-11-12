@@ -1,0 +1,159 @@
+command_line:
+  - sensor:
+      name: CAA Prix Essence DATA
+      unique_id: CAA_prix_essence_data
+      command: 'curl -s --request POST "https://www.caa.ca/wp/wp-admin/admin-ajax.php" --form action=getCitiesForDropdown --form caa_dropdown=QUEBEC'
+      json_attributes:
+        - today
+        - arrow
+        - yesterday
+        - last_week
+        - last_month
+        - last_year
+      scan_interval: 3600
+
+template:
+  - sensor:
+      # Shawinigan
+
+      - name: "CAA Prix Essence Shawinigan Aujourd'hui"
+        unique_id: caa_gas_today_shawinigan
+        icon: >
+          {% if state_attr('sensor.caa_prix_essence_data', 'arrow')['SHAWINIGAN'] == "up"  %}
+            mdi:arrow-up-bold-circle
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['SHAWINIGAN'] == "equal"  %}
+            mdi:equal
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['SHAWINIGAN'] == "down"  %}
+            mdi:arrow-down-bold-circle
+          {% endif %}
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val6 = state_attr('sensor.caa_prix_essence_data', 'today')['SHAWINIGAN'] | float / 100 %}
+          {{ val6 | round(2) }}
+
+      - name: "CAA Prix Essence Shawinigan un mois"
+        unique_id: caa_gas_last_month_shawinigan
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_month')['SHAWINIGAN'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      - name: "CAA Prix Essence Shawinigan un an"
+        unique_id: caa_gas_last_year_shawinigan
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_year')['SHAWINIGAN'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      # Montréal
+
+      - name: "CAA Prix Essence Montréal Aujourd'hui"
+        unique_id: caa_gas_today_montreal
+        icon: >
+          {% if state_attr('sensor.caa_prix_essence_data', 'arrow')['MONTREAL'] == "up"  %}
+            mdi:arrow-up-bold-circle
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['MONTREAL'] == "equal"  %}
+            mdi:equal
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['MONTREAL'] == "down"  %}
+            mdi:arrow-down-bold-circle
+          {% endif %}
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val6 = state_attr('sensor.caa_prix_essence_data', 'today')['MONTREAL'] | float / 100 %}
+          {{ val6 | round(2) }}
+
+      - name: "CAA Prix Essence Montréal un mois"
+        unique_id: caa_gas_last_month_montreal
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_month')['MONTREAL'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      - name: "CAA Prix Essence Montréal un an"
+        unique_id: caa_gas_last_year_montreal
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_year')['MONTREAL'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      # Québec
+
+      - name: "CAA Prix Essence Québec Aujourd'hui"
+        unique_id: caa_gas_today_quebec
+        icon: >
+          {% if state_attr('sensor.caa_prix_essence_data', 'arrow')['QUEBEC'] == "up"  %}
+            mdi:arrow-up-bold-circle
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['QUEBEC'] == "equal"  %}
+            mdi:equal
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['QUEBEC'] == "down"  %}
+            mdi:arrow-down-bold-circle
+          {% endif %}
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val6 = state_attr('sensor.caa_prix_essence_data', 'today')['QUEBEC'] | float / 100 %}
+          {{ val6 | round(2) }}
+
+      - name: "CAA Prix Essence Québec un mois"
+        unique_id: caa_gas_last_month_quebec
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_month')['QUEBEC'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      - name: "CAA Prix Essence Québec un an"
+        unique_id: caa_gas_last_year_quebec
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_year')['QUEBEC'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      # Trois-Rivières
+
+      - name: "CAA Prix Essence Trois-Rivières Aujourd'hui"
+        unique_id: caa_gas_today_trois_Rivieres
+        icon: >
+          {% if state_attr('sensor.caa_prix_essence_data', 'arrow')['TROIS-RIVIERES'] == "up"  %}
+            mdi:arrow-up-bold-circle
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['TROIS-RIVIERES'] == "equal"  %}
+            mdi:equal
+          {% elif state_attr('sensor.caa_prix_essence_data', 'arrow')['TROIS-RIVIERES'] == "down"  %}
+            mdi:arrow-down-bold-circle
+          {% endif %}
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val6 = state_attr('sensor.caa_prix_essence_data', 'today')['TROIS-RIVIERES'] | float / 100 %}
+          {{ val6 | round(2) }}
+
+      - name: "CAA Prix Essence Trois-Rivières un mois"
+        unique_id: caa_gas_last_month_trois_Rivieres
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_month')['TROIS-RIVIERES'] | float / 100 %}
+          {{ val7 | round(2) }}
+
+      - name: "CAA Prix Essence Trois-Rivières un an"
+        unique_id: caa_gas_last_year_trois_Rivieres
+        icon: mdi:arrow-left-top-bold
+        device_class: monetary
+        unit_of_measurement: "CAD/L"
+        state: >
+          {% set val7 = state_attr('sensor.caa_prix_essence_data', 'last_year')['TROIS-RIVIERES'] | float / 100 %}
+          {{ val7 | round(2) }}

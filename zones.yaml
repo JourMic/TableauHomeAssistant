@@ -1,0 +1,45 @@
+# Claude et Brigitte
+
+- name: Maison CB
+  latitude: 46.4976467
+  longitude: -72.7240152
+  radius: 100
+  icon: mdi:home
+
+# Claude 
+
+- name: Travail C
+  latitude: 46.5051939
+  longitude: -72.7171560
+  radius: 100
+  icon: mdi:greenhouse
+  
+# Brigitte
+
+- name: Travail B
+  latitude: 46.3260405
+  longitude: -72.5648516
+  radius: 100
+  icon: mdi:storefront
+
+# Valérie
+
+- name: Maison SV
+  latitude: 46.605409
+  longitude: -72.713005
+  radius: 100
+  icon: mdi:home
+
+- name: Travail V
+  latitude: 46.726811
+  longitude: -72.564293
+  radius: 100
+  icon: mdi:storefront
+
+# Plaza de la Mauricie
+
+- name: Plaza
+  latitude: 46.56301
+  longitude: -72.738916
+  radius: 100
+  icon: mdi:store

@@ -1,0 +1,40 @@
+template:
+
+  - sensor:
+  
+      - name: "Niveau pile détecteur fuites lave-vaisselle"
+        unique_id: niveau_de_la_pile_détecteur_de_fuites_lave_vaisselle
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        state: "{{ state_attr('sensor.neviweb130_sensor_fuites_lave_vaiselles', 'battery_level') }}"
+
+      - name: "Niveau pile détecteur fuites laveuse"
+        unique_id: niveau_de_la_pile_détecteur_de_fuites_laveuse
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        state: "{{ state_attr('sensor.neviweb130_sensor_fuites_laveuse', 'battery_level') }}"
+
+      - name: "Niveau pile détecteur fuites réservoir d'eau chaude"
+        unique_id: niveau_de_la_pile_détecteur_de_fuites_reservoir_eau_chaude
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        state: "{{ state_attr('sensor.neviweb130_sensor_fuites_reservoir_eau_chaude', 'battery_level') }}"
+
+      - name: "Niveau pile détecteur fuites salle d'eau"
+        unique_id: niveau_de_la_pile_détecteur_de_fuites_salle_deau
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        state: "{{ state_attr('sensor.neviweb130_sensor_fuites_salle_deau', 'battery_level') }}"
+
+      - name: "Niveau pile détecteur fuites salle de bain"
+        unique_id: niveau_de_la_pile_détecteur_de_fuites_salle de bain
+        unit_of_measurement: "%"
+        device_class: battery
+        state_class: measurement
+        state: "{{ state_attr('sensor.neviweb130_sensor_fuites_salle_de_bain', 'battery_level') }}"
+
+

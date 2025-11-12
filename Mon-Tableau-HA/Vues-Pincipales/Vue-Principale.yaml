@@ -1,0 +1,426 @@
+title: Principale
+path: Vue-principale
+icon: mdi:home-account
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards: 
+      - type: heading
+        heading: "Météo "
+        heading_style: subtitle
+        icon: mdi:weather-partly-rainy
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.tempest_st_00032986_temperature
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Meteo-page-principale.yaml
+
+      - type: heading
+        heading: Personnes
+        heading_style: subtitle
+        icon: mdi:account
+        grid_options:
+          columns: 2
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Personnes.yaml
+
+      - type: heading
+        icon: mdi:lightbulb
+        heading: Éclairages
+        heading_style: subtitle
+        grid_options:
+          columns: 2
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Eclairage-Page-Princiaple.yaml
+
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: subtitle
+        heading: Agenda
+        icon: mdi:calendar-month-outline
+        grid_options:
+          columns: 2
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Calendrier.yaml
+
+      - type: heading
+        icon: mdi:heat-wave
+        heading: Chauffage
+        heading_style: subtitle
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.thermopompe_temperature
+        grid_options:
+          columns: full
+          rows: 0.7
+
+      - !include ../Cartes/Carte-Sensibo-Page-Princiaple.yaml
+
+      - type: heading
+        icon: mdi:cctv
+        heading: Caméras extérieures
+        heading_style: subtitle
+        grid_options:
+          columns: 6
+          rows: 1
+
+      - type: heading
+        icon: mdi:cctv
+        heading: Caméras intérieures
+        heading_style: subtitle
+        grid_options:
+          columns: 6
+          rows: 1
+
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.blink_ca_exterieures
+        states:
+           - armed_away
+        tap_action:
+           action: none
+        hold_action:
+           action: none
+        double_tap_action:
+           action: none
+        grid_options:
+          columns: 6
+          rows: 1
+        card_mod:
+           class: soft-ui
+           style: |
+              ha-card {
+                --primary-text-color: rgb(var(--my-grey));   
+              }
+
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.blink_ca_interieures
+        states:
+           - armed_away
+        tap_action:
+           action: none
+        hold_action:
+           action: none
+        double_tap_action:
+           action: none
+        grid_options:
+          columns: 6
+          rows: 1
+        card_mod:
+           class: soft-ui
+           style: |
+              ha-card {
+                --primary-text-color: rgb(var(--my-grey));   
+              }
+badges:
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    entity: weather.forecast_maison
+    name: Prévisons
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: À venir
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Previsions.yaml
+
+  - type: entity
+    entity: sensor.tempest_st_00032986_wind_speed
+    name: Vent
+    display_type: complete
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Vent
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Rose-Des-Vents.yaml
+
+  - type: custom:mushroom-template-badge
+    content: "{{states('sensor.tempest_st_00032986_rain_today')  | round(1) }} mm"
+    icon: mdi:weather-rainy
+    entity: sensor.tempest_st_00032986_rain_today
+    label: "{{states('sensor.tempest_st_00032986_rain_rate')  | round(1) }} mm/h"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Pluie
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Pluie.yaml
+              
+  - type: entity
+    entity: sensor.soleil_lever
+    display_type: complete
+    name: Soleil
+    visibility:
+      - condition: state
+        entity: sun.sun
+        state: below_horizon
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Soleil Lune
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Horizon.yaml
+
+  - type: entity
+    entity: sensor.soleil_coucher
+    name: Soleil
+    display_type: complete
+    visibility:
+      - condition: state
+        entity: sun.sun
+        state: above_horizon
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Soleil Lune
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Horizon.yaml
+
+  - type: entity
+    entity: sensor.phases_de_la_lune # sensor.moon_phase
+    show_entity_picture: true
+    name: Phases de la lune
+    display_type: complete
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Phases de la lune
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Phases-Lune.yaml
+
+  - type: entity
+    entity: sensor.saison_courante
+    display_type: complete
+    show_entity_picture: true
+    name: Saison
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Saison
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Saisons.yaml
+
+  - type: entity
+    show_name: true
+    show_state: false
+    show_icon: true
+    entity: sensor.defi_hilo_in_progress
+    icon: mdi:progress-alert
+    name: Défi en cour
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.defi_hilo_in_progress
+        state: "True"
+    show_entity_picture: true
+    display_type: minimal
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Défis Hilo
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Defi-Hilo-En-Cour.yaml
+              
+  - type: entity
+    entity: sensor.nombre_de_lumieres_allumees
+    icon: mdi:lightbulb
+    color: yellow
+    visibility:
+      - condition: state
+        entity: sensor.nombre_de_lumieres_allumees
+        state_not: "0"
+    name: Allumées
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Lumières allumées
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Lumieres-Allumees.yaml
+              
+  - type: entity
+    entity: sensor.nombre_de_mise_a_jour_total
+    icon: mdi:update
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.nombre_de_mise_a_jour_total
+        state_not: "0"
+    name: MAJ
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Mises à jours
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Mise-A-Jour.yaml
+              
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    icon: mdi:progress-alert
+    entity: sensor.defi_hilo_nb_defi_planifies
+    name: Défi prévu
+    color: red
+    visibility:
+      - condition: state
+        entity: sensor.defi_hilo_nb_defi_planifies
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Défis Hilo
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Defis-Hilo-A-Venir.yaml
+              
+  - type: entity
+    show_name: true
+    show_state: false
+    show_icon: true
+    entity: sensor.shawinigan_resume
+    name: Alerte 1
+    icon: mdi:alert
+    color: red
+
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.shawinigan_avis
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_terminaisons
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_bulletins
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_veilles
+            state_not: "0"
+          - condition: state
+            entity: sensor.shawinigan_alertes
+            state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Avis en cour
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Avis.yaml
+
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_des_dechets
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.ordures_menageres_date
+            state: "0"
+          - condition: state
+            entity: sensor.ordures_menageres_date
+            state: "1"
+    tap_action:
+      action: none
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_de_la_recuperation
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.ordures_recuperation_date
+            state: "0"
+          - condition: state
+            entity: sensor.ordures_recuperation_date
+            state: "1"
+    tap_action:
+      action: none
+  - type: entity
+    show_name: false
+    show_state: false
+    show_icon: true
+    entity: sensor.collecte_du_compostage
+    icon: mdi:compost
+    show_entity_picture: true
+    visibility:
+      - condition: or
+        conditions:
+          - condition: state
+            entity: sensor.ordures_compostage_date
+            state: "0"
+          - condition: state
+            entity: sensor.ordures_compostage_date
+            state: "1"
+    tap_action:
+      action: none

@@ -1,0 +1,330 @@
+title: Consommation Maison KWh
+path: Sous-Vue-Consommation-Maison
+icon: mdi:home-lightning-bolt-outline
+subview: true
+type: sections
+max_columns: 3
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:progress-clock
+        heading_style: title
+        heading: "kWh  — Horaire • En-tête\_: kWh dernière heure et kWh Aujourd'hui"
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 24h
+        span:
+          end: day
+        yaxis:
+          - decimals: 1
+            max: 2
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+        series:
+          - entity: sensor.somme_de_kwh_par_heure_cumul
+            name: Dernière heure
+            type: line
+            show:
+              in_chart: false
+              in_header: true
+          - entity: sensor.kwh_par_jour_total
+            name: Mois
+            color: deepskyblue
+            type: column
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1h
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: true
+              datalabels: true
+              in_header: false
+          - entity: sensor.kwh_par_jour_total
+            name: Aujourd'hui
+            type: line
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1d
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+        grid_options:
+          columns: 36
+          rows: auto
+      - type: heading
+        icon: mdi:calendar-today
+        heading_style: title
+        heading: >-
+          kWh — Quotidienne • En-tête - kWh aujourd'hui et kWh 30 derniers
+          jours
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 30d
+        span:
+          end: day
+        yaxis:
+          - min: 0
+            max: 50
+            decimals: 1
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+          tooltip:
+            x:
+              format: dd MMM yyyy
+        series:
+          - entity: sensor.kwh_par_jour_total
+            name: Aujourd'hui
+            type: line
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1d
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+          - entity: sensor.kwh_par_jour_total
+            name: Aujourd'hui
+            color: deepskyblue
+            type: column
+            group_by:
+              duration: 1d
+              func: last
+              start_with_last: true
+              fill: zero
+            statistics:
+              type: state
+              period: day
+              align: start
+            show:
+              in_chart: true
+              datalabels: true
+              in_header: false
+            stroke_width: 0
+          - entity:  sensor.kwh_par_jour_total
+            name: Derniers 30 jours
+            type: line
+            group_by:
+              duration: 30d
+              func: sum
+              start_with_last: true
+              fill: zero
+            statistics:
+              type: state
+              period: day
+              align: start
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+        grid_options:
+          columns: 36
+          rows: auto
+      - type: heading
+        icon: mdi:calendar-month
+        heading_style: title
+        heading: "kWh — Mensuelle • En-tête : kWh ce mois-ci et kWh 12 derniers mois"
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 12month
+        span:
+          end: month
+        yaxis:
+          - min: 0
+            decimals: 0
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+          tooltip:
+            x:
+              format: MMM yyyy
+        series:
+          - entity: sensor.kwh_par_jour_total
+            name: Ce mois
+            color: deepskyblue
+            type: column
+            statistics:
+              type: state
+              period: day
+              align: start
+            group_by:
+              duration: 1month
+              func: sum
+              fill: zero
+            show:
+              in_header: true
+              name_in_header: true
+              datalabels: true
+              in_chart: true
+              legend_value: false
+              extremas: false
+          - entity: sensor.kwh_par_jour_total
+            name: Derniers 12 mois
+            type: line
+            statistics:
+              type: state
+              period: day
+              align: start
+            group_by:
+              duration: 12month
+              func: sum
+              fill: zero
+            show:
+              in_header: true
+              name_in_header: true
+              datalabels: false
+              in_chart: false
+              legend_value: false
+        grid_options:
+          columns: 36
+          rows: auto
+    column_span: 3
+    
+badges:
+
+  - type: entity
+    entity: sensor.meter00_power
+    show_name: false
+    show_state: true
+    show_icon: true
+    tap_action:
+       action: navigate
+       navigation_path: /tableau-ha/Sous-Vue-Stats-Consommation

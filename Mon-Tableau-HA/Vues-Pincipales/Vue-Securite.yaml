@@ -1,0 +1,309 @@
+title: Sécurité
+path: Vue-Securites
+icon: mdi:shield-home
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Caméras
+        template: titre
+        
+      - type: heading
+        icon: mdi:home-account
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Extérieures
+        
+      - type: heading
+        icon: mdi:tree
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Intérieures
+        
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.blink_ca_exterieures
+        states:
+           - armed_away
+        tap_action:
+           action: none
+        hold_action:
+           action: none
+        double_tap_action:
+           action: none
+        grid_options:
+          columns: 6
+          rows: 1
+        card_mod:
+           class: soft-ui
+           style: |
+              ha-card {
+                --primary-text-color: rgb(var(--my-grey));   
+              }
+
+      - type: custom:mushroom-alarm-control-panel-card
+        entity: alarm_control_panel.blink_ca_interieures
+        states:
+           - armed_away
+        tap_action:
+           action: none
+        hold_action:
+           action: none
+        double_tap_action:
+           action: none
+        grid_options:
+          columns: 6
+          rows: 1
+        card_mod:
+           class: soft-ui
+           style: |
+              ha-card {
+                --primary-text-color: rgb(var(--my-grey));   
+              }
+          
+      - type: custom:button-card
+        name: Mouvements
+        template: titre
+        
+      - type: heading
+        icon: mdi:sofa
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salon
+        
+      - type: heading
+        icon: mdi:home-floor-0
+        heading: Cuisine
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_salon_mouvement
+        template: mouvements
+        name: Salon
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_cuisine_mouvement
+        template: mouvements
+        name: Cuisine
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: heading
+        icon: mdi:home-floor-0
+        heading: Sous-Sol
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: heading
+        icon: mdi:home-floor-0
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Allée
+
+      - type: custom:button-card
+        entity: binary_sensor.camera_sous_sol_mouvement
+        template: mouvements
+        name: Sous-sol
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: custom:button-card
+        entity: binary_sensor.camera_allee_mouvement
+        template: mouvements
+        name: Allée
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: heading
+        icon: mdi:gamepad-outline
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+          
+        heading: Avant
+      - type: heading
+        icon: mdi:home-floor-0
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+          
+        heading: Arrière
+      - type: custom:button-card
+        entity: binary_sensor.camera_avant_mouvement
+        template: mouvements
+        name: Galerie avant
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: custom:button-card
+        entity: binary_sensor.camera_arriere_mouvement
+        template: mouvements
+        name: Galerie Arrière
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Porte avant
+        template: titre
+        
+      - type: heading
+        icon: mdi:lock-outline
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+          
+        heading: Serrure
+      - type: heading
+        icon: mdi:door
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Porte
+
+      - type: custom:button-card
+        entity: lock.porte_d_entree
+        template: serrure
+        name: Serrure
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: binary_sensor.porte_d_entree_porte
+        template: mouvements
+        name: Porte
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        name: Fuites
+        template: titre
+      - type: heading
+        icon: mdi:toilet
+        heading: Salle d’eau
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+          
+      - type: heading
+        icon: mdi:stove
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Cuisine
+
+      - type: custom:button-card
+        entity: sensor.neviweb130_sensor_fuites_salle_deau
+        icon: mdi:leak-off
+        template: fuites
+        name: Toilette
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+
+      - type: custom:button-card
+        entity: sensor.neviweb130_sensor_fuites_lave_vaiselles
+        icon: mdi:leak-off
+        template: fuites
+        name: Lave-Vaiselles
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: heading
+        icon: mdi:bathtub
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+          
+        heading: Salle de Bain
+      - type: heading
+        icon: mdi:chair-rolling
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Boudoire
+
+      - type: custom:button-card
+        entity: sensor.neviweb130_sensor_fuites_salle_de_bain
+        icon: mdi:leak-off
+        template: fuites
+        name: Toilette
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: custom:button-card
+        entity: sensor.neviweb130_sensor_fuites_laveuse
+        icon: mdi:leak-off
+        template: fuites
+        name: Laveuse
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2
+          
+      - type: heading
+        icon: mdi:leak-off
+        heading_style: title
+        grid_options:
+          columns: 12
+          rows: 0.4
+        heading: Sous-Sol
+
+      - type: custom:button-card
+        icon: mdi:leak-off
+        entity: sensor.neviweb130_sensor_fuites_reservoir_eau_chaude
+        template: fuites
+        name: Chauffe eau
+        show_state: true
+        grid_options:
+          columns: 6
+          rows: 2

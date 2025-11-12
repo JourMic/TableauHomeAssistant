@@ -1,0 +1,40 @@
+template:
+
+  - sensor:
+
+# Direction du vent
+
+      - name: "Direction du vent"
+        unique_id: "direction_du_vent"
+        state: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSO','SO','OSO','O','ONO','NO','NNO','N'] %}
+          {% set degree = states('sensor.st_00032986_direction_du_vent')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+
+# Prévisions
+
+      - name: "Prévisions météo en text"
+        unique_id: "previsions_meteo_en_text"
+        state: >
+           {{ state_attr('sensor.meteo_shawinigan_previsions',
+           'daily')[0]['text_summary'] }}
+# IQA
+      - name: "Indice de la qualité de l'air Shawinigan"
+        unique_id: "indice_de_la_qualite_de_l_air_Shawinigan"
+        icon: mdi:air-filter
+        state: >
+        
+          {% if states('sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air')|int(0) <= 50 %}
+             😀 Bon!
+          {% elif states('sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air')|int(0) <= 100 %}
+             🙂 Modéré!
+          {% elif states('sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air')|int(0) <= 150 %}
+             🙁 Mauvais pour les personnes sensibles!
+          {% elif states('sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air')|int(0) <= 200 %}
+             ☹️ Mauvais!
+          {% elif states('sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air')|int(0) <= 300 %}
+             😧 Très mauvais!
+          {% else %}
+             😵 Dangereux!
+          {% endif %}
+          

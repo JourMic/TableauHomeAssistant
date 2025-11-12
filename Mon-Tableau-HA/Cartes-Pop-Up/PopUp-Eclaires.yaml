@@ -1,0 +1,87 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:mushroom-template-card
+        primary: Total
+        secondary: "{{states('sensor.tempest_st_00032986_lightning_count_today')}}"
+        icon: mdi:counter
+        icon_color: blue
+        fill_container: true
+        layout: vertical
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            mushroom-state-info $: |
+              .container {
+              --card-secondary-font-size: 18px;
+              }
+      - type: custom:mushroom-template-card
+        primary: 1 hrs
+        secondary: >-
+          {{states('sensor.shawinigan_sud_nombre_d_eclairs_sur_la_dernieres_1_heure')}}
+        icon: mdi:counter
+        icon_color: blue
+        fill_container: true
+        layout: vertical
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            mushroom-state-info $: |
+              .container {
+              --card-secondary-font-size: 18px;
+              }
+      - type: custom:mushroom-template-card
+        primary: 3 hrs
+        secondary: >-
+          {{states('sensor.shawinigan_sud_nombre_d_eclairs_sur_les_3_dernieres_heures')}}
+        icon: mdi:counter
+        icon_color: blue
+        fill_container: true
+        layout: vertical
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            mushroom-state-info $: |
+              .container {
+              --card-secondary-font-size: 18px;
+              }
+      - type: custom:mushroom-template-card
+        primary: Distance
+        secondary: "{{states('sensor.shawinigan_sud_distance_du_dernier_eclair')}} km"
+        icon: mdi:arrow-expand-horizontal
+        icon_color: blue
+        fill_container: true
+        layout: vertical
+        tap_action:
+          action: none
+        hold_action:
+          action: none
+        double_tap_action:
+          action: none
+        card_mod:
+          style:
+            mushroom-state-info $: |
+              .container {
+              --card-secondary-font-size: 18px;
+              }
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }

@@ -1,0 +1,457 @@
+title: Chauffage
+path: Vue-Chauffages
+icon: mdi:radiator
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: Chauffage
+        template: titre
+      - type: heading
+        icon: mdi:sofa
+        heading_style: title
+        heading: Salon
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: heading
+        icon: mdi:stove
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Cusine
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_salon
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_cuisine
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+          
+      - type: heading
+        icon: mdi:toilet
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle d’eau
+        
+      - type: heading
+        icon: mdi:bed-king
+        heading_style: title
+        heading: Chambre des maîtres
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_salle_eau
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_ch_maitres
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: heading
+        icon: mdi:desk
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Bureau
+
+      - type: heading
+        icon: mdi:hvac
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Thermopompe
+        
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_bureau
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.sensibo_cuisine
+              name: Salle à dîner
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+  - type: grid
+    cards:
+      - type: custom:button-card
+        name: null
+        template: titre
+      - type: heading
+        icon: mdi:chair-rolling
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle de repos
+      - type: heading
+        icon: mdi:bathtub
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle de bain
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_salle_repos
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_salle_bain
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: heading
+        icon: mdi:account-group
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: "Salle familiale "
+      - type: heading
+        icon: mdi:bed-double
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Chambre des invités
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_salle_familiale
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_ch_invites
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: heading
+        icon: mdi:tools
+        heading_style: title
+        heading: Atelier
+        grid_options:
+          columns: 6
+          rows: 0.4
+
+      - type: heading
+        icon: mdi:hvac
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Thermopompe
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.neviweb130_climate_atelier
+              name: Chauffage
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: tile
+              features:
+                - type: target-temperature
+              entity: climate.sensibo_salle_de_repos
+              name: Salle de repos
+              state_content:
+                - current_temperature
+                - hvac_action
+              features_position: bottom
+              vertical: false
+              grid_options:
+                columns: 6
+                rows: 2
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 3

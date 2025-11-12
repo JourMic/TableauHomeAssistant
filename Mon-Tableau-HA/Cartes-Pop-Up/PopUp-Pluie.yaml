@@ -1,0 +1,70 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: custom:bar-card
+    icon: mdi:water
+    title_position: inside
+    height: 35
+    entities:
+      - entity: sensor.tempest_st_00032986_rain_rate
+        name: Taux
+        unit_of_measurement: mm/h
+      - entity: sensor.tempest_st_00032986_rain_today
+        name: Aujourd'hui
+      - entity: sensor.tempest_st_00032986_rain_yesterday
+        name: Hier
+    positions:
+      icon: inside
+      indicator: inside
+      name: inside
+      value: inside
+    show_icon: true
+    align: split
+    max: 100
+    unit_of_measurement: mm
+    card_mod:
+      style: |
+        ha-card {
+        } bar-card-background bar-card-backgroundbar {
+          background: linear-gradient(90deg, #76BB40 0%, #FEFB41 20%, #FFAB01 40%, #E63B7A 60%, #982ABC 80%, #4D22B2 100%);
+          border-radius: 0px;
+          filter: brightness(1);
+          opacity: 0.15;
+        } bar-card-background bar-card-currentbar {
+          background: linear-gradient(90deg, #76BB40 0%, #FEFB41 20%, #FFAB01 40%, #E63B7A 60%, #982ABC 80%, #4D22B2 100%);
+          mask-image: repeating-linear-gradient( 90deg,  rgba(0, 0, 0, 0.3) 0%, black 2%, rgba(0, 0, 0, 0.3) 4%, transparent 0%, transparent 0%);
+          clip-path: polygon(0 0, var(--bar-percent) 0, var(--bar-percent) 100%, 0 100%);
+          border-radius: 0px;
+        } bar-card-value {
+          margin: 5px;
+          font-size: 1.25rem;
+          font-weight: 800;
+        }
+        bar-card-currentbar, bar-card-current, bar-card-backgroundbar {
+            height: 15px !important;
+            margin-top: 30px;
+        }
+        ha-icon{
+            color: lightblue !important;
+        }
+        bar-card-iconbar {
+            margin-bottom: 3px;
+        }
+  - type: horizontal-stack
+    cards:
+      - type: custom:rain-gauge-card
+        entity: sensor.tempest_st_00032986_rain_today
+        name: Aujourd’hui
+        language: fr
+        max_level: "80"
+        border_colour: Blue
+      - type: custom:rain-gauge-card
+        entity: sensor.tempest_st_00032986_rain_yesterday
+        name: Hier
+        language: fr
+        max_level: "80"
+        border_colour: yellow

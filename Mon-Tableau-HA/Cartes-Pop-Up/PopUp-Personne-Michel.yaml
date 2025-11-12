@@ -1,0 +1,16 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards: 
+ 
+      - type: custom:decluttering-card
+        template: life360_personnes
+        variables:
+          - life360_personne: 'person.nasdemichel'
+          - life360_pile: 'sensor.life360_pile_tel_michel'
+          - life360_charge: 'sensor.life360_pile_tel_en_charge_michel'
+          - life360_deplacement: 'sensor.life360_en_deplacement_michel'
+          - life360_vitesse: 'sensor.life360_vitesse_michel'

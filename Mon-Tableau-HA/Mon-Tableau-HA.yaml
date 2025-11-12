@@ -1,0 +1,37 @@
+## Tableau de bord Mon tableau HAA
+
+button_card_templates: !include Templates/button_card_templates.yaml
+decluttering_templates: !include Templates/decluttering-templates.yaml
+
+title: Mon Tableau HA
+
+views: 
+
+  # Vues principales
+
+  - !include Vues-Pincipales/Vue-Principale.yaml
+  - !include Vues-Pincipales/Vue-Eclairages.yaml
+  - !include Vues-Pincipales/Vue-Chauffage.yaml
+  - !include Vues-Pincipales/Vue-Securite.yaml
+ 
+  # Vues
+
+  - !include Vues/Vue-Conditions.yaml
+  - !include Vues/Vue-Hydro-Quebec.yaml
+  - !include Vues/Vue-Meteo.yaml
+  - !include Vues/Vue-Piles.yaml
+  - !include Vues/Vue-Formule-Un.yaml
+  - !include Vues/Vue-Statut.yaml
+
+  # Sous Vues
+
+  - !include Sous-Vues/Sous-Vue-Statistiques.yaml
+  - !include Sous-Vues/Sous-Vue-Defis.yaml
+  - !include Sous-Vues/Sous-Vue-Hilo.yaml
+  - !include Sous-Vues/Sous-Vue-Hydro-Quebec.yaml
+  - !include Sous-Vues/Sous-Vue-Consommation-Maison.yaml
+  - !include Sous-Vues/Sous-Vue-Pluie.yaml
+  - !include Sous-Vues/Sous-Vue-Stats-Consommation.yaml
+   
+   
+   

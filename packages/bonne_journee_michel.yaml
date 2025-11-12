@@ -1,0 +1,12 @@
+template:
+
+  - sensor:
+
+      - name: "Periodes du jours"
+        unique_id: "periodes_du_jours"
+        icon: mdi:molecule-co2
+        state: >
+          {% if now().hour < 6 %} 🌙 Bonne nuit Michel!
+          {% elif now().hour < 12 %} ☕️ Bon matin Michel!
+          {% elif now().hour < 18 %} 😎 Bon après-midi Michel!
+          {% else %} ⭐️ Bonne soirée Michel!{% endif %} 

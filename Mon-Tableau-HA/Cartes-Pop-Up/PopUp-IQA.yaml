@@ -1,0 +1,249 @@
+type: custom:vertical-stack-in-card
+cards:
+  - type: custom:mushroom-template-card
+    primary: Qualité de l'air Shawinigan
+    tap_action:
+      action: none
+    card_mod:
+      style: |
+        ha-card {
+          --card-primary-font-size: 25px;
+          --card-primary-line-height: 26px !important;            
+          text-align: center;
+        }
+  - type: custom:button-card
+    icon: mdi:weather-dust
+    entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+    name: Qualité
+    show_name: true
+    show_icon: true
+    show_label: false
+    show_state: false
+    custom_fields:
+      level: |
+        [[[
+          var aqi = parseFloat(entity.state) || 0;
+          var lev = Math.round((aqi / 301) * 100);
+          lev = Math.min(Math.max(lev, 0), 100);
+
+          return `<div><div style="background: white; height: 1.7rem; width: 1.7rem; border-radius: 100px; position: relative; left: ${lev}%; box-shadow: 2px 1px 10px withe;"></div></div>`;
+        ]]]
+      label: |
+        [[[
+          let aqi = parseFloat(entity.state) || 0;
+          if (aqi <= 50) return '<span style="font-size: 1.2rem">😀 Bon!</span>';
+          else if (aqi <= 100) return '<span style="font-size: 1.2rem">🙂 Modéré!</span>';
+          else if (aqi <= 150) return '<span style="font-size: 1.2rem"🙁 Mauvais!<br><small>for sensitive groups</small></span>';
+          else if (aqi <= 200) return '<span style="font-size: 1.2rem">☹️ Mauvais + !</span>';
+          else if (aqi <= 300) return '<span style="font-size: 1.2rem">😧 Très mauvais!</span>';
+          else return '<span style="font-size: 1.2rem">😵 Dangereux!</span>';
+        ]]]
+              
+      index: |
+        [[[
+          return `${entity.state} <span style="font-size: 1rem; color: white">IQA</span>`;
+        ]]]
+      uv: |
+        [[[
+          return `<div></div>`
+        ]]]
+    styles:
+      grid:
+        - grid-template-areas: |
+            "n . index"  
+            "n . label" 
+            ". uv uv" 
+            ". level level"
+        - grid-template-rows: min-content 1fr min-content 0px
+        - grid-template-columns: min-content 1fr 1fr
+      card:
+        - height: 115px
+        - padding: 10px
+        - border-radius: 20px
+      name:
+        - font-size: 1.5rem
+        - font-weight: 500
+        - justify-self: start
+        - align-self: start
+        - padding-bottom: 10px
+        - color: white
+        - padding-left: 5px
+      img_cell:
+        - position: absolute
+        - top: 15%
+        - right: 40%
+        - overflow: visible
+      icon:
+        - position: absolute
+        - width: 5rem
+        - color: lightblue
+      custom_fields:
+        uv:
+          - background: >
+              linear-gradient(90deg, rgba(137,204,141,1) 0%, rgba(255,217,119,1)
+              20%, rgba(255,175,108,1) 40%, rgba(247,126,117,1) 60%,
+              rgba(167,136,210,1) 80%, rgba(116,0,152,1) 100%);
+          - border-radius: 10px
+          - height: 1rem
+          - width: 100%
+          - margin-bottom: 10px
+          - z-index: 1
+        level:
+          - background: transparent
+          - justify-self: start
+          - border-radius: 10px
+          - position: relative
+          - right: 5px
+          - bottom: 17px
+          - width: 100%
+          - z-index: 2
+          - overflow: visible
+        label:
+          - align-self: start
+          - justify-self: end
+          - margin-bottom: 10px
+          - color: white
+          - font-weight: 500
+        index:
+          - font-size: 2.2rem
+          - font-weight: 600
+          - justify-self: end
+          - color: white
+          - padding-bottom: 0px
+          - margin-left: 5px
+          
+  - show_name: true
+    show_icon: true
+    show_state: true
+    type: glance
+    entities:
+      - entity: sensor.mauricie_quebec_canada_pm2_5
+        icon: mdi:air-filter
+        name: PM 2.5
+      - entity: sensor.mauricie_quebec_canada_ozone
+        name: Ozone
+        icon: mdi:chart-box-outline
+      - entity: sensor.mauricie_quebec_canada_dominant_pollutant
+        icon: mdi:arrow-up-bold-circle
+        name: Dominant
+  - type: custom:mini-graph-card
+    icon: mdi:air-purifier
+    name: IQA
+    hours_to_show: 128
+    hour24: true
+    show:
+      extrema: true
+      graph: bar
+      name: false
+      icon: false
+      state: true
+    entities:
+      - entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+    color_thresholds:
+      - value: 0
+        color: "#76BB40"
+      - value: 6
+        color: "#7BBC3D"
+      - value: 12
+        color: "#80BD3B"
+      - value: 18
+        color: "#86BE39"
+      - value: 24
+        color: "#8BBF37"
+      - value: 30
+        color: "#91C035"
+      - value: 36
+        color: "#96C132"
+      - value: 42
+        color: "#9CC230"
+      - value: 48
+        color: "#A1C32E"
+      - value: 54
+        color: "#A6C52C"
+      - value: 60
+        color: "#ACC62A"
+      - value: 66
+        color: "#B1C727"
+      - value: 72
+        color: "#B7C825"
+      - value: 78
+        color: "#BCC923"
+      - value: 84
+        color: "#C2CA21"
+      - value: 90
+        color: "#C7CB1F"
+      - value: 96
+        color: "#CDCC1C"
+      - value: 102
+        color: "#D2CE1A"
+      - value: 108
+        color: "#D7CF18"
+      - value: 114
+        color: "#DDD016"
+      - value: 120
+        color: "#E2D114"
+      - value: 126
+        color: "#E8D211"
+      - value: 132
+        color: "#EDD30F"
+      - value: 138
+        color: "#F3D40D"
+      - value: 144
+        color: "#F8D50B"
+      - value: 150
+        color: "#FED709"
+      - value: 156
+        color: "#FBCF08"
+      - value: 162
+        color: "#F8C708"
+      - value: 168
+        color: "#F5C007"
+      - value: 174
+        color: "#F2B807"
+      - value: 180
+        color: "#EFB107"
+      - value: 186
+        color: "#ECA906"
+      - value: 192
+        color: "#E9A206"
+      - value: 198
+        color: "#E69A06"
+      - value: 204
+        color: "#E39205"
+      - value: 210
+        color: "#E08B05"
+      - value: 216
+        color: "#DD8305"
+      - value: 222
+        color: "#DA7C04"
+      - value: 228
+        color: "#D87404"
+      - value: 234
+        color: "#D56D03"
+      - value: 240
+        color: "#D26503"
+      - value: 246
+        color: "#CF5E03"
+      - value: 252
+        color: "#CC5602"
+      - value: 258
+        color: "#C94E02"
+      - value: 264
+        color: "#C64702"
+      - value: 270
+        color: "#C33F01"
+      - value: 276
+        color: "#C03801"
+      - value: 282
+        color: "#BD3001"
+      - value: 288
+        color: "#BA2900"
+      - value: 294
+        color: "#B72100"
+      - value: 300
+        color: "#B51A00"
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }

@@ -1,0 +1,277 @@
+template:
+  - sensor:
+      # Jour 1 AM
+      - name: "Probabilité pointe critique 1 jour AM"
+        unique_id: probabilite_pointe_critique_1_jour_am
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 1 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*1)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*1)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 1 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+
+      # Jour 1 PM
+      - name: "Probabilité pointe critique 1 jour PM"
+        unique_id: probabilite_pointe_critique_1_jour_pm
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 1 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*1)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*1)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 1 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+
+      # Jour 2 AM
+      - name: "Probabilité pointe critique 2 jours AM"
+        unique_id: probabilite_pointe_critique_2_jours_am<
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 2 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*2)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*2)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 2 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+
+      # Jour 2 PM
+      - name: "Probabilité pointe critique 2 jours PM"
+        unique_id: probabilite_pointe_critique_2_jours_pm
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 2 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*2)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*2)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 2 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+
+      # Jour 3 AM
+      - name: "Probabilité pointe critique 3 jours AM"
+        unique_id: probabilite_pointe_critique_3_jours_am
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 3 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*3)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*3)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 3 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+
+      # Jour 3 PM
+      - name: "Probabilité pointe critique 3 jours PM"
+        unique_id: probabilite_pointe_critique_3_jours_pm
+        unit_of_measurement: "%"
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 3 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*3)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*3)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 3 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      # Jour 4 AM
+      - name: "Probabilité pointe critique 4 jours AM"
+        unique_id: probabilite_pointe_critique_4_jours_am
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 4 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*4)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*4)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 4 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+      # Jour 4 PM
+      - name: "Probabilité pointe critique 4 jours PM"
+        unique_id: probabilite_pointe_critique_4_jours_pm
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 4 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*4)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*4)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 4 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+      # Jour 5 AM
+      - name: "Probabilité pointe critique 5 jours AM"
+        unique_id: probabilite_pointe_critique_5_jours_am
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 5 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*5)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*5)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 5 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+      # Jour 5 PM
+      - name: "Probabilité pointe critique 5 jours PM"
+        unique_id: probabilite_pointe_critique_5_jours_pm
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 5 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*5)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*5)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 5 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+      # Jour 6 AM
+      - name: "Probabilité pointe critique 6 jours AM"
+        unique_id: probabilite_pointe_critique_6_jours_am
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["06:00","09:00"] %}
+          {% set day = 6 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "am"
+          start: "{{ (as_timestamp(today_at('06:00')) + (86400*6)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('09:00')) + (86400*6)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["06:00","09:00"] %}
+            {% set day = 6 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+      # Jour 6 PM
+      - name: "Probabilité pointe critique 6 jours PM"
+        unique_id: probabilite_pointe_critique_6_jours_pm
+        state: >
+          {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+          {% set local_times_range = ["17:00","21:00"] %}
+          {% set day = 6 %}
+          {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+          {{ (e**(-4.40982668173898+-0.347977050508489*temp)/(1+e**(-4.40982668173898+-0.347977050508489*temp)) *100) |round(0) }}
+        unit_of_measurement: "%"
+        attributes:
+          peak: "pm"
+          start: "{{ (as_timestamp(today_at('17:00')) + (86400*6)) | timestamp_local }}"
+          end: "{{ (as_timestamp(today_at('21:00')) + (86400*6)) | timestamp_local }}"
+          average_temperature: >
+            {% set hourly_weather_sensor = 'sensor.pirateweather_shawinigan_hourly_forecast' %}
+            {% set local_times_range = ["17:00","21:00"] %}
+            {% set day = 6 %}
+            {% set temp =  state_attr(hourly_weather_sensor, 'forecast') | selectattr('datetime','>=',((as_timestamp(today_at(local_times_range[0])) + (86400*day)) | timestamp_utc)) | selectattr('datetime','<',((as_timestamp(today_at(local_times_range[-1])) + (86400*day)) | timestamp_utc)) |map(attribute='temperature') | average | round(1) %}
+            {{ temp }}
+      
+  - trigger:
+      - platform: time_pattern
+        hours: /1
+      - trigger: homeassistant
+        event: start
+    action:
+      - service: weather.get_forecasts
+        data:
+          type: hourly
+        target:
+          entity_id: weather.pirateweather
+        response_variable: hourly
+    sensor:
+      - name: Pirateweather Shawinigan Hourly Forecast
+        unique_id: pirateweather_shawinigan_hourly_forecast
+        state: "{{ now().isoformat() }}"
+        attributes: 
+          forecast: "{{ hourly['weather.pirateweather'].forecast }}"
+          
+          
+          
+          
+          
+          

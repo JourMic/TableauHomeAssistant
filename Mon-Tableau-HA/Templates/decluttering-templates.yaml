@@ -1,0 +1,320 @@
+# decluttering_templates:
+defi_hilo_card:
+  card:
+    type: conditional
+    conditions:
+      - condition: numeric_state
+        entity: sensor.defi_hilo_count
+        above: "[[id]]"
+    card:
+      type: custom:stack-in-card
+      mode: vertical
+      card_mod:
+        style: |
+          ha-card {
+            border-radius:0px;
+            border-style: solid none none none;
+          }
+      cards:
+        - type: markdown
+          content: >
+            {% set defi = state_attr('sensor.defi_hilo','next_events')[[[id]]]
+            %}
+
+            {% set date =
+            as_timestamp(defi.phases.preheat_start)|timestamp_custom("%d")|int
+            %} {% set weekday =
+            as_timestamp(defi.phases.preheat_start)|timestamp_custom("%w") %}
+            {% set jour = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi',
+            'Vendredi', 'Samedi'][int(weekday)] %} {% set dateToday =
+            as_timestamp(now())|timestamp_custom("%d")|int %}
+
+            {% if dateToday == date %}
+              {% set descriptif = "Aujourd'hui" %}
+            {% elif date - dateToday == 1 %}
+              {% set descriptif = "Demain" %}
+            {% else %}
+              {% set descriptif = jour + " " + date %}
+            {% endif %}
+
+            ## {{descriptif}} {{defi.period.upper()}}
+          card_mod:
+            style: |
+              ha-card {
+                border-radius:0px;
+                border-style: none;
+              }
+        - type: custom:stack-in-card
+          mode: horizontal
+          card_mod:
+            style: |
+              ha-card {
+                border-radius:0px;
+                border-style: none;
+              }
+          cards:
+            - type: custom:decluttering-card
+              template: defi_hilo_phase_card
+              variables:
+                - id: "[[id]]"
+                - phase_state_name: appreciation
+                - phase_attributes_name: appreciation
+                - primary: Ancrage
+                - icon: mdi:lightning-bolt
+            - type: custom:decluttering-card
+              template: defi_hilo_phase_card
+              variables:
+                - id: "[[id]]"
+                - phase_state_name: pre_heat
+                - phase_attributes_name: preheat
+                - primary: Préchauffage
+                - icon: mdi:timer-sand
+            - type: custom:decluttering-card
+              template: defi_hilo_phase_card
+              variables:
+                - id: "[[id]]"
+                - phase_state_name: reduction
+                - phase_attributes_name: reduction
+                - primary: Réduction
+                - icon: mdi:power-plug-off
+            - type: custom:decluttering-card
+              template: defi_hilo_phase_card
+              variables:
+                - id: "[[id]]"
+                - phase_state_name: recovery
+                - phase_attributes_name: recovery
+                - primary: Reprise
+                - icon: mdi:restart
+defi_hilo_phase_card:
+  default:
+    - id: 0
+    - phase_state_name: appreciation
+    - phase_attributes_name: appreciation
+    - primary: Ancrage
+    - icon: mdi:anchor
+    - entity: sensor.defi_hilo
+  card:
+    type: custom:mushroom-template-card
+    entity: "[[entity]]"
+    icon: "[[icon]]"
+    primary: "[[primary]]"
+    multiline_secondary: true
+    layout: vertical
+    tap_action:
+      action: more-info
+    card_mod:
+      style:
+        .: |
+          ha-card {
+            border-radius:0px;
+            border-style: none;
+          }
+          mushroom-shape-icon {
+            {% if is_state('[[entity]]', '[[phase_state_name]]') %}
+            animation: dropshadow-change 2s linear infinite;
+            {% endif %}
+            test: '[[phase_state_name]]';
+            test2: '[[entity]]';
+          }
+          @keyframes dropshadow-change {
+            0% { filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0)); }
+            50% { filter: drop-shadow(0px 0px 8px green); }
+            100% { filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0)); }
+          }
+    secondary: >-
+      {%- set phaseStart =
+      as_timestamp(state_attr(entity,'next_events')[[[id]]]['phases']['[[phase_attributes_name]]_start'])
+      -%} {%- set phaseEnd =
+      as_timestamp(state_attr(entity,'next_events')[[[id]]]['phases']['[[phase_attributes_name]]_end'])
+      -%} {%- set remainingTime = phaseStart - as_timestamp(now()) -%}
+
+      {%- if remainingTime > 0 %} {{ phaseStart | timestamp_custom("%-Hh") }}
+      à {{ phaseEnd | timestamp_custom("%-Hh") }}
+
+      ⏱︎ {{ (phaseStart - as_timestamp(now())) | timestamp_custom("%-Hh%M",
+      false) }} {%- elif is_state(entity, '[[phase_state_name]]') %} {{
+      phaseStart | timestamp_custom("%-Hh") }} à {{ phaseEnd |
+      timestamp_custom("%-Hh") }}
+
+      ⏱︎ {{ (phaseEnd - as_timestamp(now())) | timestamp_custom("%-Hh%M",
+      false) }} {%- else %} Complété! {%- endif -%}
+    icon_color: >-
+      {%- set phaseStart =
+      as_timestamp(state_attr(entity,'next_events')[[[id]]]['phases']['[[phase_attributes_name]]_start'])
+      -%} {%- set remainingTime = phaseStart - as_timestamp(now()) -%}
+
+      {%- if is_state(entity, '[[phase_state_name]]') and (remainingTime <= 0)
+      -%}
+        green
+      {%- endif -%}
+    badge_icon: >-
+      {% if
+      as_timestamp(state_attr(entity,'next_events')[[[id]]]['phases']['[[phase_attributes_name]]_end'])
+      - as_timestamp(now()) <= 0 %}
+        mdi:check-bold
+      {% endif %}
+    badge_color: green
+
+life360_personnes:
+  default:
+    - life360_personne
+    - life360_pile
+    - life360_charge
+    - life360_deplacement
+    - life360_vitesse
+  card:
+    type: custom:stack-in-card
+    mode: vertical
+    card_mod:
+      style: |
+        ha-card {
+          border-radius:0px;
+          border-style: solid none none none;
+        }
+    cards:
+      - type: tile
+        entity: "[[life360_personne]]"
+        features_position: bottom
+        vertical: false
+        show_entity_picture: true
+
+      - type: glance
+        entities:
+          - entity: "[[life360_pile]]"
+            name: Pile
+            icon: mdi:battery
+          - entity: "[[life360_charge]]"
+            name: En Charge
+            icon: mdi:flash
+          - entity: "[[life360_deplacement]]"
+            name: En Déplacement
+            icon: mdi:car
+          - entity: "[[life360_vitesse]]"
+            name: Vitesse
+            icon: mdi:speedometer
+      - type: map
+        entities:
+          - entity: "[[life360_personne]]"
+        theme_mode: dark
+        hours_to_show: 72
+        default_zoom: 11
+
+mushroom-template-card:
+  card:
+    type: custom:mushroom-template-card
+    primary: "[[primary]]"
+    secondary: "[[secondary]]"
+    icon: "[[icon]]"
+    icon_color: "[[icon_color]]"
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    double_tap_action:
+      action: none
+    fill_container: true
+    layout: vertical
+    card_mod:
+      style:
+        ha-tile-info$: |
+          :host {
+            width: 100%;
+            text-align: center !important;
+           }
+          .primary {
+            font-size: 18px !important;
+          }
+          .secondary {
+            font-size: 18px !important;
+          }
+
+temperature-min-max:
+   card:
+     type: custom:vertical-stack-in-card
+     cards:
+       - type: custom:gauge-card-pro
+         header: '[[header]]'
+         entity: '[[entity]]'
+         entity2: '[[entity2]]'
+         needle: true
+         gradient: true
+         gradient_resolution: high
+         hide_background: true
+         min: -40
+         max: 40
+         segments:
+           - pos: -40
+             color: blue
+           - pos: -20
+             color: cyan
+           - pos: 0
+             color: green
+           - pos: 20
+             color: yellow
+           - pos: 30
+             color: red
+         inner:
+           min: -40
+           max: 40
+           mode: needle
+           radient_resolution: high
+           gradient: true
+           segments:
+             - pos: -40
+               color: blue
+             - pos: -20
+               color: cyan
+             - pos: 0
+               color: green
+             - pos: 20
+               color: yellow
+             - pos: 30
+               color: red
+         value_texts:
+           primary_color: cyan
+           secondary_color: red
+           primary_font_size_reduction: 10
+         card_mod:
+           style: |
+             * {
+               --main-needle-stroke-width: 2px;
+               --main-needle-stroke-color: cyan;
+               --inner-needle-stroke-width: 2px;
+               --inner-needle-stroke-color: red;
+             }
+
+       - type: custom:mushroom-template-card
+         primary: |-
+           🔺 {{ states('[[temp1]]') | as_datetime |
+              as_timestamp | timestamp_custom('%d-%m-%Y %H:%M') }}
+         secondary: |-
+           🔻 {{ states('[[temp2]]') | as_datetime |
+              as_timestamp | timestamp_custom('%d-%m-%Y %H:%M') }}
+         tap_action:
+           action: none
+         hold_action:
+           action: none
+         double_tap_action:
+           action: none
+         features_position: bottom
+         card_mod:
+           style:
+             ha-tile-info$: |
+               :host {
+                 width: 100%;
+                 text-align: center !important;
+                }
+               .primary {
+                 font-size: 30px !important;
+                 line-height:32px !important;
+                 color: cyan !important;
+               }
+               .secondary {
+                 font-size: 30px !important;
+                 line-height: 32px !important;
+                 color: red !important;
+               }
+ 
+
+                            
+

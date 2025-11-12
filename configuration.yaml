@@ -1,0 +1,88 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+sensor: !include sensors.yaml
+switch: !include switchs.yaml
+light: !include lights.yaml
+zone: !include zones.yaml
+
+homeassistant:
+  customize: !include customize.yaml
+
+  packages: !include_dir_named packages
+
+# Bluetooth
+bluetooth:
+
+frontend:
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+
+  themes: !include_dir_merge_named themes    
+
+lovelace:
+  mode: storage
+  dashboards:
+  
+    tableau-ha:
+      filename: Mon-Tableau-HA/Mon-Tableau-HA.yaml
+      icon: mdi:billboard
+      title: Mon Tableau HA
+      show_in_sidebar: true
+      mode: yaml
+      
+    tableau-rpi:
+      filename: Mon-Tableau-Meteo/Mon-Tableau-Meteo.yaml
+      icon: mdi:laptop
+      title: Mon Tableau Météo
+      show_in_sidebar: true
+      mode: yaml
+      
+#input_boolean:
+#  temp:
+#    name: Input temporaire
+#    icon: mdi:creation
+ 
+neviweb130:
+  username: !secret climate_username
+  password: !secret climate_password
+  network: !secret climate_gateway
+  scan_interval: 360
+  stat_interval: 360
+  
+# WebSocket API
+websocket_api:
+
+homekit:
+
+#  Hilo génération automatique des capteurs de consommation électrique
+
+utility_meter:
+
+  pluie_par_heure:
+    unique_id: pluie_par_heure
+    source: sensor.rain_today_tempest_cumulative
+    cycle: hourly
+    
+  somme_de_kwh_par_heure:
+    unique_id: somme_de_kwh_par_heure
+    source: sensor.kwh_par_jour_total
+    cycle: hourly
+
+#logger:
+#  default: warning
+#  logs:
+#    homeassistant.custom_components: debug
+#    custom_components.neviweb130: debug
+
+    
+    
+    

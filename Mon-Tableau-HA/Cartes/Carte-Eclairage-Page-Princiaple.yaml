@@ -1,0 +1,69 @@
+type: grid
+grid_options:
+columns: 4
+rows: 2
+cards:
+  - type: custom:button-card
+    template: light
+    entity: light.salon
+    icon: mdi:lamps
+    name: Salon
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.lecture
+    icon: mdi:desk-lamp
+    name: Lecture
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.govee_tele
+    icon: mdi:television-ambient-light
+    name: govee
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.brilliant_1g_8d1c0112b0_huche_du_salon
+    icon: hue:bulb-group-recessed-ceiling
+    name: huche
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.brilliant_table
+    icon: hue:ensis
+    name: Table
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.neviweb130_light_comptoir_cuisine
+    icon: hue:ceiling-fugato-two
+    name: Évier
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.exterieure_avant
+    icon: hue:floor-lantern-group
+    name: Avant
+    grid_options:
+      columns: 3
+      rows: 2
+  - type: custom:button-card
+    template: light
+    entity: light.brilliant_vestibule_avant
+    icon: hue:ceiling-fugato-three-alt
+    name: Vestib.
+    grid_options:
+      columns: 3
+      rows: 2

@@ -1,0 +1,22 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+
+    - type: markdown
+      content: >-
+        # <ha-alert alert-type="info">Prévisions</ha-alert>
+
+        {% for i in range(0, 4) %}
+
+          ## <ha-alert alert-type="success"> {{
+          state_attr('sensor.meteo_shawinigan_previsions', 'daily')[i]['period'] }}
+          </ha-alert>
+
+           {{ state_attr('sensor.meteo_shawinigan_previsions',
+           'daily')[i]['text_summary'] }}
+
+        {%- endfor -%}

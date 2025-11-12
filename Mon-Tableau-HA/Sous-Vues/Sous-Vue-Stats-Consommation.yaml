@@ -1,0 +1,293 @@
+title: Statistiques Kwh
+path: Sous-Vue-Stats-Consommation
+icon: mdi:gauge-full
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: true
+type: sections
+max_columns: 3
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:progress-clock
+        heading_style: title
+        heading: "kWh Aujourd'hui"
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 24h
+        span:
+          end: day
+        yaxis:
+          - decimals: 1
+            max: 2
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+        series:
+          - entity: sensor.somme_de_kwh_par_heure_cumul
+            name: Dernière heure
+            type: line
+            show:
+              in_chart: false
+              in_header: true
+          - entity: sensor.kwh_par_jour_total
+            name: Mois
+            color: deepskyblue
+            type: column
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1h
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: true
+              datalabels: true
+              in_header: false
+          - entity: sensor.kwh_par_jour_total
+            name: Aujourd'hui
+            type: line
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1d
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+        grid_options:
+          columns: 36
+          rows: auto
+      - type: heading
+        icon: mdi:progress-clock
+        heading_style: title
+        heading: "kWh Hier"
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 24h
+        span:
+          end: day
+          offset: "-1d"
+        yaxis:
+          - decimals: 1
+            max: 2
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+        series:
+          - entity: sensor.kwh_par_jour_total
+            name: Mois
+            color: deepskyblue
+            type: column
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1h
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: true
+              datalabels: true
+              in_header: false
+          - entity: sensor.kwh_par_jour_total
+            name: Hier
+            type: line
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1d
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+        grid_options:
+          columns: 36
+          rows: auto
+      - type: heading
+        icon: mdi:progress-clock
+        heading_style: title
+        heading: "kWh Avant-hier"
+        grid_options:
+          columns: 36
+          rows: 0.5
+      - type: custom:apexcharts-card
+        card_mod:
+          style: |
+            ha-card {
+              box-shadow: 0 0 0 2px gray;
+            }
+        header:
+          show: true
+          show_states: true
+        graph_span: 24h
+        span:
+          end: day
+          offset: "-2d"
+        yaxis:
+          - decimals: 1
+            max: 2
+            apex_config:
+              labels:
+                formatter: |
+                  EVAL: (v) => `${(v ?? 0).toFixed(0)} KWh`
+        apex_config:
+          fill:
+            type: gradient
+            gradient:
+              type: vertical
+              shadeIntensity: 0
+              opacityFrom: 1
+              opacityTo: 0.5
+              stops:
+                - 0
+                - 100
+          chart:
+            height: 150px
+          grid:
+            show: false
+            borderColor: darkslateblue
+            strokeDashArray: 2
+          dataLabels:
+            background:
+              borderWidth: 0
+              opacity: 0
+              foreColor: white
+            offsetY: -10
+          plotOptions:
+            bar:
+              borderRadius: 0
+              dataLabels:
+                position: top
+        series:
+          - entity: sensor.kwh_par_jour_total
+            name: Mois
+            color: deepskyblue
+            type: column
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1h
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: true
+              datalabels: true
+              in_header: false
+          - entity: sensor.kwh_par_jour_total
+            name: Avant Hier
+            type: line
+            statistics:
+              type: change
+              period: 5minute
+              align: start
+            transform: "return x < 0 ? 0 : x;"
+            group_by:
+              duration: 1d
+              func: sum
+              start_with_last: true
+            show:
+              in_chart: false
+              in_header: true
+              name_in_header: true
+        grid_options:
+          columns: 36
+          rows: auto
+    column_span: 3

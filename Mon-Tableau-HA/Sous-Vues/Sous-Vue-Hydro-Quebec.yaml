@@ -1,0 +1,101 @@
+title: Énergie Hydro-Québec
+path: Sous-Vue-Hydro-Quebec
+icon: mdi:graph
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: true
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Hydro-Québec Production Demande
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: full
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              layout: auto
+              height: 330
+              unit_prefix: M
+              round: 1
+              convert_units_to: ""
+              co2_intensity_entity: sensor.co2_signal_co2_intensity
+              gas_co2_intensity: 2351.6459999999997
+              min_box_size: 40
+              min_box_distance: 10
+              show_states: true
+              show_units: true
+              sections:
+                - entities:
+                    - type: entity
+                      children:
+                        - sensor.hydro_quebec_production_total
+                      entity_id: sensor.hydro_quebec_production_solaire
+                      name: Solaire
+                      color: Brown
+                      icon: mdi:solar-power-variant-outline
+                    - type: entity
+                      children:
+                        - sensor.hydro_quebec_production_total
+                      entity_id: sensor.hydro_quebec_production_hydraulique
+                      name: Hydrolique
+                      color: Blue
+                      icon: mdi:hydro-power
+                    - type: entity
+                      children:
+                        - sensor.hydro_quebec_production_total
+                      entity_id: sensor.hydro_quebec_production_eolien
+                      color: Red
+                      name: Éolienne
+                      icon: mdi:wind-turbine
+                    - type: entity
+                      children:
+                        - sensor.hydro_quebec_production_total
+                      entity_id: sensor.hydro_quebec_production_autres
+                      color: Green
+                      name: Autres
+                      icon: mdi:flash
+                - entities:
+                    - type: entity
+                      children:
+                        - sensor.hydro_quebec_demande_de_puissance_reseau
+                      name: Production
+                      entity_id: sensor.hydro_quebec_production_total
+                      color: Steelblue
+                      icon: mdi:transmission-tower-import
+                - entities:
+                    - type: entity
+                      children:
+                        - >-
+                          sensor.hydroqc_maison_current_billing_period_total_consumption
+                      name: Demandes
+                      entity_id: sensor.hydro_quebec_demande_de_puissance_reseau
+                      icon: mdi:transmission-tower-export
+                      color: Orange
+              type: custom:sankey-chart
+              show_names: true
+              wide: true
+              min_state: 0
+              show_icons: true
+              sort_by: state
+              grid_options:
+              columns: full
+              rows: 6
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+    column_span: 2

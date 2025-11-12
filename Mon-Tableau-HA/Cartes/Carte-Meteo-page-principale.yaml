@@ -1,0 +1,48 @@
+type: grid
+columns: 1
+square: false
+cards:
+  - type: grid
+    square: false
+    columns: 1
+    cards:
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:clock-weather-card
+              entity: weather.pirateweather
+              sun_entity: sun.sun
+              temperature_sensor: sensor.tempest_st_00032986_temperature
+              humidity_sensor: sensor.tempest_st_00032986_humidity
+              apparent_sensor: sensor.tempest_st_00032986_feels_like_temperature
+              weather_icon_type: fill
+              animated_icon: true
+              forecast_rows: 4
+              locale: fr
+              time_format: 24
+              date_pattern: cccc d MMMM yyyy
+              hide_today_section: false
+              hide_forecast_section: true
+              show_humidity: true
+              hide_clock: true
+              hide_date: false
+              hourly_forecast: false
+              use_browser_time: false
+              show_decimal: false
+              card_mod:
+                style: |
+                  ha-card {
+                    background-color: transparent;
+                    border: transparent;
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+grid_options:
+  columns: 12
+  rows: 3.6

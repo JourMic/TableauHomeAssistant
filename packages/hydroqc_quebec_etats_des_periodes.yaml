@@ -1,0 +1,16 @@
+# États des période Hydro-Québec
+sensor:
+  - platform: template
+    sensors:
+      etat_hydroqc_maison_next_or_current_outage:
+        unique_id: "etat_hydroqc_maison_next_or_current_outage"
+        friendly_name: "Période de pannes prévues"
+        icon_template: mdi:transmission-tower
+        value_template: >
+          {% if is_state('sensor.hydroqc_maison_next_or_current_outage', 'unavailable') %}
+            Aucune 
+          {% else %}
+            {% set heure = as_timestamp(states('sensor.hydroqc_maison_next_or_current_outage')) | timestamp_custom('%H:%M') %}
+            {% set journee = ["Lun", "Mar","Mer","Jeu","Ven","Sam","Dim"] %}
+            {{ journee[as_timestamp(states('sensor.hydroqc_maison_next_or_current_outage')) | timestamp_custom('%w' ) | int -1 ] }} {{ heure }}
+          {% endif %}

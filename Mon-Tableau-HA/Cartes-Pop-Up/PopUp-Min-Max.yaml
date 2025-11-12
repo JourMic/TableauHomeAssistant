@@ -1,0 +1,17 @@
+type: custom:vertical-stack-in-card
+cards:
+
+  - type: custom:decluttering-card
+    template: temperature-min-max
+    variables:
+      - header: 'Minimum et Maximun'
+      - entity: 'sensor.minmax_temperature_maximum'
+      - entity2: 'sensor.minmax_temperature_minimum'
+      - temp1: 'sensor.minmax_temperature_max_all_time'
+      - temp2: 'sensor.minmax_temperature_min_all_time'
+      
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }

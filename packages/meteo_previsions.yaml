@@ -1,0 +1,23 @@
+template:
+
+  - trigger:
+    - platform: time_pattern
+      hours: "/4"
+    - platform: homeassistant
+      event: start
+    - platform: event
+      event_type: event_template_reloaded
+    action:
+    - service: environment_canada.get_forecasts
+      target:
+        entity_id: weather.shawinigan_previsions
+      response_variable: forecasts
+    sensor:
+    - name: Meteo Shawinigan Previsions
+      unique_id: weather_shawinigan_previsions_meteo
+      state: "{{ states('weather.shawinigan_previsions') }}"
+      attributes:
+        daily: "{{ forecasts['weather.shawinigan_previsions']['daily_forecast'] }}"
+        hourly: "{{ forecasts['weather.shawinigan_previsions']['hourly_forecast'] }}"
+        summary: "{{ forecasts['weather.shawinigan_previsions']['daily_forecast'][0]['text_summary'] }}"
+        temperature_unit: "{{ state_attr('weather.shawinigan_previsions', 'temperature_unit') }}"

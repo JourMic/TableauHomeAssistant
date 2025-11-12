@@ -1,0 +1,91 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+
+  - type: markdown
+    content: |-
+      Mode : {{states('sensor.tempest_st_00032986_battery_mode') }}
+             {{ states('sensor.weatherflow_mode_descption') }}
+    text_only: true
+
+  - type: custom:apexcharts-card
+    experimental:
+      color_threshold: true
+    graph_span: 72h
+    show:
+      last_updated: false
+    header:
+      standard_format: false
+      show: true
+      show_states: true
+      colorize_states: true
+      title: Station Tempest
+    span:
+      start: day
+    apex_config:
+      chart:
+        height: 190px
+    yaxis:
+      - id: pile
+        decimals: 0
+        apex_config:
+          tickAmount: 4
+        max: 4
+        min: 0
+    series:
+      - entity: sensor.tempest_st_00032986_voltage
+        yaxis_id: pile
+        type: area
+        group_by:
+          func: last
+          duration: 15m
+        stroke_width: 3
+        show:
+          header_color_threshold: true
+        color_threshold:
+          - value: 0
+            color: "#FF453A"
+          - value: 0.2
+            color: "#FE5335"
+          - value: 0.4
+            color: "#FE6230"
+          - value: 0.6
+            color: "#FE702B"
+          - value: 0.8
+            color: "#FE7F26"
+          - value: 1
+            color: "#FE8E21"
+          - value: 1.2
+            color: "#FE9C1C"
+          - value: 1.4
+            color: "#FEAB17"
+          - value: 1.6
+            color: "#FEB912"
+          - value: 1.8
+            color: "#FEC80D"
+          - value: 2
+            color: "#FED709"
+          - value: 2.2
+            color: "#EBD10F"
+          - value: 2.4
+            color: "#D8CC15"
+          - value: 2.6
+            color: "#C6C61B"
+          - value: 2.8
+            color: "#B3C121"
+          - value: 3
+            color: "#A1BB28"
+          - value: 3.2
+            color: "#8EB62E"
+          - value: 3.4
+            color: "#7BB034"
+          - value: 3.6
+            color: "#69AB3A"
+          - value: 3.8
+            color: "#56A540"
+          - value: 4
+            color: "#44A047"

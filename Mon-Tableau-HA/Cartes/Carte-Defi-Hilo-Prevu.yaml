@@ -1,0 +1,40 @@
+type: custom:button-card
+template: frame
+padding-bottom: 1px
+custom_fields:
+  buttons:
+    card:
+      type: markdown
+      content: |-
+
+        {% set data = state_attr('sensor.defi_hilo','next_events') %}
+
+        {% if states('sensor.defi_hilo_nb_defi_planifies') > '0' %}
+          <table width=100%>
+            <tr>
+              <th>Date</th>
+              <th>Préchauffage</th> 
+              <th>Réduction</th>
+              <th>Reprise</th>
+            </tr>  
+            {%- for data in data -%}    
+              <tr>
+                <td align=center>{{ data.phases.preheat_start.timestamp() | timestamp_custom('%d/%m/%Y') }}</td>
+                <td align=center>{{ data.phases.preheat_start.timestamp() | timestamp_custom('%HH%M') }} à {{ data.phases.preheat_end.timestamp() | timestamp_custom('%HH%M') }}</td>
+                <td align=center>{{ data.phases.reduction_start.timestamp() | timestamp_custom('%HH%M') }} à {{ data.phases.reduction_end.timestamp() | timestamp_custom('%HH%M') }}</td>
+                <td align=center>{{ data.phases.recovery_start.timestamp() | timestamp_custom('%HH%M') }} à {{ data.phases.recovery_end.timestamp() | timestamp_custom('%HH%M') }}</td>
+            {%- endfor -%}
+          </table>
+
+        {% else %}
+          Aucune donnée disponible
+        {% endif %}
+card_mod:
+  class: soft-ui
+  style: |
+    ha-card {
+      --primary-text-color: rgb(var(--my-grey));   
+    }
+grid_options:
+  columns: full
+  rows: full

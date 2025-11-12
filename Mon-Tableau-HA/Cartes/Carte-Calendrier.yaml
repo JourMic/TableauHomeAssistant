@@ -1,0 +1,110 @@
+type: grid
+columns: 1
+square: false
+cards:
+  - type: grid
+    square: false
+    columns: 1
+    cards:
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:calendar-card-pro
+              entities:
+                - entity: calendar.michel
+                  color: white
+                - entity: calendar.sports
+                  color: yellow
+                - entity: calendar.anniversaires
+                  color: orange
+                - entity: calendar.evenements
+                  color: cyan
+              days_to_show: 20
+              compact_days_to_show: 2
+              compact_events_to_show: 5
+              compact_events_complete_days: true
+              language: fr
+              accent_color: "#baf1ff"
+              vertical_line_width: 5px
+              event_spacing: 5px
+              show_current_week_number: false
+              day_separator_width: 2px
+              day_separator_color: "#baf1ff80"
+              week_separator_width: 1px
+              month_separator_width: 1.5px
+              month_separator_color: var(--secondary-text-color)
+              today_indicator: 🔴
+              date_vertical_alignment: ""
+              weekday_font_size: 15px
+              weekday_color: "#baf1ff"
+              day_font_size: 25px
+              day_color: "#baf1ff"
+              month_color: "#baf1ff"
+              weekend_weekday_color: "#E67C73"
+              weekend_day_color: "#E67C73"
+              weekend_month_color: "#E67C73"
+              today_day_color: red
+              show_progress_bar: false
+              progress_bar_color: "#03a9f4"
+              progress_bar_height: 10px
+              event_color: "#baf1ff"
+              time_24h: true
+              time_color: "#baf1ff"
+              time_icon_size: 15px
+              refresh_interval: 15
+              row_spacing: 10px
+              remove_location_country_selector: "false"
+              tap_action:
+                action: expand
+              card_mod:
+                style: |
+                  /* Make today's events stand out */
+                  .day-table.today .event-title {
+                    font-size: 16px !important;     /* Larger text */
+                    font-weight: bold !important;   /* Bold text */
+                    color: red !important; /* Use theme accent color */
+                  }
+
+                  div.event-content {
+                    display: grid;
+                    grid-template-areas: 
+                    "title time"
+                    "location location";
+                    grid-template-columns: 1fr auto;
+                    column-gap: 10px;
+                    row-gap: 0px;
+                   }
+
+                  div.summary {
+                    grid-area: title;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  }
+
+                  div.time {
+                    grid-area: time;
+                    white-space: nowrap;
+                  }
+
+                  div.location {
+                    grid-area: location;
+                    white-space: normal;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                   }
+
+                  div.time-location {
+                    display: contents;
+                  }
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+grid_options:
+  columns: 12
+  rows: full

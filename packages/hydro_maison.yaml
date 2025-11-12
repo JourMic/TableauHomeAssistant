@@ -1,0 +1,24 @@
+# power_par_heure
+
+template:
+
+  - sensor:
+
+      - name: "Somme de KWh par heure (cumul)"
+        unique_id: somme_de_kwh_par_heure_cumul
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: "{{ states('sensor.somme_de_kwh_par_heure')|float(0) }}"
+        availability: >
+          {{ states('sensor.somme_de_kwh_par_heure') not in ['unknown','unavailable','none'] }}
+
+      - name: "KWh par jour (total)"
+        unique_id: kwh_par_jour_total
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: >
+           {% set low = states('sensor.hilo_energy_total_low')  | float %}
+           {% set medium = states('sensor.hilo_energy_total_medium')  | float %}
+           {{ ((low + medium)) }}

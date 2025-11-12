@@ -1,0 +1,225 @@
+title: Statistiques
+path: Sous-Vue-Statistiques
+icon: mdi:gauge-full
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: true
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: title
+        heading: Consommations
+        icon: mdi:currency-usd
+        badges:
+          - type: entity
+            entity: sensor.hilo_energy_total
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:paper-buttons-row
+              buttons:
+                - type: entity
+                  entity: sensor.hilo_gateway
+                  name: false
+                  action: none
+                  state: false
+                  state_styles:
+                    "on":
+                      button:
+                        color: green
+                    "off":
+                      button:
+                        color: red
+                - type: entity
+                  entity: sensor.defi_hilo
+                  state: false
+                  action: none
+                  state_styles:
+                    "on":
+                      button:
+                        color: red
+                    scheduled:
+                      button:
+                        color: yellow
+                    pre_heat:
+                      button:
+                        color: red
+                    recovery:
+                      button:
+                        color: blue
+                    "off":
+                      button:
+                        color: green
+                - type: entity
+                  entity: sensor.meter00_power
+                  name: false
+                  layout: icon|state
+                  action: none
+                  state: "{{ states(config.entity) }}"
+                  icon: mdi:speedometer
+                  style:
+                    button:
+                      color: |-
+                        {% if states(config.entity) | int(0) > 1000 %}
+                          yellow
+                        {% elif states(config.entity) | int(0) > 1500 %}
+                          orange
+                        {% elif states(config.entity) | int(0) > 2000 %}
+                          red
+                        {% else%}
+                          green
+                        {% endif %}
+                - type: entity
+                  entity: sensor.hilo_rate_current
+                  name: false
+                  layout: icon|state
+                  action: none
+                  state: "{{ states(config.entity) }}"
+                  style:
+                    button:
+                      color: |-
+                        {% if states(config.entity) | float(0) > 0.07 %}
+                          yellow
+                        {% elif states(config.entity) | float(0) > 0.1 %}
+                          red
+                        {% else %}
+                          green
+                        {% endif %}
+
+              grid_options:
+                columns: full
+                rows: 1
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:vertical-stack-in-card
+              cards:
+                - type: energy-date-selection
+
+                - type: energy-sources-table
+
+                - type: energy-usage-graph
+
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+    column_span: 1
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:fridge
+        heading_style: title
+        heading: Distributions
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: energy-distribution
+              link_dashboard: true
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+      - type: heading
+        icon: mdi:clock-digital
+        heading_style: title
+        heading: Compteur
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:apexcharts-card
+              header:
+                show: true
+                show_states: true
+              experimental:
+                color_threshold: true
+              apex_config:
+                chart:
+                  height: 230px
+              graph_span: 24h
+              yaxis:
+                - id: kwh
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 6
+                - id: degree
+                  opposite: true
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 6
+              series:
+                - entity: sensor.meter00_power
+                  name: Compteur
+                  yaxis_id: kwh
+                  unit: W
+                  type: area
+                  stroke_width: 0
+                  color_threshold:
+                    - value: 0
+                      color: green
+                    - value: 5000
+                      color: cyan
+                    - value: 10000
+                      color: orange
+                    - value: 20000
+                      color: red
+                  group_by:
+                    duration: 30min
+                    func: avg
+                - entity: sensor.tempest_st_00032986_temperature
+                  stroke_width: 4
+                  yaxis_id: degree
+                  name: Température
+                  unit: °C
+                  type: line
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+dense_section_placement: true

@@ -1,0 +1,140 @@
+title: Météo
+path: Vue-Meteos
+icon: mdi:weather-partly-lightning
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    column_span: 1
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:weather-partly-snowy-rainy
+        heading: Prévisions
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - !include ..//Cartes/Carte-Meteo.yaml
+
+  - type: grid
+    cards:
+      - type: heading
+        heading_style: title
+        icon: mdi:eye
+        heading: Observations
+        grid_options:
+          columns: full
+          rows: 0.3
+
+      - !include ..//Cartes/Carte-Meteo-Observations.yaml
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Carte
+      - type: custom:weather-radar-card
+        map_style: Satellite
+        data_source: RainViewer-TWC
+        show_recenter: true
+        square_map: false
+        show_marker: true
+        show_scale: true
+        show_playback: true
+        show_range: false
+        extra_labels: false
+        zoom_level: 7
+        show_zoom: true
+        view_layout:
+          grid-area: Meteo2
+        grid_options:
+          columns: 24
+          rows: auto
+    column_span: 2
+
+badges:
+
+  - type: entity
+    entity: sensor.tempest_st_00032986_rain_today
+    show_name: false
+    show_state: true
+    show_icon: true
+    tap_action:
+       action: navigate
+       navigation_path: /tableau-ha/Sous-Vue-Pluie
+
+  - type: custom:mushroom-template-badge
+    content: |-
+      Jour:🔻{{ states('sensor.minmax_temperature_min_jour') }} °C
+      🔺{{ states('sensor.minmax_temperature_max_jour') }} °C
+    color: red
+    icon: ""
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Température
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max-Jour.yaml
+
+  - type: custom:mushroom-template-badge
+    content: |-
+      Mois:🔻{{ states('sensor.minmax_temperature_min_mois') }} °C
+      🔺{{ states('sensor.minmax_temperature_max_mois') }} °C
+    color: red
+    icon: ""
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title:  Température
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max-Mois.yaml
+  - type: custom:mushroom-template-badge
+    content: |-
+      Tout🔻{{ states('sensor.minmax_temperature_minimum') }} °C
+      🔺{{ states('sensor.minmax_temperature_maximum') }} °C
+
+    color: red
+    icon: ""
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title:  Température
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Min-Max.yaml
+
+  - type: entity
+    show_name: true
+    show_state: true
+    show_icon: true
+    color: orange
+    entity: sensor.tempest_st_00032986_lightning_count_today
+    name: Éclaires
+    visibility:
+      - condition: state
+        entity: sensor.tempest_st_00032986_lightning_count_today
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Nombre et distance des éclaires
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Eclaires.yaml

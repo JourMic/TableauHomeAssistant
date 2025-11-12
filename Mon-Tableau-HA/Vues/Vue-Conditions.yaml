@@ -1,0 +1,469 @@
+title: Conditions
+path: Vue-Conditions
+icon: mdi:home-analytics
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Salon
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading: Chambre des maîtres
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading_style: subtitle
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_salon_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading_style: subtitle
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_chambre_maitres_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:layout-card
+              layout_type: custom:grid-layout
+              cards:
+                - graph: line
+                  view_layout:
+                    grid-area: netatmo41
+                  type: sensor
+                  detail: 2
+                  entity: sensor.maison_dioxyde_de_carbone
+                  name: Salon
+                  hours_to_show: 24
+                - graph: line
+                  view_layout:
+                    grid-area: netatmo42
+                  type: sensor
+                  detail: 2
+                  entity: sensor.maison_chambre_des_maitres_dioxyde_de_carbone
+                  name: Chambre des maîtres
+                  hours_to_show: 24
+
+              layout:
+                grid-template-columns: 1fr 1fr
+                grid-auto-flow: row
+                grid-template-areas: |
+                  "netatmo41 netatmo42"
+
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+
+        grid_options:
+          columns: 12
+          rows: full
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 1
+        heading: Salon
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_bruit
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 1
+        heading: Cuisine
+      - type: custom:button-card
+        template: conditioms
+        name: salon
+        entity: sensor.maison_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: salon
+        entity: sensor.maison_humidite
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: cuisine
+        entity: sensor.sensibo_temperature_courante_cuisine
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: cusine
+        entity: sensor.sensibo_humiditee_courante_cuisine
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        heading: Salle à manger
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_a_manger_battery
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Salle d’eau
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_deau_battery
+      - type: custom:button-card
+        template: conditioms
+        name: manger
+        entity: sensor.govee_salle_a_manger_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: manger
+        entity: sensor.govee_salle_a_manger_humidity
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: eau
+        entity: sensor.govee_salle_deau_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: eau
+        entity: sensor.govee_salle_deau_humidity
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Chambre des maîtres
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_chambre_des_maitres_batterie
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_bureau_batterie
+        grid_options:
+          columns: 6
+          rows: 0.4
+      - type: custom:button-card
+        template: conditioms
+        name: maitres
+        entity: sensor.maison_chambre_des_maitres_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: maitres
+        entity: sensor.maison_chambre_des_maitres_humidite
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: bureau
+        entity: sensor.maison_bureau_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: bureau
+        entity: sensor.maison_bureau_humidite
+        grid_options:
+          columns: 3
+          rows: 2
+  - type: grid
+    cards:
+      - type: heading
+        heading: Bureau
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading: Sous-Sol
+        heading_style: title
+        icon: mdi:molecule-co2
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading_style: subtitle
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_bureau_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: heading
+        heading_style: subtitle
+        icon: mdi:checkbox-marked-circle-outline
+        badges:
+          - type: entity
+            entity: sensor.netatmo_sous_sol_co2_text
+        heading: État
+        grid_options:
+          columns: 6
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:layout-card
+              layout_type: custom:grid-layout
+              cards:
+                - graph: line
+                  view_layout:
+                    grid-area: netatmo43
+                  type: sensor
+                  detail: 2
+                  entity: sensor.maison_bureau_dioxyde_de_carbone
+                  name: Bureau
+                  hours_to_show: 24
+                - graph: line
+                  view_layout:
+                    grid-area: netatmo44
+                  type: sensor
+                  detail: 2
+                  entity: sensor.maison_sous_sol_dioxyde_de_carbone
+                  name: Sous-Sol
+                  hours_to_show: 24
+              layout:
+                grid-template-columns: 1fr 1fr
+                grid-auto-flow: row
+                grid-template-areas: |
+                  "netatmo43 netatmo44"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+
+        grid_options:
+          columns: 12
+          rows: full
+
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 1
+        heading: Salle de bain
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_salle_de_bain_battery
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 1
+        heading: Salle de repos
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.boudoirte_batterie
+      - type: custom:button-card
+        template: conditioms
+        name: bain
+        entity: sensor.govee_salle_de_bain_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: bain
+        entity: sensor.govee_salle_de_bain_humidity
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: repos
+        show_entity_picture: true
+        entity: sensor.sensibo_temperature_courante_salle_de_repos
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: repos
+        entity: sensor.sensibo_humiditee_courante_salle_de_repos
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Sous-Sol
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_sous_sol_batterie
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Chambre des invités
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_chambre_invites_battery
+      - type: custom:button-card
+        template: conditioms
+        name: sous-sol
+        entity: sensor.maison_sous_sol_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: sous-sol
+        entity: sensor.maison_sous_sol_humidite
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: invités
+        entity: sensor.govee_chambre_invites_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: invités
+        entity: sensor.govee_chambre_invites_humidity
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: heading
+        heading: Atelier
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.govee_atelier_battery
+      - type: heading
+        heading_style: title
+        grid_options:
+          columns: 6
+          rows: 0.4
+        heading: Thermopompe
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: true
+            entity: sensor.maison_thermopompe_batterie
+      - type: custom:button-card
+        template: conditioms
+        name: atelier
+        entity: sensor.govee_atelier_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: atelier
+        entity: sensor.govee_atelier_humidity
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: Thermopompe
+        entity: sensor.maison_thermopompe_temperature
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: conditioms
+        name: thermopompe
+        entity: sensor.maison_thermopompe_humidite
+        grid_options:
+          columns: 3
+          rows: 2

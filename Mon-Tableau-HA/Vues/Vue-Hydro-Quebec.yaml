@@ -1,0 +1,645 @@
+title: Hydro-Québec
+path: Vue-Hydro-Quebec
+icon: mdi:flash
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: false
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:open-in-app
+        heading_style: title
+        heading: Paramètres du compte
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: Tarif
+                - secondary: >-
+                    {{
+                    states('sensor.hydroqc_maison_current_billing_period_rate')
+                    }}
+                - icon: mdi:playlist-check
+                - icon_color: red
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: Égaux
+                - secondary: >-
+                    {{
+                    state_translated('binary_sensor.hydroqc_maison_current_period_epp_enabled')
+                    }}
+                - icon: mdi:code-equal
+                - icon_color: green
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: Site HQ
+                - secondary: >-
+                    {{
+                    state_translated('binary_sensor.hydroqc_maison_hydroquebec_website_status')
+                    }}
+                - icon: mdi:check-network-outline
+                - icon_color: yellow
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: Paiements
+                - secondary: "{{ states('sensor.hydroqc_maison_balance') }} $"
+                - icon: mdi:currency-usd
+                - icon_color: blue
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+
+      - type: heading
+        heading: Coût actuellement et prévisions
+        heading_style: title
+        icon: mdi:currency-usd
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydroqc_maison_current_billing_period_total_to_date
+            state_content: state
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydroqc_maison_current_billing_period_projected_bill
+        grid_options:
+          columns: full
+          rows: 1
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:apexcharts-card
+              header:
+                show: false
+                show_states: false
+              experimental:
+                color_threshold: true
+              apex_config:
+                chart:
+                  height: 280px
+              graph_span: 1month
+              yaxis:
+                - id: prevus
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 6
+                  max: 500
+                  min: 0
+                - id: utilise
+                  opposite: true
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 6
+                  max: 500
+                  min: 0
+              series:
+                - entity: sensor.hydroqc_maison_current_billing_period_total_to_date
+                  stroke_width: 4
+                  yaxis_id: utilise
+                  name: Utilisé
+                  unit: $
+                  type: area
+                  fill_raw: last
+                  curve: smooth
+                  color_threshold:
+                    - value: 0
+                      color: green
+                    - value: 150
+                      color: cyan
+                    - value: 300
+                      color: orange
+                    - value: 450
+                      color: red
+                - entity: sensor.hydroqc_maison_current_billing_period_projected_bill
+                  name: Prevus
+                  yaxis_id: prevus
+                  unit: $
+                  type: line
+                  color: green
+                  fill_raw: last
+                  curve: smooth
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 5
+      - type: heading
+        icon: mdi:navigation
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: 1
+        heading: Données Hilo >
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: button
+              show_name: true
+              show_icon: false
+              tap_action:
+                action: navigate
+                navigation_path: /tableau-ha/Sous-Vue-Defis
+              name: Défis
+              hold_action:
+                action: none
+              icon: mdi:navigation-variant
+              show_state: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 1
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: button
+              show_name: true
+              show_icon: false
+              tap_action:
+                action: navigate
+                navigation_path: /tableau-ha/Sous-Vue-Hilo
+              name: Hilo
+              hold_action:
+                action: none
+              icon: mdi:navigation-variant
+              show_state: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 1
+
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:open-in-app
+        heading_style: title
+        heading: Moyennes par jour pour la période
+        grid_options:
+          columns: full
+          rows: 0.5
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: "{{ states('sensor.hydroqc_maison_current_billing_period_current_day') }} sur"
+                - secondary: "{{ states('sensor.hydroqc_maison_current_billing_period_duration') }} jours"
+                - icon: "mdi:calendar-month"
+                - icon_color: "red"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: "Tempé."
+                - secondary: "{{ states('sensor.hydroqc_maison_current_billing_period_average_temperature') }} °C"
+                - icon: "mdi:thermometer-alert"
+                - icon_color: "green"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: "Paiements"
+                - secondary: "{{ states('sensor.hydroqc_maison_current_billing_period_daily_bill_mean') }} $"
+                - icon: "mdi:currency-usd"
+                - icon_color: "yellow"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:decluttering-card
+              template: mushroom-template-card
+              variables:
+                - primary: "kWh"
+                - secondary: "{{ states('sensor.hydroqc_maison_current_billing_period_daily_consumption_mean') }} kWh"
+                - icon: "mdi:lightning-bolt-circle"
+                - icon_color: "blue"
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 3
+          rows: 2
+
+      - type: heading
+        heading_style: title
+        heading: kWh actuellement et prévisions
+        icon: mdi:lightning-bolt-circle
+        grid_options:
+          columns: full
+          rows: 1
+        badges:
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: sensor.hydroqc_maison_current_billing_period_total_consumption
+          - type: entity
+            show_state: true
+            show_icon: false
+            entity: >-
+              sensor.hydroqc_maison_current_billing_period_projected_total_consumption
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:apexcharts-card
+              header:
+                show: false
+                show_states: false
+              experimental:
+                color_threshold: true
+              apex_config:
+                chart:
+                  height: 280px
+              graph_span: 1month
+              yaxis:
+                - id: prevus
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 5
+                  max: 6000
+                  min: 0
+                - id: utilise
+                  opposite: true
+                  decimals: 0
+                  apex_config:
+                    tickAmount: 5
+                  max: 6000
+                  min: 0
+              series:
+                - entity: sensor.hydroqc_maison_current_billing_period_total_consumption
+                  yaxis_id: utilise
+                  name: Utilisé
+                  unit: kWh
+                  type: area
+                  fill_raw: last
+                  curve: smooth
+                  color_threshold:
+                    - value: 0
+                      color: green
+                    - value: 1500
+                      color: cyan
+                    - value: 3000
+                      color: orange
+                    - value: 4500
+                      color: red
+                - entity: >-
+                    sensor.hydroqc_maison_current_billing_period_projected_total_consumption
+                  name: Prévus
+                  yaxis_id: prevus
+                  unit: kWh
+                  type: line
+                  color: cyan
+                  fill_raw: last
+                  curve: smooth
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: 5
+
+      - type: heading
+        icon: mdi:navigation
+        heading_style: title
+        grid_options:
+          columns: full
+          rows: 1
+        heading: Données énergie >
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: button
+              show_name: true
+              show_icon: false
+              tap_action:
+                action: navigate
+                navigation_path: /tableau-ha/Sous-vue-hydro-quebec
+              name: Hydro-Québec
+              hold_action:
+                action: none
+              icon: mdi:navigation-variant
+              show_state: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 1
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: button
+              show_name: true
+              show_icon: false
+              tap_action:
+                action: navigate
+                navigation_path: /tableau-ha/Sous-Vue-Statistiques
+              name: Statistiques
+              hold_action:
+                action: none
+              icon: mdi:navigation-variant
+              show_state: false
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: 6
+          rows: 1
+
+badges:
+
+  - type: entity
+    entity: sensor.meter00_power
+    show_name: false
+    show_state: true
+    show_icon: true
+    tap_action:
+       action: navigate
+       navigation_path: /tableau-ha/Sous-Vue-Consommation-Maison
+
+  - type: entity
+    entity: sensor.hydro_quebec_production_hydraulique
+    display_type: complete
+    name: Hydrolique
+    icon: mdi:hydro-power
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production hydraulique
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Hydraulique.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_production_eolien
+    name: Éolienne
+    icon: mdi:wind-turbine
+    visibility:
+      - condition: numeric_state
+        entity: sensor.hydro_quebec_production_eolien
+        above: 0
+    display_type: complete
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production eolienne
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Eolienne.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_production_solaire
+    icon: mdi:sun-wireless
+    visibility:
+      - condition: numeric_state
+        entity: sensor.hydro_quebec_production_solaire
+        above: 0
+    display_type: complete
+    name: Solaire
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production solaire
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Solaire.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_production_autres
+    icon: mdi:flash
+    visibility:
+      - condition: numeric_state
+        entity: sensor.hydro_quebec_production_autres
+        above: 0
+    display_type: complete
+    name: Autres
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production autres
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Autres.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_production_total
+    name: Total
+    display_type: complete
+    state_content:
+      - name
+      - state
+    icon: mdi:transmission-tower-import
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production Demande
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Demande.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_demande_de_puissance_reseau
+    display_type: complete
+    name: Demande
+    icon: mdi:transmission-tower-export
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Production Demande
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Production-Demande.yaml
+  - type: entity
+    entity: sensor.hydro_quebec_interruptions_quebec
+    display_type: complete
+    name: Panne en cours
+    icon: mdi:transmission-tower-off
+    visibility:
+      - condition: state
+        entity: sensor.hydro_quebec_interruptions_quebec
+        state_not: "0"
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Hydro-Québec - Pannes en cours
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-HQ-Pannes.yaml

@@ -1,0 +1,77 @@
+template:
+
+  - sensor:
+ 
+      # Description du CO2 par pièces
+
+      - name: "Netatmo salon co2 text"
+        unique_id: "netatmo_salon_co2_text_deux"
+        icon: mdi:molecule-co2
+        state: >
+          {% if states('sensor.maison_dioxyde_de_carbone')|int(0) >= 1600 %}
+              Malsain
+          {% elif states('sensor.maison_dioxyde_de_carbone')|int(0) >= 1400 %}
+              Mauvais
+          {% elif states('sensor.maison_dioxyde_de_carbone')|int(0) >= 1150 %}
+              Acceptable
+          {% elif states('sensor.maison_dioxyde_de_carbone')|int(0) >= 900 %}
+              Bon
+          {% elif states('sensor.maison_dioxyde_de_carbone')|int(0) >= 1 %}
+              Excellent
+          {% else %}
+              Black
+          {% endif %}
+
+      - name: "Netatmo bureau co2 text"
+        unique_id: "netatmo_bureau_co2_text_deux"
+        icon: mdi:molecule-co2
+        state: >
+          {% if states('sensor.maison_bureau_dioxyde_de_carbone')|int(0) >= 1600 %}
+              Malsain
+          {% elif states('sensor.maison_bureau_dioxyde_de_carbone')|int(0) >= 1400 %}
+              Mauvais
+          {% elif states('sensor.maison_bureau_dioxyde_de_carbone')|int(0) >= 1150 %}
+              Acceptable
+          {% elif states('sensor.maison_bureau_dioxyde_de_carbone')|int(0) >= 900 %}
+              Bon
+          {% elif states('sensor.maison_bureau_dioxyde_de_carbone')|int(0) >= 1 %}
+              Excellent
+          {% else %}
+              Black
+          {% endif %}
+
+      - name: "Netatmo chambre maitres co2 text"
+        unique_id: "netatmo_chambre_maitres_co2_text_deux"
+        icon: mdi:molecule-co2
+        state: >
+          {% if states('sensor.maison_chambre_des_maitres_dioxyde_de_carbone')|int(0) >= 1600 %}
+              Malsain
+          {% elif states('sensor.maison_chambre_des_maitres_dioxyde_de_carbone')|int(0) >= 1400 %}
+              Mauvais
+          {% elif states('sensor.maison_chambre_des_maitres_dioxyde_de_carbone')|int(0) >= 1150 %}
+              Acceptable
+          {% elif states('sensor.maison_chambre_des_maitres_dioxyde_de_carbone')|int(0) >= 900 %}
+              Bon
+          {% elif states('sensor.maison_chambre_des_maitres_dioxyde_de_carbone')|int(0) >= 1 %}
+              Excellent
+          {% else %}
+              Black
+          {% endif %}
+
+      - name: "Netatmo sous sol co2 text"
+        unique_id: "netatmo_sous_sol_co2_text_deux"
+        icon: mdi:molecule-co2
+        state: >
+          {% if states('sensor.maison_sous_sol_dioxyde_de_carbone')|int(0) >= 1600 %}
+             Malsain
+          {% elif states('sensor.maison_sous_sol_dioxyde_de_carbone')|int(0) >= 1400 %}
+             Mauvais
+          {% elif states('sensor.maison_sous_sol_dioxyde_de_carbone')|int(0) >= 1150 %}
+             Acceptable
+          {% elif states('sensor.maison_sous_sol_dioxyde_de_carbone')|int(0) >= 900 %}
+              Bon
+          {% elif states('sensor.maison_sous_sol_dioxyde_de_carbone')|int(0) >= 1 %}
+              Excellent
+          {% else %}
+             Black
+          {% endif %}

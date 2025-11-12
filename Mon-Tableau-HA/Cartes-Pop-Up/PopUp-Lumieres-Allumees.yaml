@@ -1,0 +1,22 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: custom:auto-entities
+    card:
+      type: entities
+    filter:
+      include:
+        - entity_id: light.*
+          state: "on"
+      exclude:
+        - entity_id: light.*groupe*
+        - entity_id: light.*
+          attributes:
+            is_hue_group: true
+    sort:
+      method: friendly_name
+      ignore_case: true

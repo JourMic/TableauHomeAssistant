@@ -1,0 +1,278 @@
+type: custom:vertical-stack-in-card
+cards:
+
+  - !include Carte-Vent.yaml
+
+  - type: custom:button-card
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Indice UV
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-Indice-UV.yaml
+    icon: mdi:sun-wireless
+    entity: sensor.tempest_st_00032986_uv_index
+    name: Indice UV actuel
+    show_name: true
+    show_icon: true
+    show_label: false
+    show_state: false
+    custom_fields:
+      level: |
+        [[[
+          var uv = parseFloat(entity.state) || 0;
+          var lev = Math.round((uv / 12) * 100);
+          lev = Math.min(Math.max(lev, 0), 100);
+          
+          return `<div><div style="background: white; height: 1.7rem; width: 1.7rem; border-radius: 100px; position: relative; left: ${lev}%; box-shadow: 2px 1px 10px var(--contrast10);"></div></div>`;
+        ]]]
+      uv: |
+        [[[
+          return `<div></div>`
+        ]]]
+      label: |
+        [[[
+          let uv = parseFloat(entity.state) || 0;
+          if (uv <= 2) return '<span style="font-size: 1.2rem">🙂 Bas</span>';
+          else if (uv <= 5) return '<span style="font-size: 1.2rem">🙁 Modéré</span>';
+          else if (uv <= 7) return '<span style="font-size: 1.2rem">😧 Élevé</span>';
+          else if (uv <= 10) return '<span style="font-size: 1.2rem">😬 Très élevé</span>';
+          else return '<span style="font-size: 1.2rem">😵 Extrême</span>';
+        ]]]
+      index: |
+        [[[
+          return entity.state;
+        ]]]
+    styles:
+      grid:
+        - grid-template-areas: |
+            "n . index" 
+            "n . label"  
+            ". uv uv"  
+            ". level level"
+        - grid-template-rows: min-content 1fr min-content 0px
+        - grid-template-columns: min-content 1fr 1fr
+      card:
+        - height: 115px
+        - padding: 10px
+        - border-radius: 20px
+      name:
+        - font-size: 1.5rem
+        - font-weight: 500
+        - justify-self: start
+        - align-self: start
+        - padding-bottom: 10px
+        - color: white
+        - padding-left: 5px
+      img_cell:
+        - position: absolute
+        - top: 15%
+        - right: 40%
+        - overflow: visible
+      icon:
+        - position: absolute
+        - width: 5rem
+        - color: yellow
+      custom_fields:
+        uv:
+          - background: >
+              linear-gradient(90deg, rgba(137,204,141,1) 0%, rgba(255,217,119,1)
+              27%, rgba(255,175,108,1) 52%, rgba(247,126,117,1) 77%,
+              rgba(167,136,210,1) 100%);
+          - border-radius: 10px
+          - height: 1rem
+          - width: 100%
+          - margin-bottom: 10px
+          - z-index: 1
+        level:
+          - background: transparent
+          - justify-self: start
+          - border-radius: 10px
+          - position: relative
+          - right: 5px
+          - bottom: 17px
+          - width: 100%
+          - z-index: 2
+          - overflow: visible
+        label:
+          - align-self: start
+          - justify-self: end
+          - margin-bottom: 10px
+          - color: white
+          - font-weight: 600
+        index:
+          - font-size: 2.2rem
+          - font-weight: 600
+          - justify-self: end
+          - color: white
+          - padding-bottom: 0px
+          - margin-left: 5px
+  - type: custom:button-card
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: IQA
+          content:
+            type: entities
+            entities:
+              - !include ../Cartes-Pop-Up/PopUp-IQA.yaml
+    icon: mdi:weather-dust
+    entity: sensor.mauricie_quebec_canada_indice_de_qualite_de_l_air
+    name: Qualité de l'air
+    show_name: true
+    show_icon: true
+    show_label: false
+    show_state: false
+    custom_fields:
+      level: |
+        [[[
+          var aqi = parseFloat(entity.state) || 0;
+          var lev = Math.round((aqi / 301) * 100);
+          lev = Math.min(Math.max(lev, 0), 100);
+
+          return `<div><div style="background: white; height: 1.7rem; width: 1.7rem; border-radius: 100px; position: relative; left: ${lev}%; box-shadow: 2px 1px 10px withe;"></div></div>`;
+        ]]]
+      label: |
+        [[[
+          let aqi = parseFloat(entity.state) || 0;
+          if (aqi <= 50) return '<span style="font-size: 1.2rem">😀 Bon!</span>';
+          else if (aqi <= 100) return '<span style="font-size: 1.2rem">🙂 Modéré!</span>';
+          else if (aqi <= 150) return '<span style="font-size: 1.2rem">🙁 Mauvais!</span>';
+          else if (aqi <= 200) return '<span style="font-size: 1.2rem">☹️ Mauvais + !</span>';
+          else if (aqi <= 300) return '<span style="font-size: 1.2rem">😧 Très mauvais!</span>';
+          else return '<span style="font-size: 1.2rem">😵 Dangereux!</span>';
+        ]]]
+              
+      index: |
+        [[[
+          return `${entity.state} <span style="font-size: 1rem; color: white">IQA</span>`;
+        ]]]
+      uv: |
+        [[[
+          return `<div></div>`
+        ]]]
+    styles:
+      grid:
+        - grid-template-areas: |
+            "n . index"  
+            "n . label" 
+            ". uv uv" 
+            ". level level"
+        - grid-template-rows: min-content 1fr min-content 0px
+        - grid-template-columns: min-content 1fr 1fr
+      card:
+        - height: 115px
+        - padding: 10px
+        - border-radius: 20px
+      name:
+        - font-size: 1.5rem
+        - font-weight: 500
+        - justify-self: start
+        - align-self: start
+        - padding-bottom: 10px
+        - color: white
+        - padding-left: 5px
+      img_cell:
+        - position: absolute
+        - top: 15%
+        - right: 40%
+        - overflow: visible
+      icon:
+        - position: absolute
+        - width: 5rem
+        - color: lightblue
+      custom_fields:
+        uv:
+          - background: >
+              linear-gradient(90deg, rgba(137,204,141,1) 0%, rgba(255,217,119,1)
+              20%, rgba(255,175,108,1) 40%, rgba(247,126,117,1) 60%,
+              rgba(167,136,210,1) 80%, rgba(116,0,152,1) 100%);
+          - border-radius: 10px
+          - height: 1rem
+          - width: 100%
+          - margin-bottom: 10px
+          - z-index: 1
+        level:
+          - background: transparent
+          - justify-self: start
+          - border-radius: 10px
+          - position: relative
+          - right: 5px
+          - bottom: 17px
+          - width: 100%
+          - z-index: 2
+          - overflow: visible
+        label:
+          - align-self: start
+          - justify-self: end
+          - margin-bottom: 10px
+          - color: white
+          - font-weight: 600
+        index:
+          - font-size: 2.2rem
+          - font-weight: 600
+          - justify-self: end
+          - color: white
+          - padding-bottom: 0px
+          - margin-left: 5px
+  - type: custom:bar-card
+    icon: mdi:water
+    height: 33
+    title: Pluie
+    entities:
+#      - entity: sensor.tempest_st_00032986_rain_rate
+#        name: Taux
+#        unit_of_measurement: mm/h
+      - entity: sensor.tempest_st_00032986_rain_today
+        name: Aujourd'hui
+      - entity: sensor.tempest_st_00032986_rain_yesterday
+        name: Hier
+    positions:
+      icon: inside
+      indicator: inside
+      name: inside
+      value: inside
+    show_icon: true
+    align: split
+    max: 100
+    unit_of_measurement: mm
+    card_mod:
+      style: |
+        ha-card {
+        } bar-card-background bar-card-backgroundbar {
+          background: linear-gradient(90deg, #76BB40 0%, #FEFB41 20%, #FFAB01 40%, #E63B7A 60%, #982ABC 80%, #4D22B2 100%);
+          border-radius: 0px;
+          filter: brightness(1);
+          opacity: 0.15;
+        } bar-card-background bar-card-currentbar {
+          background: linear-gradient(90deg, #76BB40 0%, #FEFB41 20%, #FFAB01 40%, #E63B7A 60%, #982ABC 80%, #4D22B2 100%);
+          mask-image: repeating-linear-gradient( 90deg,  rgba(0, 0, 0, 0.3) 0%, black 2%, rgba(0, 0, 0, 0.3) 4%, transparent 0%, transparent 0%);
+          clip-path: polygon(0 0, var(--bar-percent) 0, var(--bar-percent) 100%, 0 100%);
+          border-radius: 0px;
+        } bar-card-value {
+          margin: 5px;
+          font-size: 1.25rem;
+          font-weight: 800;
+        }
+        bar-card-currentbar, bar-card-current, bar-card-backgroundbar {
+            height: 15px !important;
+            margin-top: 30px;
+        }
+        ha-icon{
+            color: lightblue !important;
+        }
+        bar-card-iconbar {
+            margin-bottom: 0px;
+        }
+card_mod:
+  class: soft-ui
+  style: |
+    ha-card {
+      --primary-text-color: rgb(var(--my-grey));   
+    }

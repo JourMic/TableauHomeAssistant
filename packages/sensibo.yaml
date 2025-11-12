@@ -1,0 +1,43 @@
+template:
+  - sensor:
+      - name: "Sensibo temperature courante cuisine"
+        unique_id: "sensibo_temperature_courante_cuisine_deux"
+        icon: mdi:thermometer-low
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ state_attr('climate.sensibo_cuisine', 'current_temperature') }}"
+
+      - name: "Sensibo temperature cuisine"
+        unique_id: "sensibo_temperature_cuisine_deux"
+        icon: mdi:thermometer-low
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ state_attr('climate.sensibo_cuisine', 'temperature') }}"
+
+      - name: "Sensibo humiditee courante cuisine"
+        unique_id: "sensibo_humiditee_courante_cuisine_deux"
+        icon: mdi:water-percent
+        device_class: humidity
+        unit_of_measurement: "°%"
+        state: "{{ state_attr('climate.sensibo_cuisine', 'current_humidity') }}"
+
+      - name: "Sensibo temperature courante salle de repos"
+        unique_id: "sensibo_temperature_courante_salle_de_repos_deux"
+        icon: mdi:thermometer-low
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ state_attr('climate.sensibo_salle_de_repos', 'current_temperature') }}"
+
+      - name: "Sensibo temperature salle de repos"
+        unique_id: "sensibo_temperature_salle_de_repos_deux"
+        icon: mdi:thermometer-low
+        unit_of_measurement: "°C"
+        device_class: temperature
+        state: "{{ state_attr('climate.sensibo_salle_de_repos', 'temperature') }}"
+
+      - name: "Sensibo humiditee courante salle de repos"
+        unique_id: "sensibo_humiditee_courante_salle_de_repos_deux"
+        icon: mdi:water-percent
+        device_class: humidity
+        unit_of_measurement: "°%"
+        state: "{{ state_attr('climate.sensibo_salle_de_repos', 'current_humidity') }}"

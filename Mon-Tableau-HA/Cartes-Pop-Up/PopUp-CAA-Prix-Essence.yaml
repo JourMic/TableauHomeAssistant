@@ -1,0 +1,88 @@
+type: custom:vertical-stack-in-card
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: 0 0 0 2px gray;
+    }
+cards:
+  - type: entities
+    entities:
+      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+        type: custom:multiple-entity-row
+        show_state: false
+        name: Shawinigan
+        secondary_info: last-changed
+        entities:
+          - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+            name: Actuel
+            unit: $
+          - entity: sensor.caa_prix_essence_shawinigan_un_mois
+            name: 1 Mois
+            unit: $
+          - entity: sensor.caa_prix_essence_shawinigan_un_an
+            name: 1 An
+            unit: $
+      - type: section
+      - entity: sensor.caa_prix_essence_montreal_aujourd_hui
+        type: custom:multiple-entity-row
+        show_state: false
+        name: Montréal
+        secondary_info: last-changed
+        entities:
+          - entity: sensor.caa_prix_essence_montreal_aujourd_hui
+            name: Actuel
+            unit: $
+          - entity: sensor.caa_prix_essence_montreal_un_mois
+            name: 1 Mois
+            unit: $
+          - entity: sensor.caa_prix_essence_montreal_un_an
+            name: 1 An
+            unit: $
+      - type: section
+      - entity: sensor.caa_prix_essence_quebec_aujourd_hui
+        type: custom:multiple-entity-row
+        show_state: false
+        name: Québec
+        secondary_info: last-changed
+        entities:
+          - entity: sensor.caa_prix_essence_quebec_aujourd_hui
+            name: Actuel
+            unit: $
+          - entity: sensor.caa_prix_essence_quebec_un_mois
+            name: 1 Mois
+            unit: $
+          - entity: sensor.caa_prix_essence_quebec_un_an
+            name: 1 An
+            unit: $
+      - type: section
+      - entity: sensor.caa_prix_essence_trois_rivieres_aujourd_hui
+        type: custom:multiple-entity-row
+        show_state: false
+        name: Trois-Rivières
+        secondary_info: last-changed
+        entities:
+          - entity: sensor.caa_prix_essence_trois_rivieres_aujourd_hui
+            name: Actuel
+            unit: $
+          - entity: sensor.caa_prix_essence_trois_rivieres_un_mois
+            name: 1 Mois
+            unit: $
+          - entity: sensor.caa_prix_essence_trois_rivieres_un_an
+            name: 1 An
+            unit: $
+      - type: section
+  - type: custom:mini-graph-card
+    hours_to_show: 720
+    name: Prix quotidien sur 1 mois
+    entities:
+      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+        aggregate_func: max
+        name: Max
+        color: "#e74c3c"
+      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+        aggregate_func: min
+        name: Min
+      - entity: sensor.caa_prix_essence_shawinigan_aujourd_hui
+        aggregate_func: avg
+        name: Moy
+        color: green

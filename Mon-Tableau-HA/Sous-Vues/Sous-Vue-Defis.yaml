@@ -1,0 +1,178 @@
+title: Hilo défis
+path: Sous-Vue-Defis
+icon: mdi:gauge-full
+theme: !include ../Cartes/Carte-Theme.yaml
+subview: true
+type: sections
+max_columns: 2
+cards: []
+sections:
+  - type: grid
+    cards:
+      - type: heading
+        heading: Défis prévus
+        heading_style: title
+        icon: mdi:page-next
+        entities:
+          - show_state: true
+            show_icon: true
+            entity: sensor.defi_hilo_nb_defi_planifies
+            color: red
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Defi-Hilo-Prevu.yaml
+
+      - type: heading
+        heading: Défis en cour
+        heading_style: title
+        icon: mdi:calendar-today-outline
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Defis-en-cour.yaml
+
+      - type: heading
+        heading: kWh permis et utilisés
+        heading_style: title
+        icon: mdi:lightning-bolt-outline
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: custom:apexcharts-card
+              experimental:
+                color_threshold: true
+              graph_span: 24h
+              apex_config:
+                chart:
+                  height: 150px
+              show:
+                last_updated: true
+              header:
+                standard_format: false
+                show: true
+                show_states: true
+                colorize_states: true
+              span:
+                start: day
+              series:
+                - entity: sensor.defi_hilo_allowed_kwh
+                  type: line
+                  group_by:
+                    func: last
+                    duration: 15m
+                  stroke_width: 5
+                - entity: sensor.defi_hilo_used_kwh
+                  type: area
+                  group_by:
+                    func: last
+                    duration: 15m
+                  stroke_width: 5
+                  show:
+                    header_color_threshold: true
+                  color_threshold:
+                    - value: 0
+                      color: steelblue
+                    - value: 0.5
+                      color: midnightblue
+                    - value: 1
+                      color: orange
+                    - value: 1.5
+                      color: orangered
+                    - value: 2
+                      color: red
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
+
+      - type: heading
+        heading: Probabilité de défi
+        heading_style: title
+        icon: mdi:help-circle
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - !include ../Cartes/Carte-Probabilite-pointe-critique.yaml
+
+  - type: grid
+    cards:
+      - type: heading
+        heading: Défis réalisés
+        heading_style: title
+        icon: mdi:check-circle
+        grid_options:
+          columns: full
+          rows: 0.4
+
+      - type: custom:button-card
+        template: frame
+        padding-bottom: 1px
+        custom_fields:
+          buttons:
+            card:
+              type: markdown
+              content: |-
+                {% 
+                 set data = state_attr('sensor.recompenses_hilo','history')[0] 
+                %}
+                {% if data is defined %}
+
+                  <h2><center>Saison  {{data.season}}-{{data.season + 1}}</center></h2>  
+                  <ha-alert alert-type="success"><h3>
+                    Nb de défis: {{data.events | count}}<br>
+                    Récompense totale: {{"%.2f" | format(data.totalReward) }}$<br>
+                    Récompense moyenne: {{"%.2f" | format(data.totalReward /(data.events | count)) }}$
+                  </h3></ha-alert>      
+                  <br>
+
+                  <table width=100%>
+                    <tr>
+                      <th>#</th>
+                      <th>Date</th>
+                      <th>Plage</th>
+                      <th>Alloué</th>
+                      <th>Utilisé</th>
+                      <th>Prime</th>
+                    </tr>  
+
+                    {%- for event in data.events -%}    
+                      <tr>
+                      <td align=center>{{ "%02i"|format(loop.index) }}</td>
+                      <td align=center>{{ event.phases.reduction_start.timestamp() | timestamp_custom('%d/%m/%Y') }}</td>
+                      <td align=center>{{ "Matin" if (event.period =="am") else "Soir" }}</td>
+                      <td align=center>{{ "%.1f"|format(event.allowed_kWh) }}</td> 
+                      <td align=center>{{ "%.1f"|format(event.used_kWh) }}</td>      
+                      <td align=center>{{ "%.2f"|format(max(0,event.allowed_kWh - event.used_kWh) * 0.55) }}$</td>
+                      </tr>
+                    {%- endfor -%}
+
+                  </table>
+
+                {% else %}
+                   Aucune donnée disponible
+                {% endif %}
+        card_mod:
+          class: soft-ui
+          style: |
+            ha-card {
+              --primary-text-color: rgb(var(--my-grey));   
+            }
+        grid_options:
+          columns: full
+          rows: full
