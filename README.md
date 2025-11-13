@@ -1,6 +1,6 @@
 # Tableau Home Assistant
 
-<img width="1080" height="810" alt="image" src="https://github.com/user-attachments/assets/3f372065-cd3b-4ca2-a236-4097e8c95bd2" />
+![image](https://github.com/user-attachments/assets/3f30d933-445e-4f20-a0cd-38d49ce8b3e2)
 
 <img width="1080" height="810" alt="image" src="https://github.com/user-attachments/assets/47d8e79a-1067-4596-96e7-a10fe6894858" />
 
