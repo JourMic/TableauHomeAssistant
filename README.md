@@ -26,6 +26,8 @@
 
 <img width="1376" height="1032" alt="image" src="https://github.com/user-attachments/assets/cfa2dced-ed03-42d5-baa7-f43dfee7ddee" />
 
+![image](https://github.com/user-attachments/assets/3c6f969e-6c80-4b37-a82e-4a27b234bc38)
+
 <img width="1376" height="1032" alt="image" src="https://github.com/user-attachments/assets/531606fd-6430-4a99-9969-e308a607b2f2" />
 
 ## Pop-Up
